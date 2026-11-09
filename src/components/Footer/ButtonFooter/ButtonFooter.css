@@ -1,0 +1,52 @@
+/* ==========================================================================
+   Variaveis
+========================================================================== */
+:root {
+    /* Colors */
+    --btn-footer-bg: #111a3a;
+    --btn-footer-color: #ffffff;
+    --btn-footer-shadow: 0 12px 20px -10px rgba(17, 26, 58, 0.5);
+
+    /* Font */
+    --btn-footer-font: 'Nunito';
+    --btn-footer-font-size: 15px;
+    --btn-footer-font-weight: 800;
+}
+
+/* ==========================================================================
+   Botão de criar roteiro (azul escuro, com seta)
+========================================================================== */
+
+.btn-footer {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: var(--btn-footer-bg);
+    border: none;
+    border-radius: 40px;
+    padding: 13px 26px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.btn-footer__txt {
+    margin: 0;
+    color: var(--btn-footer-color);
+    font-family: var(--btn-footer-font);
+    font-size: var(--btn-footer-font-size);
+    font-weight: var(--btn-footer-font-weight);
+}
+.btn-footer__icon {
+    width: 20px;
+    height: auto;
+    transition: transform 0.25s ease;
+}
+.btn-footer:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--btn-footer-shadow);
+}
+
+/* A seta anda um pouquinho para a direita quando passa o mouse */
+.btn-footer:hover .btn-footer__icon {
+    transform: translateX(4px);
+}

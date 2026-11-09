@@ -1,0 +1,46 @@
+/* ==========================================================================
+   Variaveis
+========================================================================== */
+:root {
+    /* Colors */
+    --btn-contact-bg: #ffcc00;
+    --btn-contact-color: #000000;
+    --btn-contact-shadow: 0 10px 18px -10px rgba(255, 193, 7, 0.9);
+
+    /* Font */
+    --btn-contact-font: 'Nunito';
+    --btn-contact-font-size: 17px;
+    --btn-contact-font-weight: 800;
+}
+
+/* ==========================================================================
+   Botão de fale conosco 
+========================================================================== */
+
+.btn-contact {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: var(--btn-contact-bg);
+    border: none;
+    border-radius: 12px;
+    padding: 13px 30px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.btn-contact__txt {
+    margin: 0;
+    color: var(--btn-contact-color);
+    font-family: var(--btn-contact-font);
+    font-size: var(--btn-contact-font-size);
+    font-weight: var(--btn-contact-font-weight);
+}
+.btn-contact__icon {
+    width: 20px;
+    height: auto;
+}
+.btn-contact:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--btn-contact-shadow);
+}
