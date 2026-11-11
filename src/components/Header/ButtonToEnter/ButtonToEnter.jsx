@@ -1,8 +1,8 @@
 import "./ButtonToEnter.css";
 
-export default function ButtonToEnter(OnClick) {
+export default function ButtonToEnter({ onClick }) {
     return (
-        <button className="btn-to-enter" onClick={OnClick}>
+        <button className="btn-to-enter" onClick={onClick}>
             <p className="btn-to-enter-text">Entrar</p>
         </button>
     );

@@ -5,6 +5,8 @@ import logoFooter from "../../assets/icons/logoFooter.svg";
 import Instagram from "../../assets/icons/instaIcon.svg";
 import WhatsApp from "../../assets/icons/zapIcon.svg";
 import Facebook from "../../assets/icons/faceIcon.svg";
+import { useNavigate } from "react-router-dom";
+import { useModal } from "../../context/ModalContext";
 
 /* ==========================================================================
    Redes sociais
@@ -16,6 +18,8 @@ const SOCIAL_LINKS = [
 ];
 
 export default function Footer() {
+  const navigate = useNavigate();
+  const { openModal } = useModal();
   return (
     <footer className="footer">
       <div className="footer__container">
@@ -28,7 +32,7 @@ export default function Footer() {
             <br />
             começa aqui.
           </p>
-          <ButtonFooter />
+          <ButtonFooter onClick={() => navigate("/roteiros")} />
         </div>
 
         {/*==================================================
@@ -37,7 +41,7 @@ export default function Footer() {
         <div className="footer__container-middle">
           
           <a
-            href="#inicio"
+            href="/#inicio"
             className="footer__logo"
             aria-label="Rota Cultural - Sua viagem começa aqui"
           >
@@ -81,7 +85,7 @@ export default function Footer() {
 
           {/* Contato: botão Fale Conosco + redes sociais */}
           <div className="footer__contato">
-            <ButtonContact />
+            <ButtonContact onClick={() => openModal("contato")} />
 
             <div className="footer__redes-sociais">
               {SOCIAL_LINKS.map(({ label, href, icon }) => (

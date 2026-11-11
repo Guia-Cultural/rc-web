@@ -1,0 +1,170 @@
+@import "../../features/roteiros/styles/roteiros-legacy.css";
+
+.roteiros-page {
+  --yellow: #ffc107;
+  --soft: #ffefb5;
+  --cream: #fffbea;
+  --navy: #101b3b;
+  --orange: #ff7a1a;
+  --red: #e8222b;
+  --blue: #1f5fd9;
+  --green: #2fae5e;
+  --muted: #5b6478;
+  --brush: "Caveat Brush", "Segoe Print", cursive;
+  --cond: Impact, sans-serif;
+  --body: "Nunito", system-ui, sans-serif;
+  --lil: "Nunito", system-ui, sans-serif;
+  --shadow: 0 14px 34px rgba(16, 27, 59, .14);
+  --ease: cubic-bezier(.2, .75, .2, 1);
+  --r: 24px;
+  --r-sm: 16px;
+  --line: #f0e7c2;
+  min-height: 100vh;
+  background: var(--cream);
+  color: var(--navy);
+  font-family: var(--body);
+  overflow: clip;
+}
+
+.roteiros-page .city-art {
+  display: grid;
+  place-items: center;
+  min-height: 95px;
+  background: linear-gradient(135deg, var(--ts), var(--t));
+  color: var(--td);
+}
+
+.roteiros-page .city-art .i {
+  width: 3rem;
+  height: 3rem;
+}
+
+.roteiros-page .card-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .7rem;
+  margin-top: .7rem;
+}
+
+.roteiros-page .cost-result,
+.roteiros-page .guide-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.roteiros-page .cost-result .lcard {
+  display: grid;
+  gap: .4rem;
+  text-align: center;
+}
+
+.roteiros-page .cost-result b {
+  font-size: clamp(1.6rem, 4vw, 2.6rem);
+}
+
+.roteiros-page .stay-result {
+  display: grid;
+  grid-template-columns: minmax(240px, .8fr) 1.2fr;
+  gap: 1.5rem;
+}
+
+.roteiros-page .stay-result > img {
+  width: 100%;
+  height: 100%;
+  min-height: 290px;
+  object-fit: cover;
+  border-radius: 18px;
+}
+
+.roteiros-page .stay-result ul,
+.roteiros-page .guide-grid {
+  list-style: none;
+  padding: 0;
+}
+
+.roteiros-page .day-result {
+  display: grid;
+  gap: 0;
+  max-width: 820px;
+  margin-inline: auto;
+}
+
+.roteiros-page .day-item {
+  display: grid;
+  grid-template-columns: 76px 18px 1fr;
+  gap: 1rem;
+  min-height: 130px;
+}
+
+.roteiros-page .day-item .clock {
+  font-weight: 900;
+  color: var(--td);
+}
+
+.roteiros-page .day-item .line {
+  width: 4px;
+  height: 100%;
+  background: var(--t);
+  position: relative;
+}
+
+.roteiros-page .day-item .line::before {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--td);
+  left: 50%;
+  translate: -50% 0;
+}
+
+.roteiros-page .route-map svg {
+  width: 100%;
+  border-radius: 28px;
+  filter: drop-shadow(0 16px 30px rgba(16, 27, 59, .12));
+}
+
+.roteiros-page .schedule-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.roteiros-page .schedule-table td {
+  padding: 1rem;
+  border-bottom: 1px solid rgba(16, 27, 59, .1);
+}
+
+@media (max-width: 760px) {
+  .roteiros-page .cost-result,
+  .roteiros-page .guide-grid,
+  .roteiros-page .stay-result {
+    grid-template-columns: 1fr;
+  }
+
+  .roteiros-page .rh-tx {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .roteiros-page .rhero .lh1 {
+    max-width: 100%;
+    font-size: clamp(2.35rem, 11vw, 3rem);
+    letter-spacing: -1px;
+  }
+
+  .roteiros-page .ltag {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  .roteiros-page .lact {
+    max-width: 100%;
+  }
+
+  .roteiros-page .lact .btn {
+    white-space: normal;
+  }
+}

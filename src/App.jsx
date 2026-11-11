@@ -1,251 +1,33 @@
-// src/App.jsx
-import { BrowserRouter } from "react-router-dom";
-import "./App.css";
+import { useEffect } from "react";
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import Footer from "./components/Footer/Footer";
-import HeaderHome from "./components/Header/Header";
-import Hero from "./components/Home/Hero/Hero";
+import Header from "./components/Header/Header";
+import Home from "./pages/Home/Home";
+import Location from "./pages/Location/Location";
+import Roteiros from "./pages/Roteiros/Roteiros";
+import "./App.css";
 import "./styles/Global.css";
 import "./styles/Reset.css";
 
-export default function App() {
-  return (
-    <BrowserRouter>
-      {/* Agora o Header está seguro dentro do roteador e vai renderizar! */}
-      <HeaderHome />
-      <Hero />
-      <h1>Bem-vindo ao nosso site!</h1>
-      <p>Explore nossos recursos e aproveite a experiência!</p>
-      <p>Mais conteúdo será adicionado em breve.</p>
-      <p>Fique atento às atualizações!</p>
-      <p>Obrigado por visitar nosso site!</p>
-      <p>Seja bem-vindo(a) à nossa comunidade!</p>
-      <p>Estamos felizes em tê-lo(a) aqui!</p>
-      <p>Descubra nossas funcionalidades incríveis!</p>
-      <p>Navegue pelo site e aproveite ao máximo!</p>
-      <p>Não perca as novidades que estão por vir!</p>
-      <p>Aproveite sua visita e volte sempre!</p>
-      <h1>Bem-vindo ao nosso site!</h1>
-      <p>Explore nossos recursos e aproveite a experiência!</p>
-      <p>Mais conteúdo será adicionado em breve.</p>
-      <p>Fique atento às atualizações!</p>
-      <p>Obrigado por visitar nosso site!</p>
-      <p>Seja bem-vindo(a) à nossa comunidade!</p>
-      <p>Estamos felizes em tê-lo(a) aqui!</p>
-      <p>Descubra nossas funcionalidades incríveis!</p>
-      <p>Navegue pelo site e aproveite ao máximo!</p>
-      <p>Não perca as novidades que estão por vir!</p>
-      <p>Aproveite sua visita e volte sempre!</p>
-      <h1>Bem-vindo ao nosso site!</h1>
-      <p>Explore nossos recursos e aproveite a experiência!</p>
-      <p>Mais conteúdo será adicionado em breve.</p>
-      <p>Fique atento às atualizações!</p>
-      <p>Obrigado por visitar nosso site!</p>
-      <p>Seja bem-vindo(a) à nossa comunidade!</p>
-      <p>Estamos felizes em tê-lo(a) aqui!</p>
-      <p>Descubra nossas funcionalidades incríveis!</p>
-      <p>Navegue pelo site e aproveite ao máximo!</p>
-      <p>Não perca as novidades que estão por vir!</p>
-      <p>Aproveite sua visita e volte sempre!</p>
-      <h1>Bem-vindo ao nosso site!</h1>
-      <p>Explore nossos recursos e aproveite a experiência!</p>
-      <p>Mais conteúdo será adicionado em breve.</p>
-      <p>Fique atento às atualizações!</p>
-      <p>Obrigado por visitar nosso site!</p>
-      <p>Seja bem-vindo(a) à nossa comunidade!</p>
-      <p>Estamos felizes em tê-lo(a) aqui!</p>
-      <p>Descubra nossas funcionalidades incríveis!</p>
-      <p>Navegue pelo site e aproveite ao máximo!</p>
-      <p>Não perca as novidades que estão por vir!</p>
-      <p>Aproveite sua visita e volte sempre!</p>
-      <h1>Bem-vindo ao nosso site!</h1>
-      <p>Explore nossos recursos e aproveite a experiência!</p>
-      <p>Mais conteúdo será adicionado em breve.</p>
-      <p>Fique atento às atualizações!</p>
-      <p>Obrigado por visitar nosso site!</p>
-      <p>Seja bem-vindo(a) à nossa comunidade!</p>
-      <p>Estamos felizes em tê-lo(a) aqui!</p>
-      <p>Descubra nossas funcionalidades incríveis!</p>
-      <p>Navegue pelo site e aproveite ao máximo!</p>
-      <p>Não perca as novidades que estão por vir!</p>
-      <p>Aproveite sua visita e volte sempre!</p>
-      <h1>Bem-vindo ao nosso site!</h1>
-      <p>Explore nossos recursos e aproveite a experiência!</p>
-      <p>Mais conteúdo será adicionado em breve.</p>
-      <p>Fique atento às atualizações!</p>
-      <p>Obrigado por visitar nosso site!</p>
-      <p>Seja bem-vindo(a) à nossa comunidade!</p>
-      <p>Estamos felizes em tê-lo(a) aqui!</p>
-      <p>Descubra nossas funcionalidades incríveis!</p>
-      <p>Navegue pelo site e aproveite ao máximo!</p>
-      <p>Não perca as novidades que estão por vir!</p>
-      <p>Aproveite sua visita e volte sempre!</p>
-      <h1>Bem-vindo ao nosso site!</h1>
-      <p>Explore nossos recursos e aproveite a experiência!</p>
-      <p>Mais conteúdo será adicionado em breve.</p>
-      <p>Fique atento às atualizações!</p>
-      <p>Obrigado por visitar nosso site!</p>
-      <p>Seja bem-vindo(a) à nossa comunidade!</p>
-      <p>Estamos felizes em tê-lo(a) aqui!</p>
-      <p>Descubra nossas funcionalidades incríveis!</p>
-      <p>Navegue pelo site e aproveite ao máximo!</p>
-      <p>Não perca as novidades que estão por vir!</p>
-      <p>Aproveite sua visita e volte sempre!</p>
-      <h1>Bem-vindo ao nosso site!</h1>
-      <p>Explore nossos recursos e aproveite a experiência!</p>
-      <p>Mais conteúdo será adicionado em breve.</p>
-      <p>Fique atento às atualizações!</p>
-      <p>Obrigado por visitar nosso site!</p>
-      <p>Seja bem-vindo(a) à nossa comunidade!</p>
-      <p>Estamos felizes em tê-lo(a) aqui!</p>
-      <p>Descubra nossas funcionalidades incríveis!</p>
-      <p>Navegue pelo site e aproveite ao máximo!</p>
-      <p>Não perca as novidades que estão por vir!</p>
-      <p>Aproveite sua visita e volte sempre!</p>
-      <h1>Bem-vindo ao nosso site!</h1>
-      <p>Explore nossos recursos e aproveite a experiência!</p>
-      <p>Mais conteúdo será adicionado em breve.</p>
-      <p>Fique atento às atualizações!</p>
-      <p>Obrigado por visitar nosso site!</p>
-      <p>Seja bem-vindo(a) à nossa comunidade!</p>
-      <p>Estamos felizes em tê-lo(a) aqui!</p>
-      <p>Descubra nossas funcionalidades incríveis!</p>
-      <p>Navegue pelo site e aproveite ao máximo!</p>
-      <p>Não perca as novidades que estão por vir!</p>
-      <p>Aproveite sua visita e volte sempre!</p>
-      <h1>Bem-vindo ao nosso site!</h1>
-      <p>Explore nossos recursos e aproveite a experiência!</p>
-      <p>Mais conteúdo será adicionado em breve.</p>
-      <p>Fique atento às atualizações!</p>
-      <p>Obrigado por visitar nosso site!</p>
-      <p>Seja bem-vindo(a) à nossa comunidade!</p>
-      <p>Estamos felizes em tê-lo(a) aqui!</p>
-      <p>Descubra nossas funcionalidades incríveis!</p>
-      <p>Navegue pelo site e aproveite ao máximo!</p>
-      <p>Não perca as novidades que estão por vir!</p>
-      <p>Aproveite sua visita e volte sempre!</p>
-      <h1>Bem-vindo ao nosso site!</h1>
-      <p>Explore nossos recursos e aproveite a experiência!</p>
-      <p>Mais conteúdo será adicionado em breve.</p>
-      <p>Fique atento às atualizações!</p>
-      <p>Obrigado por visitar nosso site!</p>
-      <p>Seja bem-vindo(a) à nossa comunidade!</p>
-      <p>Estamos felizes em tê-lo(a) aqui!</p>
-      <p>Descubra nossas funcionalidades incríveis!</p>
-      <p>Navegue pelo site e aproveite ao máximo!</p>
-      <p>Não perca as novidades que estão por vir!</p>
-      <p>Aproveite sua visita e volte sempre!</p>
-      <h1>Bem-vindo ao nosso site!</h1>
-      <p>Explore nossos recursos e aproveite a experiência!</p>
-      <p>Mais conteúdo será adicionado em breve.</p>
-      <p>Fique atento às atualizações!</p>
-      <p>Obrigado por visitar nosso site!</p>
-      <p>Seja bem-vindo(a) à nossa comunidade!</p>
-      <p>Estamos felizes em tê-lo(a) aqui!</p>
-      <p>Descubra nossas funcionalidades incríveis!</p>
-      <p>Navegue pelo site e aproveite ao máximo!</p>
-      <p>Não perca as novidades que estão por vir!</p>
-      <p>Aproveite sua visita e volte sempre!</p>
-      <h1>Bem-vindo ao nosso site!</h1>
-      <p>Explore nossos recursos e aproveite a experiência!</p>
-      <p>Mais conteúdo será adicionado em breve.</p>
-      <p>Fique atento às atualizações!</p>
-      <p>Obrigado por visitar nosso site!</p>
-      <p>Seja bem-vindo(a) à nossa comunidade!</p>
-      <p>Estamos felizes em tê-lo(a) aqui!</p>
-      <p>Descubra nossas funcionalidades incríveis!</p>
-      <p>Navegue pelo site e aproveite ao máximo!</p>
-      <p>Não perca as novidades que estão por vir!</p>
-      <p>Aproveite sua visita e volte sempre!</p>
-      <h1>Bem-vindo ao nosso site!</h1>
-      <p>Explore nossos recursos e aproveite a experiência!</p>
-      <p>Mais conteúdo será adicionado em breve.</p>
-      <p>Fique atento às atualizações!</p>
-      <p>Obrigado por visitar nosso site!</p>
-      <p>Seja bem-vindo(a) à nossa comunidade!</p>
-      <p>Estamos felizes em tê-lo(a) aqui!</p>
-      <p>Descubra nossas funcionalidades incríveis!</p>
-      <p>Navegue pelo site e aproveite ao máximo!</p>
-      <p>Não perca as novidades que estão por vir!</p>
-      <p>Aproveite sua visita e volte sempre!</p>
-      <h1>Bem-vindo ao nosso site!</h1>
-      <p>Explore nossos recursos e aproveite a experiência!</p>
-      <p>Mais conteúdo será adicionado em breve.</p>
-      <p>Fique atento às atualizações!</p>
-      <p>Obrigado por visitar nosso site!</p>
-      <p>Seja bem-vindo(a) à nossa comunidade!</p>
-      <p>Estamos felizes em tê-lo(a) aqui!</p>
-      <p>Descubra nossas funcionalidades incríveis!</p>
-      <p>Navegue pelo site e aproveite ao máximo!</p>
-      <p>Não perca as novidades que estão por vir!</p>
-      <p>Aproveite sua visita e volte sempre!</p>
-      <h1>Bem-vindo ao nosso site!</h1>
-      <p>Explore nossos recursos e aproveite a experiência!</p>
-      <p>Mais conteúdo será adicionado em breve.</p>
-      <p>Fique atento às atualizações!</p>
-      <p>Obrigado por visitar nosso site!</p>
-      <p>Seja bem-vindo(a) à nossa comunidade!</p>
-      <p>Estamos felizes em tê-lo(a) aqui!</p>
-      <p>Descubra nossas funcionalidades incríveis!</p>
-      <p>Navegue pelo site e aproveite ao máximo!</p>
-      <p>Não perca as novidades que estão por vir!</p>
-      <p>Aproveite sua visita e volte sempre!</p>
-      <h1>Bem-vindo ao nosso site!</h1>
-      <p>Explore nossos recursos e aproveite a experiência!</p>
-      <p>Mais conteúdo será adicionado em breve.</p>
-      <p>Fique atento às atualizações!</p>
-      <p>Obrigado por visitar nosso site!</p>
-      <p>Seja bem-vindo(a) à nossa comunidade!</p>
-      <p>Estamos felizes em tê-lo(a) aqui!</p>
-      <p>Descubra nossas funcionalidades incríveis!</p>
-      <p>Navegue pelo site e aproveite ao máximo!</p>
-      <p>Não perca as novidades que estão por vir!</p>
-      <p>Aproveite sua visita e volte sempre!</p>
-      <h1>Bem-vindo ao nosso site!</h1>
-      <p>Explore nossos recursos e aproveite a experiência!</p>
-      <p>Mais conteúdo será adicionado em breve.</p>
-      <p>Fique atento às atualizações!</p>
-      <p>Obrigado por visitar nosso site!</p>
-      <p>Seja bem-vindo(a) à nossa comunidade!</p>
-      <p>Estamos felizes em tê-lo(a) aqui!</p>
-      <p>Descubra nossas funcionalidades incríveis!</p>
-      <p>Navegue pelo site e aproveite ao máximo!</p>
-      <p>Não perca as novidades que estão por vir!</p>
-      <p>Aproveite sua visita e volte sempre!</p>
-      <h1>Bem-vindo ao nosso site!</h1>
-      <p>Explore nossos recursos e aproveite a experiência!</p>
-      <p>Mais conteúdo será adicionado em breve.</p>
-      <p>Fique atento às atualizações!</p>
-      <p>Obrigado por visitar nosso site!</p>
-      <p>Seja bem-vindo(a) à nossa comunidade!</p>
-      <p>Estamos felizes em tê-lo(a) aqui!</p>
-      <p>Descubra nossas funcionalidades incríveis!</p>
-      <p>Navegue pelo site e aproveite ao máximo!</p>
-      <p>Não perca as novidades que estão por vir!</p>
-      <p>Aproveite sua visita e volte sempre!</p>
-      <h1>Bem-vindo ao nosso site!</h1>
-      <p>Explore nossos recursos e aproveite a experiência!</p>
-      <p>Mais conteúdo será adicionado em breve.</p>
-      <p>Fique atento às atualizações!</p>
-      <p>Obrigado por visitar nosso site!</p>
-      <p>Seja bem-vindo(a) à nossa comunidade!</p>
-      <p>Estamos felizes em tê-lo(a) aqui!</p>
-      <p>Descubra nossas funcionalidades incríveis!</p>
-      <p>Navegue pelo site e aproveite ao máximo!</p>
-      <p>Não perca as novidades que estão por vir!</p>
-      <p>Aproveite sua visita e volte sempre!</p>
-      <h1>Bem-vindo ao nosso site!</h1>
-      <p>Explore nossos recursos e aproveite a experiência!</p>
-      <p>Mais conteúdo será adicionado em breve.</p>
-      <p>Fique atento às atualizações!</p>
-      <p>Obrigado por visitar nosso site!</p>
-      <p>Seja bem-vindo(a) à nossa comunidade!</p>
-      <p>Estamos felizes em tê-lo(a) aqui!</p>
-      <p>Descubra nossas funcionalidades incríveis!</p>
-      <p>Navegue pelo site e aproveite ao máximo!</p>
-      <p>Não perca as novidades que estão por vir!</p>
-      <p>Aproveite sua visita e volte sempre!</p>
+function ScrollManager() {
+  const { pathname, hash } = useLocation();
+  useEffect(() => {
+    if (hash) window.setTimeout(() => document.querySelector(hash)?.scrollIntoView(), 0);
+    else window.scrollTo({ top: 0 });
+  }, [hash, pathname]);
+  return null;
+}
 
-      <Footer />
-    </BrowserRouter>
-  );
+function SiteRoutes() {
+  return <><ScrollManager /><Header /><Routes>
+    <Route path="/" element={<Home />} />
+    <Route path="/local" element={<Location />} />
+    <Route path="/location" element={<Navigate to="/local" replace />} />
+    <Route path="/roteiros" element={<Roteiros />} />
+    <Route path="*" element={<Navigate to="/" replace />} />
+  </Routes><Footer /></>;
+}
+
+export default function App() {
+  return <BrowserRouter><SiteRoutes /></BrowserRouter>;
 }

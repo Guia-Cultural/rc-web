@@ -36,6 +36,33 @@
   box-shadow: var(--header-shadow);
 }
 
+.header.header--legacy {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 60;
+  padding-block: 0;
+  background: transparent;
+}
+
+.header.header--legacy.header--scrolled {
+  position: fixed;
+  background: rgba(16, 27, 59, .94);
+  backdrop-filter: blur(8px);
+}
+
+.header--legacy .header__container {
+  max-width: 1370px;
+  min-height: 76px;
+}
+
+.header--legacy .header__logo-img {
+  height: 46px;
+}
+
+.header--legacy .header__nav {
+  gap: 2.8rem;
+}
+
 /* Esse cara serve para alinhar a logo, o menu e os botões na mesma linha */
 .header__container {
   display: flex;

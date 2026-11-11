@@ -3,7 +3,7 @@ Fontes:
 ====================================================================================================== */
 @font-face {
   font-family: 'Nunito';
-  src: url('../assets/fonts/Nunito-VariableFont_wght.ttf') format('truetype-variations');
+  src: url('../assets/fonts/Nunito-VariableFont_wght.ttf') format('truetype');
   font-weight: 100 900;
   font-style: normal;
 }
@@ -17,7 +17,7 @@ Fontes:
 
 @font-face {
   font-family: 'Inter';
-  src: url('../assets/fonts/Inter-VariableFont_slnt,wght.ttf') format('truetype-variations');
+  src: url('../assets/fonts/Inter-VariableFont_opsz,wght.ttf') format('truetype');
   font-weight: 100 900;
   font-style: normal;
 }

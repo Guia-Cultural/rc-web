@@ -1,0 +1,88 @@
+@import "../../features/local/styles/local-legacy.css";
+
+.location-page {
+  --yellow: #ffc107;
+  --soft: #ffefb5;
+  --cream: #fffbea;
+  --navy: #101b3b;
+  --orange: #ff7a1a;
+  --red: #e8222b;
+  --blue: #1f5fd9;
+  --green: #2fae5e;
+  --muted: #5b6478;
+  --brush: "Caveat Brush", "Segoe Print", cursive;
+  --cond: Impact, sans-serif;
+  --body: "Nunito", system-ui, sans-serif;
+  --lil: "Nunito", system-ui, sans-serif;
+  --shadow: 0 14px 34px rgba(16, 27, 59, .14);
+  --ease: cubic-bezier(.2, .75, .2, 1);
+  --r: 24px;
+  --r-sm: 16px;
+  --line: #f0e7c2;
+  min-height: 100vh;
+  background: var(--cream);
+  color: var(--navy);
+  font-family: var(--body);
+  overflow: clip;
+}
+
+.location-page .dialog-inner {
+  position: relative;
+}
+
+.location-page .dialog-close {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.location-page .lightbox-image {
+  width: min(1000px, 90vw);
+  max-height: 78vh;
+  object-fit: contain;
+  border-radius: 18px;
+}
+
+.location-page .rate.simple {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.location-page .rate.simple button {
+  border: 0;
+  background: transparent;
+  padding: .15rem;
+  color: #c8c8c8;
+}
+
+.location-page .rate.simple button[aria-pressed="true"],
+.location-page .stars .on {
+  color: var(--yellow);
+  fill: var(--yellow);
+}
+
+.location-page .stars {
+  display: inline-flex;
+  color: #c8c8c8;
+}
+
+.location-page .demo {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 25;
+  max-width: min(440px, calc(100vw - 2rem));
+}
+
+.location-page #toTop {
+  display: grid;
+}
+
+@media (max-width: 700px) {
+  .location-page .demo {
+    position: relative;
+    inset: auto;
+    margin: 1rem;
+  }
+}
