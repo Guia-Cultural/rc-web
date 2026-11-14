@@ -1,0 +1,15 @@
+/* ==========================================================================
+   ROTAS DA APLICAÇÃO — React Router
+   Mantém a Home como rota pública principal do RotaCultural.
+========================================================================== */
+import { Navigate, Route, Routes } from "react-router-dom";
+import Home from "../pages/Home/Home";
+
+export default function AppRoutes() {
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
+  );
+}

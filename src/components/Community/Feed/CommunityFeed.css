@@ -1,0 +1,46 @@
+/* ==========================================================================
+   COMMUNITY | FEED
+   Folha do componente — BEM, variáveis próprias e comentários por responsabilidade.
+========================================================================== */
+
+/* ==========================================================================
+   VARIÁVEIS E TOKENS DO COMPONENTE
+========================================================================== */
+
+:root {
+  --community-feed-highlight-pink: #E91E8C;
+  --community-feed-gap: 1.2rem;
+  --community-feed-radius: 24px;
+}
+
+/* ==========================================================================
+   ESTILIZAÇÃO EM EFEITO CASCATA
+========================================================================== */
+
+.community-page .community-post__category{position:absolute;left:10px;bottom:10px;z-index:2;display:inline-flex;gap:6px;align-items:center;background:var(--community-k);border:2px solid #000;border-radius:999px;padding:3px 11px;font-weight:900;font-size:.76rem}
+.community-page .community-who{display:flex;gap:.7rem;align-items:center}
+.community-page .community-who b{display:block;font-size:.95rem;line-height:1.2}
+.community-page .community-who small{font-size:.8rem;color:var(--community-muted);font-weight:700}
+.community-page .community-chips{display:flex;gap:.55rem;flex-wrap:wrap;margin:1.5rem 0 .4rem}
+.community-page .community-chip{display:inline-flex;gap:7px;align-items:center;border:2px solid var(--community-k);background:#fff;border-radius:999px;padding:.5rem 1.1rem;font-weight:900;font-size:.9rem;transition:background .2s,translate .2s}
+.community-page .community-chip:hover{translate:0 -3px}
+.community-page .community-chip[aria-pressed=true]{background:var(--community-k);color:var(--community-kt,#000);animation:community-bump .3s}
+.community-page .community-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem 1.8rem}
+
+
+
+/* ==========================================================================
+   VARIÁVEIS DO FEED DA COMUNIDADE
+========================================================================== */
+
+.community-page .community-highlight--pink { --community-rc: var(--community-feed-highlight-pink); }
+
+/* ==========================================================================
+   RESPONSIVIDADE
+========================================================================== */
+
+@media (max-width:1000px) {
+.community-page .community-grid{grid-template-columns:1fr 1fr}
+}@media (max-width:680px) {
+.community-page .community-grid, .community-page .community-form__row, .community-page .community-continue__lista{grid-template-columns:1fr}
+}

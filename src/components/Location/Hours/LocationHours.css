@@ -1,0 +1,45 @@
+/* ==========================================================================
+   LOCATION | HOURS
+   Folha do componente — BEM, variáveis próprias e comentários por responsabilidade.
+========================================================================== */
+
+/* ==========================================================================
+   VARIÁVEIS E TOKENS DO COMPONENTE
+========================================================================== */
+
+:root {
+  --location-hours-row-gap: .8rem;
+  --location-hours-accent: var(--location-t);
+}
+
+/* ==========================================================================
+   ESTILIZAÇÃO EM EFEITO CASCATA
+========================================================================== */
+
+.location-page .location-hrs{width:100%;border-collapse:collapse}
+.location-page .location-hrs td{padding:.75rem 1rem;font-weight:700;border-bottom:1px solid rgba(16,27,59,.07)}
+.location-page .location-hrs td:last-child{text-align:right}
+.location-page .location-hrs tr.location-today td{background:color-mix(in srgb,var(--location-t) 38%,#fff);font-weight:900}
+.location-page .location-hrs tr.location-today td:first-child{border-radius:12px 0 0 12px}
+.location-page .location-hrs tr.location-today td:last-child{border-radius:0 12px 12px 0}
+.location-page .location-hrs .location-closed{color:var(--location-muted)}
+.location-page .location-days{display:grid;gap:.4rem}
+.location-page .location-day{display:grid;grid-template-columns:90px 1fr 1fr auto;gap:.5rem;align-items:center;font-weight:700}
+.location-page .location-day input[type=time]{padding:.45rem .6rem}
+
+
+/* ==========================================================================
+   MODIFICADORES E APRESENTAÇÃO DOS HORÁRIOS
+========================================================================== */
+.location-page .location-hours__status { margin-bottom: .8rem; }
+.location-page .location-hours__price-title { font: 900 1.2rem var(--location-body); }
+.location-page .location-hours__price-description { margin-top: .4rem; color: #33405c; font-weight: 600; }
+
+/* ==========================================================================
+   RESPONSIVIDADE
+========================================================================== */
+
+@media (max-width:560px) {
+.location-page .location-day{grid-template-columns:70px 1fr 1fr}
+.location-page .location-day .location-ckl{grid-column:1/-1}
+}

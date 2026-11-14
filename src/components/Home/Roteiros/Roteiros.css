@@ -1,0 +1,365 @@
+/* ===========================================================================
+   ROTEIROS — estilos do componente (BEM)
+========================================================================== */
+
+/* ==========================================================================
+   VARIÁVEIS E TOKENS DO COMPONENTE
+========================================================================== */
+
+:root {
+  --roteiros-line-width: 4px;
+  --roteiros-card-radius: 24px;
+}
+
+/* ==========================================================================
+   ESTILIZAÇÃO EM EFEITO CASCATA
+========================================================================== */
+
+/* ==========================================================================
+   SEÇÃO 1: ESTRUTURA E ELEMENTOS DO COMPONENTE
+========================================================================== */
+
+.roteiros {
+  background: #fff;
+}
+
+.roteiros__actions {
+  display: flex;
+  gap: .8rem;
+  flex-wrap: wrap;
+  margin-top: 2.4rem;
+}
+
+.roteiros {
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+}
+
+.roteiros .layout-container {
+  position: relative;
+  z-index: 1;
+}
+
+.roteiros__trail {
+  position: relative;
+  max-width: 920px;
+  margin: 3.4rem auto 0;
+  padding: .5rem 0 1rem;
+}
+
+.roteiros__line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  border-left: 4px dashed rgba(14,26,61,.22);
+  translate: -50% 0;
+}
+
+.roteiros__progress {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 4px;
+  height: 0;
+  background: var(--navy);
+  translate: -50% 0;
+  border-radius: 4px;
+}
+
+.roteiros__plane {
+  position: absolute;
+  left: 50%;
+  top: -22px;
+  width: 44px;
+  height: 44px;
+  translate: -50% 0;
+  rotate: 180deg;
+  z-index: 6;
+  fill: var(--navy);
+  stroke: none;
+  filter: drop-shadow(0 6px 6px rgba(0,0,0,.25));
+  animation: sway 3s ease-in-out infinite;
+}
+
+.roteiros__step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 70px 1fr;
+  align-items: center;
+  margin-bottom: 2.2rem;
+  min-height: 130px;
+}
+
+.roteiros__step::before {
+  content: "";
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #fff;
+  border: 4px solid var(--roteiros-step-color);
+  z-index: 2;
+  transition: background .4s,scale .4s;
+}
+
+.roteiros__step.roteiros__step--visible::before {
+  background: var(--roteiros-step-color);
+  scale: 1.25;
+}
+
+.roteiros__card {
+  grid-row: 1;
+  display: flex;
+  gap: .9rem;
+  align-items: center;
+  background: #fff;
+  border: 3px solid var(--navy);
+  border-radius: 22px;
+  padding: .7rem;
+  box-shadow: 6px 6px 0 var(--roteiros-step-color);
+  max-width: 350px;
+  opacity: 0;
+  transition: opacity .7s var(--ease),translate .7s var(--ease);
+}
+
+.roteiros__card img {
+  width: 86px;
+  height: 86px;
+  object-fit: cover;
+  border-radius: 16px;
+  flex: none;
+}
+
+.roteiros__card-title {
+  font: 900 1.15rem var(--body);
+  margin: 0 0 .1rem;
+}
+
+.roteiros__card-description {
+  margin: 0;
+  font-weight: 600;
+  font-size: .88rem;
+  color: var(--muted);
+}
+
+.roteiros__card-meta {
+  font-style: normal;
+  font-weight: 800;
+  font-size: .75rem;
+  color: var(--roteiros-step-contrast);
+}
+
+.roteiros__step.roteiros__step--left .roteiros__card {
+  grid-column: 1;
+  justify-self: end;
+  translate: -30px 0;
+}
+
+.roteiros__step.roteiros__step--right .roteiros__card {
+  grid-column: 3;
+  justify-self: start;
+  translate: 30px 0;
+}
+
+.roteiros__step.roteiros__step--visible .roteiros__card {
+  opacity: 1;
+  translate: 0 0;
+}
+
+.roteiros__decoration {
+  grid-row: 1;
+  position: relative;
+  height: 110px;
+  color: var(--roteiros-step-contrast);
+}
+
+.roteiros__step.roteiros__step--left .roteiros__decoration {
+  grid-column: 3;
+}
+
+.roteiros__step.roteiros__step--right .roteiros__decoration {
+  grid-column: 1;
+}
+
+.roteiros__decoration>* {
+  opacity: 0;
+  transition: opacity .5s var(--ease) var(--roteiros-delay,0s),scale .5s var(--ease) var(--roteiros-delay,0s);
+}
+
+.roteiros__step.roteiros__step--visible .roteiros__decoration>* {
+  opacity: 1;
+}
+
+.roteiros__decoration.roteiros__decoration--sleep .roteiros__moon {
+  position: absolute;
+  left: 12%;
+  top: 20px;
+  width: 64px;
+  height: 64px;
+  color: var(--roteiros-step-color);
+  animation: float 4s ease-in-out infinite;
+}
+
+.roteiros__step.roteiros__step--right .roteiros__decoration.roteiros__decoration--sleep .roteiros__moon {
+  left: auto;
+  right: 12%;
+}
+
+.roteiros__sleep-letter {
+  position: absolute;
+  left: 42%;
+  top: 30px;
+  font: 400 1.8rem var(--brush);
+  color: var(--roteiros-step-contrast);
+  animation: zzu 3s linear infinite !important;
+}
+
+.roteiros__step.roteiros__step--right .roteiros__sleep-letter {
+  left: auto;
+  right: 42%;
+}
+
+.roteiros__sleep-letter--two {
+  animation-delay: 1s !important;
+  left: 50%;
+}
+
+.roteiros__sleep-letter--three {
+  animation-delay: 2s !important;
+  left: 58%;
+}
+
+.roteiros__step.roteiros__step--right .roteiros__sleep-letter--two {
+  right: 50%;
+  left: auto;
+}
+
+.roteiros__step.roteiros__step--right .roteiros__sleep-letter--three {
+  right: 58%;
+  left: auto;
+}
+
+.roteiros__decoration.roteiros__decoration--food i {
+  position: absolute;
+  left: var(--roteiros-x);
+  top: var(--roteiros-y);
+  width: var(--roteiros-size);
+  height: var(--roteiros-size);
+  border-radius: 46% 54% 50% 50%;
+  background: #C98B3C;
+  animation: crumb 2.4s ease-in-out infinite;
+  animation-delay: var(--roteiros-delay);
+}
+
+.roteiros__step.roteiros__step--right .roteiros__decoration.roteiros__decoration--food i {
+  left: auto;
+  right: var(--roteiros-x);
+}
+
+.roteiros__decoration.roteiros__decoration--places .roteiros__compass {
+  position: absolute;
+  left: var(--roteiros-x);
+  top: calc(50% - var(--roteiros-size)/2);
+  width: var(--roteiros-size);
+  height: var(--roteiros-size);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  animation: slow 8s linear infinite;
+  animation-delay: var(--roteiros-delay);
+}
+
+.roteiros__step.roteiros__step--right .roteiros__decoration.roteiros__decoration--places .roteiros__compass {
+  left: auto;
+  right: var(--roteiros-x);
+}
+
+.roteiros__decoration.roteiros__decoration--transport .roteiros__footstep {
+  position: absolute;
+  left: var(--roteiros-x);
+  top: var(--roteiros-y);
+  width: 34px;
+  height: 34px;
+  rotate: 90deg;
+  color: var(--roteiros-step-contrast);
+}
+
+.roteiros__step.roteiros__step--right .roteiros__decoration.roteiros__decoration--transport .roteiros__footstep {
+  left: auto;
+  right: var(--roteiros-x);
+  rotate: -90deg;
+}
+
+.roteiros__decoration.roteiros__decoration--finish .roteiros__finish-flag {
+  position: absolute;
+  left: 14%;
+  top: 6px;
+  width: 70px;
+  height: 70px;
+  fill: var(--roteiros-step-color);
+  stroke: var(--navy);
+  stroke-width: 1.5;
+  animation: bounceF 1.6s ease-in-out infinite;
+}
+
+.roteiros__step.roteiros__step--right .roteiros__decoration.roteiros__decoration--finish .roteiros__finish-flag {
+  left: auto;
+  right: 14%;
+}
+
+.roteiros__decoration.roteiros__decoration--finish .roteiros__finish-label {
+  position: absolute;
+  left: 14%;
+  top: 78px;
+  font: 400 1.5rem var(--brush);
+  color: var(--navy);
+}
+
+.roteiros__step.roteiros__step--right .roteiros__decoration.roteiros__decoration--finish .roteiros__finish-label {
+  left: auto;
+  right: 14%;
+}
+
+
+
+
+
+/* ==========================================================================
+   MODIFICADOR: AÇÃO CENTRALIZADA
+========================================================================== */
+.roteiros__actions--center { justify-content: center; }
+
+/* ==========================================================================
+   RESPONSIVIDADE
+========================================================================== */
+
+@media (max-width:900px) {
+  .roteiros__line,
+.roteiros__progress,
+.roteiros__plane {
+    left: 20px;
+  }
+  .roteiros__step {
+    grid-template-columns: 40px 1fr;
+  }
+  .roteiros__step::before {
+    grid-column: 1;
+    justify-self: start;
+    margin-left: 8px;
+  }
+  .roteiros__step .roteiros__card,
+.roteiros__step.roteiros__step--left .roteiros__card,
+.roteiros__step.roteiros__step--right .roteiros__card {
+    grid-column: 2;
+    justify-self: stretch;
+    max-width: none;
+  }
+  .roteiros__decoration {
+    display: none;
+  }
+
+}

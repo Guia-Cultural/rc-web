@@ -1,0 +1,40 @@
+/* ==========================================================================
+   COMMUNITY | FOOTER
+   Folha do componente — BEM, variáveis próprias e comentários por responsabilidade.
+========================================================================== */
+
+/* ==========================================================================
+   VARIÁVEIS E TOKENS DO COMPONENTE
+========================================================================== */
+
+:root {
+  --community-footer-background: #FFFFFF;
+  --community-footer-top-color: #FFC107;
+}
+
+/* ==========================================================================
+   ESTILIZAÇÃO EM EFEITO CASCATA
+========================================================================== */
+
+.community-page .community-footer{border-top:9px solid var(--community-yellow);border-radius:90px 90px 0 0;background:var(--community-footer-background);margin-top:-2.4rem;position:relative;z-index:4;font-family:var(--inter);box-shadow:0 -12px 30px rgba(14,26,61,.08)}
+.community-page .community-footer .community-footer__container{max-width:1200px;margin:0 auto;padding:2.4rem 24px 1.4rem;display:flex;align-items:center;gap:0 40px}
+.community-page .community-footer .community-footer__logo img{height:92px;width:auto}
+.community-page .community-footer .community-footer__divider{width:1px;height:110px;background:var(--community-yellow);margin:0 8px}
+.community-page .community-footer .community-footer__column{min-width:150px}
+.community-page .community-footer .community-footer__column h5{font:500 19px var(--inter);margin:0 0 14px;color:#000}
+.community-page .community-footer .community-footer__column a{display:block;font-size:15px;color:#4a4a4a;padding:4px 0;transition:color .2s,translate .2s}
+.community-page .community-footer .community-footer__column a:hover{color:#000;translate:3px 0}
+.community-page .community-footer .community-footer__contact{margin-left:auto;text-align:center}
+.community-page .community-footer .community-footer__contact-button{display:inline-flex;gap:8px;align-items:center;background:var(--community-yellow);border:0;border-radius:12px;padding:13px 30px;font:600 17px var(--inter);color:#000;transition:translate .2s,box-shadow .2s}
+.community-page .community-footer .community-footer__contact-button:hover{translate:0 -2px;box-shadow:0 10px 18px -10px rgba(255,193,7,.9)}
+
+/* ==========================================================================
+   RESPONSIVIDADE
+========================================================================== */
+
+@media (max-width:1000px) {
+.community-page .community-footer .community-footer__container{flex-wrap:wrap;gap:28px 40px}
+.community-page .community-footer .community-footer__divider{display:none}
+.community-page .community-footer .community-footer__contact{margin-left:0}
+.community-page .community-footer{border-radius:48px 48px 0 0}
+}

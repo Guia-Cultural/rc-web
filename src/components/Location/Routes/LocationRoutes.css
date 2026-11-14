@@ -1,0 +1,23 @@
+/* ==========================================================================
+   LOCATION | ROUTES
+   Folha do componente — BEM, variáveis próprias e comentários por responsabilidade.
+========================================================================== */
+
+/* ==========================================================================
+   VARIÁVEIS E TOKENS DO COMPONENTE
+========================================================================== */
+
+:root {
+  --location-routes-gap: 1rem;
+  --location-routes-card-radius: 24px;
+}
+
+/* ==========================================================================
+   ESTILIZAÇÃO EM EFEITO CASCATA
+========================================================================== */
+
+.location-page .location-pb, .location-page .location-person, .location-page .location-routes>div, .location-page .location-composer, .location-page .location-card2{background:var(--location-cream);border:1px solid var(--location-line);border-radius:var(--location-r);box-shadow:none}
+.location-page .location-routes .location-soon{background:#fff;border:2px dashed #E3D79B}
+.location-page .location-routes li{display:flex;gap:.6rem;align-items:center}
+.location-page .location-routes li::before{content:none!important}
+.location-page .location-routes .location-soon .location-icon{color:var(--location-orange)}

@@ -1,0 +1,21 @@
+/* ==========================================================================
+   LOCATION | INFORMATION
+   Folha do componente — BEM, variáveis próprias e comentários por responsabilidade.
+========================================================================== */
+
+/* ==========================================================================
+   VARIÁVEIS E TOKENS DO COMPONENTE
+========================================================================== */
+
+:root {
+  --location-information-card-radius: 24px;
+  --location-information-card-padding: 1.5rem;
+}
+
+/* ==========================================================================
+   ESTILIZAÇÃO EM EFEITO CASCATA
+========================================================================== */
+
+.location-page .location-card{background:#fff;border:1px solid rgba(16,27,59,.06);border-radius:var(--location-r);box-shadow:var(--location-shadow);padding:var(--location-information-card-padding)}
+.location-page .location-info-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:2rem;align-items:start}
+.location-page .location-destinations{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1rem;margin-top:1.6rem}

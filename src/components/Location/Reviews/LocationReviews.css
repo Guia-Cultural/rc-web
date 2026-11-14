@@ -1,0 +1,52 @@
+/* ==========================================================================
+   LOCATION | REVIEWS
+   Folha do componente — BEM, variáveis próprias e comentários por responsabilidade.
+========================================================================== */
+
+/* ==========================================================================
+   VARIÁVEIS E TOKENS DO COMPONENTE
+========================================================================== */
+
+:root {
+  --location-reviews-accent: var(--location-t);
+  --location-reviews-gap: 1rem;
+}
+
+/* ==========================================================================
+   ESTILIZAÇÃO EM EFEITO CASCATA
+========================================================================== */
+
+.location-page .location-stats{border-radius:var(--location-r)}
+.location-page .location-avg{font:400 5rem/1 var(--location-brush);color:var(--location-td);text-align:center}
+.location-page .location-avg .location-rating{font-size:1.3rem;display:flex;justify-content:center;margin-top:.3rem}
+.location-page .location-avg small{display:block;font:700 .9rem var(--location-body);color:var(--location-muted)}
+.location-page .location-reviews{list-style:none;padding:0;display:grid;gap:var(--location-reviews-gap);margin-top:1.4rem}
+.location-page .location-review{background:#fff;border-radius:var(--location-r);padding:1.2rem 1.4rem;box-shadow:var(--location-shadow);animation:location-up .5s var(--location-ease) both}
+.location-page .location-review header{display:flex;align-items:center;gap:.8rem;margin-bottom:.5rem;flex-wrap:wrap}
+.location-page .location-review small{color:var(--location-muted);font-weight:600}
+.location-page .location-review .location-rating{margin-left:auto}
+.location-page .location-rate{display:inline-flex;flex-direction:row-reverse;justify-content:flex-end;gap:.15rem;position:relative}
+.location-page .location-rate input{position:absolute;opacity:0;width:1px;height:1px}
+.location-page .location-rate label{margin:0;cursor:pointer;color:var(--location-td);display:block}
+.location-page .location-rate label .location-icon{width:2rem;height:2rem;fill:none;transition:fill .15s,scale .15s}
+.location-page .location-rate input:checked~label .location-icon, .location-page .location-rate label:hover .location-icon, .location-page .location-rate label:hover~label .location-icon{fill:var(--location-t)}
+.location-page .location-rate label:hover .location-icon{scale:1.2}
+.location-page .location-rate input:focus-visible+label{outline:3px solid var(--location-navy);border-radius:8px}
+.location-page .location-avg{font:900 4.4rem/1 var(--location-body)!important;letter-spacing:-2px;color:#000!important}
+
+
+/* ==========================================================================
+   SEÇÃO 5: TEXTO DE APOIO DO FORMULÁRIO
+========================================================================== */
+.location-page .location-reviews__hint {
+  margin-bottom: .8rem;
+  color: var(--location-muted);
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   FORMULÁRIO E CONTROLES DE AVALIAÇÃO
+========================================================================== */
+.location-page .location-reviews__more-wrap { margin-top: 1rem; text-align: center; }
+.location-page .location-reviews__form-heading { margin-bottom: .8rem; font: 900 1.2rem var(--location-body); }
+.location-page .location-reviews__separator { border: 0; border-top: 1px solid rgba(16,27,59,.08); margin: 1.2rem 0; }

@@ -1,0 +1,33 @@
+/* ==========================================================================
+   LOCATION | SECTIONS
+   Folha do componente — BEM, variáveis próprias e comentários por responsabilidade.
+========================================================================== */
+
+/* ==========================================================================
+   VARIÁVEIS E TOKENS DO COMPONENTE
+========================================================================== */
+
+:root {
+  --location-section-padding: clamp(4rem,7vw,6rem);
+  --location-section-transition: .9s;
+}
+
+/* ==========================================================================
+   ESTILIZAÇÃO EM EFEITO CASCATA
+========================================================================== */
+
+.location-page .location-section{position:relative;padding:var(--location-section-padding) 0;background:var(--location-bgc,var(--location-tb));transition:background-color .9s;scroll-margin-top:130px}
+.location-page .location-section.location-section--white{--location-bgc:#fff}
+.location-page .location-section.location-section--soft{--location-bgc:var(--location-ts)}
+.location-page .location-section::before{content:"";position:absolute;left:0;right:0;top:1px;height:64px;transform:translateY(-100%);background:var(--location-bgc,var(--location-tb));-webkit-mask:var(--location-div) center bottom/100% 100% no-repeat;mask:var(--location-div) center bottom/100% 100% no-repeat;transition:background-color .9s;pointer-events:none}
+.location-page .location-section::before{-webkit-mask-size:112% 100%;mask-size:112% 100%;transform-origin:50% 100%;animation:location-divsway 6s ease-in-out infinite alternate,location-divpulse 4s ease-in-out infinite}
+
+.location-page .location-section .location-layout__container{z-index:1}
+
+/* ==========================================================================
+   RESPONSIVIDADE
+========================================================================== */
+
+@media (prefers-reduced-motion:reduce) {
+.location-page .location-section::before{animation:none}
+}

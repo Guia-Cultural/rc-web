@@ -1,0 +1,581 @@
+/* ==========================================================================
+   ESTILOS GLOBAIS — RotaCultural
+========================================================================== */
+
+/* ==========================================================================
+   ESTILIZAÇÃO EM EFEITO CASCATA
+========================================================================== */
+
+/* ==========================================================================
+   SEÇÃO 1: TIPOGRAFIA E FONTES LOCAIS
+========================================================================== */
+
+
+
+
+
+/* ==========================================================================
+   SEÇÃO 1: TIPOGRAFIA E FONTES LOCAIS
+========================================================================== */
+
+
+@font-face {
+  font-family: "Nunito";
+  src: url("../assets/fonts/Nunito-VariableFont_wght.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("../assets/fonts/Inter-VariableFont_opsz,wght.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Caveat Brush";
+  src: url("../assets/fonts/CaveatBrush-Regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+/* ==========================================================================
+   SEÇÃO 2: ANIMAÇÕES COMPARTILHADAS
+========================================================================== */
+
+@keyframes wig {
+  0%, 100% {
+    rotate: 0deg;
+  }
+  25% {
+    rotate: -12deg;
+  }
+  75% {
+    rotate: 12deg;
+  }
+
+}
+
+@keyframes mq {
+  to {
+    translate: -50% 0;
+  }
+
+}
+
+@keyframes bob2 {
+  50% {
+    translate: 0 -10px;
+  }
+
+}
+
+@keyframes spin {
+  to {
+    rotate: 360deg;
+  }
+
+}
+
+@keyframes pg {
+  from {
+    box-shadow: 0 0 0 0 rgba(18, 183, 106, .6);
+  }
+  to {
+    box-shadow: 0 0 0 12px rgba(18, 183, 106, 0);
+  }
+
+}
+
+@keyframes up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+}
+
+@keyframes float {
+  50% {
+    translate: 0 -12px;
+  }
+
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: scale(.94) translateY(12px);
+  }
+
+}
+
+@keyframes ring {
+  from {
+    box-shadow: 0 0 0 0 rgba(255, 193, 7, .7);
+  }
+  to {
+    box-shadow: 0 0 0 14px rgba(255, 193, 7, 0);
+  }
+
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+}
+
+@keyframes morph {
+  50% {
+    border-radius: 42% 58% 46% 54% / 56% 44% 56% 44%;
+    rotate: 10deg;
+  }
+
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: -60;
+  }
+
+}
+
+@keyframes kb {
+  from {
+    scale: 1;
+  }
+  to {
+    scale: 1.12;
+  }
+
+}
+
+@keyframes tbp {
+  to {
+    width: 100%;
+  }
+
+}
+
+@keyframes seg {
+  to {
+    scale: 1 1;
+  }
+
+}
+
+@keyframes rmorph {
+  to {
+    border-radius: 60% 40% 40% 60% / 40% 60% 40% 60%;
+    rotate: 25deg;
+    scale: 1.08;
+  }
+
+}
+
+@keyframes sway {
+  50% {
+    translate: calc(-50% + 6px) 0;
+  }
+
+}
+
+@keyframes zzu {
+  0% {
+    opacity: 0;
+    translate: 0 10px;
+    scale: .6;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    translate: 14px -40px;
+    scale: 1.4;
+  }
+
+}
+
+@keyframes crumb {
+  50% {
+    translate: 0 -5px;
+    rotate: 30deg;
+  }
+
+}
+
+@keyframes slow {
+  to {
+    rotate: 360deg;
+  }
+
+}
+
+@keyframes bounceF {
+  50% {
+    translate: 0 -10px;
+  }
+
+}
+
+/* ==========================================================================
+   SEÇÃO 3: CONTROLES COMPARTILHADOS — BOTÕES E ÍCONES
+========================================================================== */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 2px solid var(--yellow);
+  border-radius: 999px;
+  padding: 13px 26px;
+  background: var(--yellow);
+  color: var(--navy);
+  font-weight: 900;
+  font-size: .95rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: translate .2s var(--ease), box-shadow .2s, background .2s;
+}
+
+.button:hover {
+  translate: 0 -3px;
+  box-shadow: 0 12px 20px -10px rgba(14, 26, 61, .5);
+}
+
+.button .icon {
+  transition: translate .25s;
+}
+
+.button:hover .icon {
+  translate: 4px 0;
+}
+
+.button--small {
+  padding: 9px 18px;
+  font-size: .88rem;
+}
+
+.button--ghost {
+  border-color: var(--navy);
+  background: #fff;
+  color: var(--navy);
+}
+
+.button--ghost:hover {
+  background: var(--navy);
+  color: #fff;
+}
+
+.button--outline-light {
+  border-color: #fff;
+  background: transparent;
+  color: #fff;
+}
+
+.button--dark {
+  border-color: var(--navy);
+  background: var(--navy);
+  color: #fff;
+}
+
+.button--blue {
+  border-color: var(--blue);
+  background: var(--blue);
+  color: #fff;
+}
+
+.button--wide {
+  width: 100%;
+  margin-top: .4rem;
+}
+
+.icon {
+  width: 1.2em;
+  height: 1.2em;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ==========================================================================
+   SEÇÃO 4: ESTRUTURA E TIPOGRAFIA DE SEÇÃO
+========================================================================== */
+
+.layout-container {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section {
+  position: relative;
+  padding: 6rem 0;
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.section-title {
+  margin: .7rem 0;
+  font-weight: 900;
+  font-size: clamp(2rem, 4.6vw, 3.6rem);
+  line-height: 1.05;
+  letter-spacing: -1.5px;
+}
+
+.section-description {
+  max-width: 56ch;
+  color: var(--muted);
+  font-size: 1.12rem;
+  font-weight: 600;
+}
+
+.section-subtitle {
+  margin: 5rem 0 0;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 900;
+  letter-spacing: -.5px;
+}
+
+.text-highlight {
+  padding: 0 .12em;
+  background: linear-gradient(transparent 60%, var(--yellow) 60%);
+  font-family: var(--brush);
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 0;
+}
+
+.handwritten-note {
+  display: inline-block;
+  font: 400 clamp(1.5rem, 2.6vw, 2.1rem)/1.05 var(--brush);
+  rotate: -4deg;
+}
+
+.handwritten-note::after {
+  display: block;
+  width: 70%;
+  height: 5px;
+  margin: .3rem auto 0;
+  border-radius: 50%;
+  background: var(--yellow);
+  content: "";
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: var(--yellow);
+  color: var(--navy);
+  font-size: .8rem;
+  font-weight: 900;
+  letter-spacing: .4px;
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   SEÇÃO 5: ANIMAÇÕES DE ENTRADA E FAIXAS ROLANTES
+========================================================================== */
+
+.reveal {
+  opacity: 0;
+  translate: 0 26px;
+  transition: opacity .8s var(--ease) var(--rc-animation-delay, 0s), translate .8s var(--ease) var(--rc-animation-delay, 0s);
+}
+
+.reveal.reveal--visible {
+  opacity: 1;
+  translate: 0 0;
+}
+
+.marquee {
+  position: relative;
+  z-index: 3;
+  overflow: hidden;
+  margin: 0 -3%;
+  padding: .7rem 0;
+  border-block: 3px solid var(--navy);
+  background: var(--yellow);
+  color: var(--navy);
+  white-space: nowrap;
+  rotate: -1.6deg;
+}
+
+.marquee .marquee__track {
+  display: inline-flex;
+  width: max-content;
+  animation: mq var(--mqd, 32s) linear infinite;
+}
+
+.marquee:hover .marquee__track {
+  animation-play-state: paused;
+}
+
+.marquee span {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.4rem;
+  padding-left: 1.4rem;
+  font: 400 clamp(1.5rem, 2.8vw, 2.1rem) var(--brush);
+}
+
+.marquee span::after {
+  font-size: 1.1rem;
+  content: "✦";
+}
+
+.marquee--reverse {
+  rotate: 1.4deg;
+}
+
+.marquee--blue {
+  border-color: var(--navy);
+  background: var(--blue);
+  color: #fff;
+}
+
+.marquee--orange {
+  background: var(--orange);
+  color: #fff;
+}
+
+.marquee--magenta {
+  background: var(--mag);
+  color: #fff;
+}
+
+.marquee--green {
+  background: var(--green);
+  color: #fff;
+}
+
+.sobre-nos + .marquee {
+  margin-top: 3rem;
+  margin-bottom: 0;
+}
+
+/* ==========================================================================
+   SEÇÃO 6: CAMPOS DE FORMULÁRIO E NOTIFICAÇÕES
+========================================================================== */
+
+.form-field {
+  width: 100%;
+  border: 2px solid var(--navy);
+  border-radius: 999px;
+  padding: .7rem 1.1rem;
+  background: #fff;
+  color: var(--navy);
+  font: 700 .95rem var(--body);
+}
+
+.form-field:focus {
+  outline: 0;
+  box-shadow: 0 0 0 4px rgba(255, 193, 7, .45);
+}
+
+select.form-field {
+  width: auto;
+  appearance: none;
+  padding-right: 2.4rem;
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%230E1A3D' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 6l5 5 5-5'/%3E%3C/svg%3E") no-repeat right 14px center;
+}
+
+.rc-toast {
+  position: fixed;
+  z-index: 1000;
+  left: 50%;
+  bottom: 24px;
+  padding: 12px 20px;
+  border-radius: 999px;
+  background: var(--navy);
+  color: #fff;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%);
+  transition: opacity .2s;
+}
+
+.rc-toast.rc-toast--visible {
+  opacity: 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   SPRITES SVG COMPARTILHADOS
+========================================================================== */
+.icon-sprite { position: absolute; }
+
+/* ==========================================================================
+   MODIFICADORES DE ATRASO DAS ANIMAÇÕES DE REVELAÇÃO
+========================================================================== */
+.reveal--delay-100 { --rc-animation-delay: .1s; }
+.reveal--delay-120 { --rc-animation-delay: .12s; }
+.reveal--delay-150 { --rc-animation-delay: .15s; }
+.reveal--delay-200 { --rc-animation-delay: .2s; }
+.reveal--delay-240 { --rc-animation-delay: .24s; }
+.reveal--delay-300 { --rc-animation-delay: .3s; }
+
+/* ==========================================================================
+   SPRITES SVG DE PÁGINAS
+========================================================================== */
+.location-page .location-icon-sprite { position: absolute; }
+
+/* ==========================================================================
+   RESPONSIVIDADE
+========================================================================== */
+
+@media (max-width: 640px) {
+  .section {
+    padding: 4rem 0;
+  }
+  .marquee {
+    margin-top: -1.2rem;
+    margin-bottom: -1.2rem;
+  }
+
+}@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    translate: none;
+  }
+  .marquee .marquee__track {
+    animation: mq var(--mqd, 32s) linear infinite !important;
+  }
+  .text-highlight {
+    padding: 0;
+    background: none;
+    color: inherit;
+    font: inherit;
+  }
+
+}

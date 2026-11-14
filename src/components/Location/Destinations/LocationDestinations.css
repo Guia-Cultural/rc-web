@@ -1,0 +1,27 @@
+/* ==========================================================================
+   LOCATION | DESTINATIONS
+   Folha do componente — BEM, variáveis próprias e comentários por responsabilidade.
+========================================================================== */
+
+/* ==========================================================================
+   VARIÁVEIS E TOKENS DO COMPONENTE
+========================================================================== */
+
+:root {
+  --location-destinations-gap: 1rem;
+  --location-destinations-card-radius: 24px;
+}
+
+/* ==========================================================================
+   ESTILIZAÇÃO EM EFEITO CASCATA
+========================================================================== */
+
+.location-page .location-destination-card{background:#fff;border-radius:var(--location-r);padding:1.1rem;box-shadow:var(--location-shadow);transition:translate .35s var(--location-ease)}
+.location-page .location-destination-card:hover{translate:0 -6px}
+.location-page .location-destination-card .location-ib{display:grid;place-items:center;width:46px;height:46px;border-radius:50%;background:var(--location-t);color:var(--location-navy);margin-bottom:.6rem}
+.location-page .location-destination-card b{font-weight:900}
+
+/* ==========================================================================
+   CONTROLE DE MAIS DESTINOS
+========================================================================== */
+.location-page .location-destinations__more-wrap { margin-top: 1.6rem; text-align: center; }

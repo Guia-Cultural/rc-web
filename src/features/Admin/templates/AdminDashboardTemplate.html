@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Área do administrador – Rota Cultural</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<!-- ADMIN_DASHBOARD_STYLES -->
+</head>
+<body>
+<div class="gate" id="gate" hidden><div class="card"><h1>Acesso restrito</h1><p id="gateMsg">Entre com uma conta de administrador para abrir esta área.</p><a class="btn y" id="gateBack" href="local.html">Ir para o site e entrar</a><small>Teste: admin@demo.com · senha 123</small></div></div>
+<div class="app" id="app" hidden>
+<aside><div class="brand">Rota <b>Cultural</b></div><nav id="nav" aria-label="Seções do painel"></nav>
+<div class="side-f"><a class="back" id="back" href="local.html"><svg class="i" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>Voltar ao site</a><button class="btn y" id="out" type="button">Sair</button></div></aside>
+<main><div class="top"><h1 id="ttl">Visão geral</h1><div class="chip"><span class="av" id="av"></span><span id="who"></span></div></div><div id="view" role="region" aria-live="polite"></div></main>
+</div>
+<dialog id="dRej"><form method="dialog" id="fRej"><h3>Reprovar local</h3><p id="rejN"></p><label>Motivo da reprovação (título curto)<input name="m" maxlength="80" placeholder="Ex.: Fotos sem autorização"></label><p class="err" id="rejE"></p><div style="display:flex;gap:.6rem;justify-content:flex-end"><button class="btn line" value="x" formnovalidate>Cancelar</button><button class="btn red" value="ok" id="rejOk">Reprovar</button></div></form></dialog>
+<dialog id="dAsk"><form method="dialog"><h3>Confirmar</h3><p id="askT"></p><div style="display:flex;gap:.6rem;justify-content:flex-end"><button class="btn line" value="x">Cancelar</button><button class="btn red" value="ok">Confirmar</button></div></form></dialog>
+<div id="toast" role="status" aria-live="polite"></div>
+<!-- ADMIN_DASHBOARD_SCRIPT -->
+</body>
+</html>

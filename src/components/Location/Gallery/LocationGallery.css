@@ -1,0 +1,35 @@
+/* ==========================================================================
+   LOCATION | GALLERY
+   Folha do componente — BEM, variáveis próprias e comentários por responsabilidade.
+========================================================================== */
+
+/* ==========================================================================
+   VARIÁVEIS E TOKENS DO COMPONENTE
+========================================================================== */
+
+:root {
+  --location-gallery-gap: 1rem;
+  --location-gallery-row-height: 170px;
+}
+
+/* ==========================================================================
+   ESTILIZAÇÃO EM EFEITO CASCATA
+========================================================================== */
+
+.location-page .location-gallery{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:170px;gap:var(--location-gallery-gap)}
+.location-page .location-gallery__item{position:relative;border:0;padding:0;border-radius:var(--location-r);overflow:hidden;background:var(--location-td);box-shadow:var(--location-shadow);cursor:zoom-in}
+.location-page .location-gallery__item:nth-child(1){grid-column:span 2;grid-row:span 2}
+.location-page .location-gallery__item:nth-child(4){grid-column:span 2}
+.location-page .location-gallery__item:nth-child(4) img{object-position:50% 40%}
+.location-page .location-gallery__item img{width:100%;height:100%;object-fit:cover;scale:1.04;transition:scale .7s var(--location-ease)}
+.location-page .location-gallery__item:hover img{scale:1.14}
+.location-page .location-gallery__item span{position:absolute;left:.8rem;bottom:.8rem;background:var(--location-t);color:var(--location-navy);font-weight:800;font-size:.8rem;padding:.2rem .8rem;border-radius:999px;display:inline-flex;gap:.3rem;align-items:center}
+
+/* ==========================================================================
+   RESPONSIVIDADE
+========================================================================== */
+
+@media (max-width:900px) {
+.location-page .location-gallery{grid-template-columns:repeat(2,1fr);grid-auto-rows:150px}
+.location-page .location-gallery__item:nth-child(4){grid-column:span 1}
+}

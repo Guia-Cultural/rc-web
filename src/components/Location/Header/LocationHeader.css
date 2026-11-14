@@ -1,0 +1,41 @@
+/* ==========================================================================
+   LOCATION | HEADER
+   Folha do componente — BEM, variáveis próprias e comentários por responsabilidade.
+========================================================================== */
+
+/* ==========================================================================
+   VARIÁVEIS E TOKENS DO COMPONENTE
+========================================================================== */
+
+:root {
+  --location-header-background: rgba(16,27,59,.94);
+  --location-header-height: 76px;
+}
+
+/* ==========================================================================
+   ESTILIZAÇÃO EM EFEITO CASCATA
+========================================================================== */
+
+.location-page .location-header{position:fixed;inset:0 0 auto;z-index:30;transition:background .3s,box-shadow .3s;animation:location-drop .8s var(--location-ease) both}
+.location-page .location-header.location-header--solid{background:var(--location-header-background);box-shadow:0 4px 18px rgba(0,0,0,.25);backdrop-filter:blur(8px)}
+.location-page .location-header nav ul{display:flex;gap:1.9rem;list-style:none;padding:0}
+.location-page .location-header nav a{color:#fff;text-decoration:none;font-weight:700;padding:.3rem 0;background:linear-gradient(var(--location-yellow),var(--location-yellow)) 0 100%/0 3px no-repeat;transition:background-size .3s}
+.location-page .location-header nav a:hover, .location-page .location-header nav a[aria-current]{background-size:100% 3px}
+.location-page .location-header .location-button.location-button--outline .location-icon{margin-right:.1rem}
+.location-page .location-header .location-layout__container{width:min(1380px,100% - 4.4rem)}
+.location-page .location-header nav ul{gap:2.8rem}
+
+.location-page .location-header nav button{background:linear-gradient(var(--location-yellow),var(--location-yellow)) 0 100%/0 3px no-repeat;border:0;color:#fff;font:inherit;font-weight:700;padding:.3rem 0;cursor:pointer;transition:background .3s}
+.location-page .location-header nav button:hover{background-size:100% 3px}
+.location-page .location-header nav.is-open button{text-align:left}
+.location-page .location-header nav button{line-height:inherit;display:inline-block}
+
+/* ==========================================================================
+   RESPONSIVIDADE
+========================================================================== */
+
+@media (max-width:900px) {
+.location-page .location-header nav{display:none}
+.location-page .location-header nav.is-open{display:block;position:absolute;top:76px;left:0;right:0;background:rgba(16,27,59,.97);padding:1rem 1.5rem}
+.location-page .location-header nav.is-open ul{flex-direction:column;gap:.8rem}
+}

@@ -1,0 +1,187 @@
+/* ==========================================================================
+   Variaveis
+========================================================================== */
+
+/* ==========================================================================
+   VARIÁVEIS E TOKENS DO COMPONENTE
+========================================================================== */
+
+:root {
+  --header-txt-color: #ffffff;
+  --header-bg: #111a3a;
+  --header-txt-color-destaque: #ffcc00;
+  --header-color-line-active: #ffcc00;
+  --header-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  --header-font-nunito: var(--body);
+  --header-font-size-link: 16px;
+  --header-font-weight-bold: 700;
+}
+
+/* ==========================================================================
+   ESTILIZAÇÃO EM EFEITO CASCATA
+========================================================================== */
+
+/* ==========================================================================
+   SEÇÃO 1: ESTRUTURA E ELEMENTOS DO COMPONENTE
+========================================================================== */
+
+/* ==========================================================================
+   SEÇÃO 1: O BLOCO PRINCIPAL (A BARRA COMPLETA)
+   ========================================================================== */
+
+.header {
+  background-color: var(--header-bg);
+  width: 100%;
+  padding: 1rem 2rem;
+  box-sizing: border-box;
+  position: sticky;
+  /* Deixa a barra grudada no topo enquanto a página rola */
+  top: 0;
+  z-index: 50;
+  transition: box-shadow 0.3s ease;
+}
+
+/* Modificador: entra quando o usuário começa a rolar a página */
+
+.header--scrolled {
+  box-shadow: var(--header-shadow);
+}
+
+/* Esse cara serve para alinhar a logo, o menu e os botões na mesma linha */
+
+.header__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   SEÇÃO 2: LOGOTIPO
+   ========================================================================== */
+
+.header__logo {
+  display: flex;
+  align-items: center;
+}
+
+.header__logo-img {
+  height: 60px;
+  width: auto;
+}
+
+/* ==========================================================================
+   SEÇÃO 3: MENU DE NAVEGAÇÃO (OS LINKS DO MEIO)
+   ========================================================================== */
+
+.header__nav {
+  display: flex;
+  gap: 1.5rem;
+  /* Cria um espacinho igual entre cada palavra do menu */
+
+}
+
+.header__link {
+  color: var(--header-txt-color);
+  text-decoration: none;
+  font-family: var(--header-font-nunito);
+  font-size: var(--header-font-size-link);
+  font-weight: var(--header-font-weight-bold);
+  /* Como a borda já existe, só que invisível: assim o menu não "pula" 3px
+     quando o link vira ativo */
+  padding: 8px 0;
+  border-bottom: 3px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+  /* Faz a cor mudar suavemente quando passa o mouse */
+
+}
+
+/* Para a seção que estiver visível no momento */
+
+.header__link--active {
+  border-bottom-color: var(--header-color-line-active);
+  /* Acende aquela bordinha charmosa embaixo da palavra */
+
+}
+
+/* ==========================================================================
+   SEÇÃO 4: BOTÕES DE AÇÃO (CADASTRAR E ENTRAR)
+   ========================================================================== */
+
+.header__actions {
+  display: flex;
+  gap: 1rem;
+  /* Espaço entre o botão de cadastrar e o de entrar */
+
+}
+
+/* ==========================================================================
+   SEÇÃO 5: BOTÃO HAMBÚRGUER (SÓ APARECE NO CELULAR E TABLET)
+   ========================================================================== */
+
+.header__burger {
+  display: none;
+  background: none;
+  border: 0;
+  color: var(--header-txt-color);
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   SEÇÃO 6: RESPONSIVO
+   ========================================================================== */
+
+
+
+
+
+
+
+
+
+/* Compatibilidade com o controlador da navegação da Home original */
+
+/* ==========================================================================
+   RESPONSIVIDADE
+========================================================================== */
+
+@media (max-width: 1000px) {
+  .header__nav {
+    display: none;
+  }
+  /* Modificador: menu aberto pelo hambúrguer */
+  .header__nav--open {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: absolute;
+    /* Se encaixa embaixo da barra (o .header é a referência) */
+    top: 100%;
+    left: 0;
+    right: 0;
+    padding: 12px 2rem 20px;
+    background-color: var(--header-bg);
+    box-shadow: var(--header-shadow);
+  }
+  .header__actions {
+    margin-left: auto;
+  }
+  .header__burger {
+    display: block;
+  }
+
+}@media (max-width: 640px) {
+  .header {
+    padding: 0.8rem 1rem;
+  }
+  .header__actions .button-register {
+    display: none;
+  }
+
+}@media (max-width: 1000px) {
+}

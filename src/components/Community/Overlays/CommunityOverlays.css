@@ -1,0 +1,80 @@
+/* ==========================================================================
+   COMMUNITY | OVERLAYS
+   Folha do componente — BEM, variáveis próprias e comentários por responsabilidade.
+========================================================================== */
+
+/* ==========================================================================
+   VARIÁVEIS E TOKENS DO COMPONENTE
+========================================================================== */
+
+:root {
+  --community-dialog-backdrop: rgba(16,27,59,.6);
+  --community-dialog-radius: 28px;
+}
+
+/* ==========================================================================
+   ESTILIZAÇÃO EM EFEITO CASCATA
+========================================================================== */
+
+.community-page .community-toast{position:fixed;left:50%;bottom:24px;translate:-50% 30px;background:var(--community-navy);color:#fff;padding:12px 22px;border-radius:999px;font-weight:800;opacity:0;pointer-events:none;transition:.3s;z-index:400;max-width:92vw;text-align:center}
+.community-page .community-toast.is-visible{opacity:1;translate:-50% 0}
+.community-page .community-dialog{border:0;border-radius:28px;padding:0;width:min(470px,92vw);max-height:90vh;overflow:auto;box-shadow:0 30px 80px rgba(16,27,59,.45);color:var(--community-navy);background:#fff;animation:community-pop .4s var(--community-ease)}
+.community-page .community-dialog::backdrop{background:var(--community-dialog-backdrop);backdrop-filter:blur(4px)}
+.community-page .community-dialog h2{font:900 1.7rem/1.1 var(--community-body);letter-spacing:-.5px}
+.community-page .community-dialog label{display:block;font-weight:800;font-size:.9rem;margin-bottom:.7rem}
+.community-page .community-dialog input, .community-page .community-dialog textarea{width:100%;margin-top:.3rem;padding:.75rem 1rem;border:2px solid #E7E2D2;border-radius:14px;font:600 1rem var(--community-body);background:#fff;color:var(--community-navy)}
+.community-page .community-dialog input:focus, .community-page .community-dialog textarea:focus{outline:0;border-color:var(--community-yellow);box-shadow:0 0 0 4px rgba(255,193,7,.3)}
+.community-page .community-dialog .community-form__error{display:block;color:var(--community-red);font-size:.8rem;min-height:1em;font-weight:700}
+.community-page .community-dialog details{border:2px solid var(--community-line);border-radius:16px;padding:.7rem 1rem;margin-bottom:.6rem}
+.community-page .community-dialog summary{font-weight:900;cursor:pointer}
+.community-page .community-dialog details p{margin-top:.4rem;font-weight:600;color:#3b4660}
+.community-page .community-dialog .community-dialog__success{text-align:center;padding:1.2rem 0}
+.community-page .community-dialog .community-dialog__success .community-icon{width:3rem;height:3rem;color:var(--community-green)}
+.community-page .community-dialog .community-button{width:100%;justify-content:center}
+.community-page .community-dialog .community-form__input{border-radius:16px}
+.community-page .community-dialog textarea.community-form__input{min-height:90px}
+.community-page .community-route-dialog .community-hm__fechar{right:16px;top:16px}
+.community-page .community-modal-overlay{position:fixed;inset:0;background:rgba(15,23,42,.66);backdrop-filter:blur(5px);z-index:90;display:grid;place-items:center;padding:16px;animation:community-fade-in .25s}
+.community-page .community-modal-overlay[hidden]{display:none}
+.community-page .community-hm{background:#fff;border:3px solid #000;border-radius:36px;max-width:820px;width:100%;max-height:92vh;overflow:auto;position:relative;animation:community-pop .4s var(--community-ease);box-shadow:6px 6px 0 var(--community-c,var(--community-yellow))}
+.community-page .community-hm__fechar{position:absolute;right:26px;top:26px;z-index:6;width:42px;height:42px;border-radius:50%;border:2px solid #000;background:#fff;font-weight:900}
+.community-page .community-hm__fechar:hover{background:var(--community-yellow)}
+.community-page .community-hm__capa{position:relative;margin:14px 14px 0;aspect-ratio:16/10;border-radius:24px;overflow:hidden;border:3px solid #000}
+.community-page .community-hm__capa img{width:100%;height:100%;object-fit:cover;object-position:center}
+.community-page .community-hm__salvar{position:absolute;right:62px;top:12px;width:42px;height:42px;border-radius:50%;border:2px solid #000;background:#fff;display:grid;place-items:center;transition:scale .2s,background .2s}
+.community-page .community-hm__salvar:hover{scale:1.12}
+.community-page .community-hm__salvar[aria-pressed=true]{background:var(--community-yellow)}
+.community-page .community-hm__salvar[aria-pressed=true] .community-icon{fill:#000}
+.community-page .community-hm__corpo{padding:1.4rem 2rem .4rem;display:grid;gap:.9rem}
+.community-page .community-hm__meta{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center}
+.community-page .community-hm__autor{justify-self:start;background:var(--community-blue3);color:#fff;font:800 .95rem var(--body);border-radius:999px;padding:.35rem 1rem}
+.community-page .community-hm__titulo{font:400 clamp(2rem,4.2vw,2.9rem)/1.02 var(--community-brush);letter-spacing:0;margin:0}
+.community-page .community-hm__texto{margin:0;font:600 1.05rem/1.75 var(--body);color:#2b3656}
+.community-page .community-hm__roteiro{background:var(--community-cream);border:3px solid #000;border-radius:24px;padding:1.1rem 1.3rem;box-shadow:3px 3px 0 var(--community-c)}
+.community-page .community-hm__roteiro h4{margin:0 0 .8rem;font-size:1.05rem;font-weight:900;display:flex;gap:.5rem;align-items:center}
+.community-page .community-hm__roteiro ol{list-style:none;margin:0;padding:0;display:grid;gap:.7rem;position:relative}
+.community-page .community-hm__roteiro li{display:grid;grid-template-columns:30px 1fr;gap:.7rem;align-items:start}
+.community-page .community-hm__roteiro li>span{width:30px;height:30px;border-radius:50%;background:var(--community-c);color:#000;border:2px solid #000;display:grid;place-items:center;font-weight:900;font-size:.85rem}
+.community-page .community-hm__roteiro b{display:block;line-height:1.25}
+.community-page .community-hm__roteiro small{color:var(--community-muted);font-weight:700}
+.community-page .community-hm__acoes{display:flex;flex-wrap:wrap;gap:.5rem;margin:.8rem 2rem 0;padding-top:.9rem;border-top:2px dashed #EBD27A}
+.community-page .community-account-panel{position:fixed;inset:0;z-index:95;background:rgba(15,23,42,.66);backdrop-filter:blur(6px);display:grid;place-items:center;padding:20px;animation:community-fade-in .25s}
+.community-page .community-account-panel[hidden]{display:none}
+.community-page .community-account-panel .community-button.community-button--themed{background:var(--community-t);border-color:var(--community-t);color:var(--community-on)}
+.community-page .community-account-panel .community-form__input:focus{border-color:var(--community-t);box-shadow:0 0 0 4px color-mix(in srgb,var(--community-t) 30%,transparent)}
+.community-page .community-account-panel .community-button.community-perigo{background:#fff;border-color:var(--community-red);color:var(--community-red)}
+.community-page .community-account-panel .community-button.community-perigo:hover{background:var(--community-red);color:#fff}
+.community-page .community-dialog h2{margin:0}
+.community-page .community-dialog details{border:2px solid var(--community-line);border-radius:16px;padding:10px 16px;margin-bottom:8px}
+.community-page .community-dialog summary{font-weight:900;cursor:pointer}
+.community-page .community-dialog details p{margin:6px 0 0;font-weight:600;color:#3b4660}
+
+/* ==========================================================================
+   RESPONSIVIDADE
+========================================================================== */
+
+@media (max-width:680px) {
+.community-page .community-hm__corpo, .community-page .community-coms{padding-left:1.2rem;padding-right:1.2rem}
+.community-page .community-hm__acoes{margin-left:1.2rem;margin-right:1.2rem}
+.community-page .community-account-panel{padding:0}
+}

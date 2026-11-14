@@ -1,0 +1,33 @@
+/* ==========================================================================
+   LOCATION | SECTIONNAV
+   Folha do componente — BEM, variáveis próprias e comentários por responsabilidade.
+========================================================================== */
+
+/* ==========================================================================
+   VARIÁVEIS E TOKENS DO COMPONENTE
+========================================================================== */
+
+:root {
+  --location-section-nav-offset: 76px;
+  --location-section-nav-gap: .4rem;
+}
+
+/* ==========================================================================
+   ESTILIZAÇÃO EM EFEITO CASCATA
+========================================================================== */
+
+.location-page .location-section-nav{position:sticky;top:76px;z-index:15;background:color-mix(in srgb,var(--location-tb) 88%,transparent);backdrop-filter:blur(10px);border-bottom:2px solid var(--location-ts)}
+.location-page .location-section-nav ul{display:flex;gap:var(--location-section-nav-gap);list-style:none;padding:.6rem 0;overflow-x:auto;scrollbar-width:none}
+.location-page .location-section-nav ul::-webkit-scrollbar{display:none}
+.location-page .location-section-nav a{display:inline-flex;align-items:center;gap:.4rem;padding:.45rem 1rem;border-radius:999px;font-weight:800;text-decoration:none;white-space:nowrap;transition:background .25s}
+.location-page .location-section-nav a:hover, .location-page .location-section-nav a.is-active{background:var(--location-t)}
+.location-page .location-section-nav .location-icon{color:var(--location-td)}
+.location-page .location-section-nav a.is-active .location-icon, .location-page .location-section-nav a:hover .location-icon{color:var(--location-navy)}
+
+/* ==========================================================================
+   RESPONSIVIDADE
+========================================================================== */
+
+@media (max-width:900px) {
+.location-page .location-section-nav{top:76px}
+}

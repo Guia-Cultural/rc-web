@@ -1,0 +1,31 @@
+/* ==========================================================================
+   LOCATION | HERO
+   Folha do componente — BEM, variáveis próprias e comentários por responsabilidade.
+========================================================================== */
+
+/* ==========================================================================
+   VARIÁVEIS E TOKENS DO COMPONENTE
+========================================================================== */
+
+:root {
+  --location-hero-min-height: min(92vh,800px);
+  --location-hero-overlay: rgba(5,15,25,.8);
+}
+
+/* ==========================================================================
+   ESTILIZAÇÃO EM EFEITO CASCATA
+========================================================================== */
+
+.location-page .location-hero{position:relative;min-height:var(--location-hero-min-height);color:#fff;padding:120px 0 2rem;overflow:hidden;isolation:isolate;background:var(--location-td);display:flex;flex-direction:column;justify-content:flex-end;gap:2rem}
+.location-page .location-hero .location-hero__background{position:absolute;inset:-3% 0 0;width:100%;height:103%;object-fit:cover;object-position:var(--location-bp,50% 50%);z-index:-3;opacity:0;transition:opacity 1.2s ease}
+.location-page .location-hero .location-hero__background.is-visible{opacity:1;animation:location-kb 22s ease-in-out infinite alternate}
+.location-page .location-hero::before{content:"";position:absolute;inset:0;z-index:-2;background:linear-gradient(90deg,rgba(5,15,25,.8) 0%,rgba(5,15,25,.35) 55%,transparent 85%),linear-gradient(180deg,rgba(0,0,0,.4),transparent 30%,transparent 42%,color-mix(in srgb,var(--location-td) 88%,#000))}
+.location-page .location-hero .location-layout__container{width:min(1380px,100% - 4.4rem)}
+
+/* ==========================================================================
+   RESPONSIVIDADE
+========================================================================== */
+
+@media (max-width:560px) {
+.location-page .location-hero{padding-top:105px}
+}

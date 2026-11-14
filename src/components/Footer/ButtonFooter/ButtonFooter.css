@@ -1,0 +1,66 @@
+/* ==========================================================================
+   Variaveis
+========================================================================== */
+
+/* ==========================================================================
+   VARIÁVEIS E TOKENS DO COMPONENTE
+========================================================================== */
+
+:root {
+  --button-footer-bg: #111a3a;
+  --button-footer-color: #ffffff;
+  --button-footer-shadow: 0 12px 20px -10px rgba(17, 26, 58, 0.5);
+  --button-footer-font: var(--body);
+  --button-footer-font-size: 15px;
+  --button-footer-font-weight: 800;
+}
+
+/* ==========================================================================
+   ESTILIZAÇÃO EM EFEITO CASCATA
+========================================================================== */
+
+/* ==========================================================================
+   SEÇÃO 1: ESTRUTURA E ELEMENTOS DO COMPONENTE
+========================================================================== */
+
+/* ==========================================================================
+   Botão de criar roteiro (azul escuro, com seta)
+========================================================================== */
+
+.button-footer {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: var(--button-footer-bg);
+  border: none;
+  border-radius: 40px;
+  padding: 13px 26px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.button-footer__text {
+  margin: 0;
+  color: var(--button-footer-color);
+  font-family: var(--button-footer-font);
+  font-size: var(--button-footer-font-size);
+  font-weight: var(--button-footer-font-weight);
+}
+
+.button-footer__icon {
+  width: 20px;
+  height: auto;
+  transition: transform 0.25s ease;
+}
+
+.button-footer:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--button-footer-shadow);
+}
+
+/* A seta anda um pouquinho para a direita quando passa o mouse */
+
+.button-footer:hover .button-footer__icon {
+  transform: translateX(4px);
+}
