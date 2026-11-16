@@ -1,7 +1,4 @@
-/* ==========================================================================
-   CONTEXTO DE MODAIS | Controle compartilhado de abertura e fechamento.
-   ========================================================================== */
-
+// src/context/ModalContext.jsx
 import { createContext, useContext, useState } from "react";
 
 // ==========================================================================

@@ -23,7 +23,7 @@ export default function SobreNos() {
 <a className="sobre-nos__feature sobre-nos__feature--green" href="#explorar"><svg className="icon" aria-hidden="true"><use href="#i-landmark"></use></svg><span>Museus<small>do grande ao pequeno</small></span></a>
 <a className="sobre-nos__feature sobre-nos__feature--orange" href="#explorar"><svg className="icon" aria-hidden="true"><use href="#i-pin"></use></svg><span>Pontos turísticos<small>por perfil e preço</small></span></a>
 <a className="sobre-nos__feature sobre-nos__feature--blue" href="#explorar"><svg className="icon" aria-hidden="true"><use href="#i-heart"></use></svg><span>Gastronomia local<small>sabores de cada cidade</small></span></a></div>
-<div className="sobre-nos__actions"><a className="button" href="#explorar">Explorar destinos <svg className="icon" aria-hidden="true"><use href="#i-arrow"></use></svg></a><a className="button button--ghost" href="roteiros.html">Criar meu roteiro</a></div></div>
+<div className="sobre-nos__actions"><a className="button" href="#explorar">Explorar destinos <svg className="icon" aria-hidden="true"><use href="#i-arrow"></use></svg></a><a className="button button--ghost" href="/roteiros">Criar meu roteiro</a></div></div>
 <div className="sobre-nos__collage reveal reveal--delay-150">
 <figure className="sobre-nos__collage-item--one"><img data-as="macaw" alt="Arara-azul em uma árvore diante de uma praia de água turquesa" /></figure>
 <figure className="sobre-nos__collage-item--two"><img data-as="surf2" alt="Surfista em uma onda azul" /></figure>
@@ -82,7 +82,7 @@ export default function SobreNos() {
 </div>
 {/* SEÇÃO 8: CHAMADA FINAL */}
 <div className="sobre-nos__cta reveal"><div className="sobre-nos__cta-content"><span className="badge">Vem com a gente</span><h3>Pronto para viver novas histórias?</h3><p>Explore, descubra e planeje. O Rota Cultural guia você em cada passo da jornada.</p>
-<div className="sobre-nos__cta-actions"><button className="button" data-auth="register">Criar minha conta <svg className="icon" aria-hidden="true"><use href="#i-arrow"></use></svg></button><a className="button button--outline-light" href="roteiros.html">Criar meu roteiro</a></div></div>
+<div className="sobre-nos__cta-actions"><button className="button" data-auth="register">Criar minha conta <svg className="icon" aria-hidden="true"><use href="#i-arrow"></use></svg></button><a className="button button--outline-light" href="/roteiros">Criar meu roteiro</a></div></div>
 <img data-as="dogs" alt="Cachorros de óculos de sol tirando uma selfie" /></div>
 </div></section>
 <div className="marquee marquee--blue marquee--reverse" aria-hidden="true"><div className="marquee__track"><span>Descubra</span><span>Explore</span><span>Planeje</span><span>Viva</span><span>Compartilhe</span><span>Volte</span><span>Descubra</span><span>Explore</span><span>Planeje</span><span>Viva</span><span>Compartilhe</span><span>Volte</span></div></div>

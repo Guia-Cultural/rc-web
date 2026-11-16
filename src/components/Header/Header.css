@@ -1,29 +1,20 @@
 /* ==========================================================================
    Variaveis
 ========================================================================== */
-
-/* ==========================================================================
-   VARIÁVEIS E TOKENS DO COMPONENTE
-========================================================================== */
-
 :root {
   --header-txt-color: #ffffff;
-  --header-bg: #111a3a;
+  --header-bg: #111a3a;                   
   --header-txt-color-destaque: #ffcc00;
-  --header-color-line-active: #ffcc00;
-  --header-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-  --header-font-nunito: var(--body);
+  --header-color-line-active: #ffcc00;    
+  --header-shadow: 0 10px 30px rgba(0, 0, 0, 0.25); 
+
+
+  /* Fonts */
+  --header-font-nunito: 'Nunito';
   --header-font-size-link: 16px;
   --header-font-weight-bold: 700;
 }
 
-/* ==========================================================================
-   ESTILIZAÇÃO EM EFEITO CASCATA
-========================================================================== */
-
-/* ==========================================================================
-   SEÇÃO 1: ESTRUTURA E ELEMENTOS DO COMPONENTE
-========================================================================== */
 
 /* ==========================================================================
    SEÇÃO 1: O BLOCO PRINCIPAL (A BARRA COMPLETA)
@@ -33,31 +24,56 @@
   background-color: var(--header-bg);
   width: 100%;
   padding: 1rem 2rem;
-  box-sizing: border-box;
-  position: sticky;
-  /* Deixa a barra grudada no topo enquanto a página rola */
+  box-sizing: border-box; 
+  position: sticky;  /* Deixa a barra grudada no topo enquanto a página rola */
   top: 0;
-  z-index: 50;
+  z-index: 50; 
   transition: box-shadow 0.3s ease;
 }
 
 /* Modificador: entra quando o usuário começa a rolar a página */
-
 .header--scrolled {
   box-shadow: var(--header-shadow);
 }
 
-/* Esse cara serve para alinhar a logo, o menu e os botões na mesma linha */
+.header.header--legacy {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 60;
+  padding-block: 0;
+  background: transparent;
+}
 
+.header.header--legacy.header--scrolled {
+  position: fixed;
+  background: rgba(16, 27, 59, .94);
+  backdrop-filter: blur(8px);
+}
+
+.header--legacy .header__container {
+  max-width: 1370px;
+  min-height: 76px;
+}
+
+.header--legacy .header__logo-img {
+  height: 46px;
+}
+
+.header--legacy .header__nav {
+  gap: 2.8rem;
+}
+
+/* Esse cara serve para alinhar a logo, o menu e os botões na mesma linha */
 .header__container {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1.5rem;
+  justify-content: space-between; 
+  align-items: center;            
+  gap: 1.5rem;                     
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
+  max-width: 1200px;               
+  margin: 0 auto;                 
 }
+
 
 /* ==========================================================================
    SEÇÃO 2: LOGOTIPO
@@ -73,39 +89,37 @@
   width: auto;
 }
 
+
 /* ==========================================================================
    SEÇÃO 3: MENU DE NAVEGAÇÃO (OS LINKS DO MEIO)
    ========================================================================== */
 
 .header__nav {
   display: flex;
-  gap: 1.5rem;
-  /* Cria um espacinho igual entre cada palavra do menu */
-
+  gap: 1.5rem; /* Cria um espacinho igual entre cada palavra do menu */
 }
 
 .header__link {
   color: var(--header-txt-color);
   text-decoration: none;
+
   font-family: var(--header-font-nunito);
   font-size: var(--header-font-size-link);
   font-weight: var(--header-font-weight-bold);
+
   /* Como a borda já existe, só que invisível: assim o menu não "pula" 3px
      quando o link vira ativo */
   padding: 8px 0;
   border-bottom: 3px solid transparent;
-  transition: color 0.2s ease, border-color 0.2s ease;
-  /* Faz a cor mudar suavemente quando passa o mouse */
-
+  transition: color 0.2s ease, border-color 0.2s ease; /* Faz a cor mudar suavemente quando passa o mouse */
 }
+
 
 /* Para a seção que estiver visível no momento */
-
 .header__link--active {
-  border-bottom-color: var(--header-color-line-active);
-  /* Acende aquela bordinha charmosa embaixo da palavra */
-
+  border-bottom-color: var(--header-color-line-active); /* Acende aquela bordinha charmosa embaixo da palavra */
 }
+
 
 /* ==========================================================================
    SEÇÃO 4: BOTÕES DE AÇÃO (CADASTRAR E ENTRAR)
@@ -113,10 +127,28 @@
 
 .header__actions {
   display: flex;
-  gap: 1rem;
-  /* Espaço entre o botão de cadastrar e o de entrar */
-
+  align-items: center;
+  gap: 0.75rem;
 }
+
+.header__logout {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 40px;
+  padding: 7px 14px;
+  color: #ffffff;
+  font-family: var(--body, 'Nunito', sans-serif);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.header__logout:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: #ffcc00;
+}
+
 
 /* ==========================================================================
    SEÇÃO 5: BOTÃO HAMBÚRGUER (SÓ APARECE NO CELULAR E TABLET)
@@ -132,35 +164,23 @@
   cursor: pointer;
 }
 
+
 /* ==========================================================================
    SEÇÃO 6: RESPONSIVO
    ========================================================================== */
 
 
-
-
-
-
-
-
-
-/* Compatibilidade com o controlador da navegação da Home original */
-
-/* ==========================================================================
-   RESPONSIVIDADE
-========================================================================== */
-
 @media (max-width: 1000px) {
   .header__nav {
     display: none;
   }
+
   /* Modificador: menu aberto pelo hambúrguer */
   .header__nav--open {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    position: absolute;
-    /* Se encaixa embaixo da barra (o .header é a referência) */
+    position: absolute; /* Se encaixa embaixo da barra (o .header é a referência) */
     top: 100%;
     left: 0;
     right: 0;
@@ -168,20 +188,23 @@
     background-color: var(--header-bg);
     box-shadow: var(--header-shadow);
   }
+
   .header__actions {
     margin-left: auto;
   }
+
   .header__burger {
     display: block;
   }
+}
 
-}@media (max-width: 640px) {
+@media (max-width: 640px) {
   .header {
     padding: 0.8rem 1rem;
   }
+
+  .header__actions .btn-register,
   .header__actions .button-register {
     display: none;
   }
-
-}@media (max-width: 1000px) {
 }

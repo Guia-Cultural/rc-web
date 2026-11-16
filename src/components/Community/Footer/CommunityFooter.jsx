@@ -15,9 +15,7 @@ export default function Footer() {
           </b>
           <a
             className="community-button community-button--dark"
-            href="https://claude.ai/artifact/C8iRKBW9jFtRxAiN5CSppw#plano"
-            target="_blank"
-            rel="noopener"
+            href="/roteiros"
           >
             Criar meu roteiro
             <svg className="community-icon" aria-hidden="true">
@@ -28,9 +26,7 @@ export default function Footer() {
         <div className="community-footer__container">
           <a
             className="community-footer__logo"
-            href="https://claude.ai/artifact/C8iRKBW9jFtRxAiN5CSppw"
-            target="_blank"
-            rel="noopener"
+            href="/"
             aria-label="RotaCultural - Sua viagem começa aqui"
           >
             <img
@@ -41,18 +37,10 @@ export default function Footer() {
           <div className="community-footer__divider"></div>
           <div className="community-footer__column">
             <h5>Institucional</h5>
-            <a
-              href="https://claude.ai/artifact/C8iRKBW9jFtRxAiN5CSppw#sobre"
-              target="_blank"
-              rel="noopener"
-            >
+            <a href="/#sobre">
               Sobre nós
             </a>
-            <a
-              href="https://claude.ai/artifact/C8iRKBW9jFtRxAiN5CSppw#como-funciona"
-              target="_blank"
-              rel="noopener"
-            >
+            <a href="/#sobre">
               Como funciona
             </a>
             <a href="#" data-dlg="contact">

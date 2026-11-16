@@ -4,6 +4,7 @@
    Classes BEM e estilos inline específicos preservados.
    Interações da seção permanecem na feature Visit.
 ========================================================================== */
+import { Link } from "react-router-dom";
 import "./Roteiros.css";
 
 export default function Roteiros() {
@@ -21,7 +22,7 @@ export default function Roteiros() {
 <p className="handwritten-note">Tudo que você precisa<br />no mesmo lugar.</p>
 </div>
 <div className="roteiros__trail" id="trail"></div>
-<div className="roteiros__actions roteiros__actions--center reveal"><a className="button button--blue" href="roteiros.html">Criar meu roteiro <svg className="icon" aria-hidden="true"><use href="#i-arrow"></use></svg></a></div>
+<div className="roteiros__actions roteiros__actions--center reveal"><Link className="button button--blue" to="/roteiros">Criar meu roteiro <svg className="icon" aria-hidden="true"><use href="#i-arrow"></use></svg></Link></div>
 </div>
 </section>
 {/* ==========================================================================

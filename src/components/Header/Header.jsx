@@ -1,130 +1,85 @@
-/* ==========================================================================
-   COMPONENTE: Header | Navegação principal e ações da conta.
-   ========================================================================== */
-
 import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import logo from "../../assets/icons/logoHeader.svg";
+import { useAuth } from "../../context/AuthContext";
+import { useModal } from "../../context/ModalContext";
+import ButtonAccount from "./ButtonAccount/ButtonAccount";
 import ButtonRegister from "./ButtonRegister/ButtonRegister";
 import ButtonToEnter from "./ButtonToEnter/ButtonToEnter";
 import "./Header.css";
 
-// ==========================================================================
-//    LINKS DO MENU
-// ==========================================================================
-const NAV_LINKS = [
-  { label: "Início", href: "#inicio" },
-  { label: "Destinos", href: "#explorar" },
-  { label: "Sobre Nós", href: "#sobre" },
-  { label: "Roteiros", href: "#roteiros" },
-  { label: "Momentos", href: "#momentos" },
-  { label: "Blogs", href: "#blogs" },
-  { label: "Recomendação", href: "#plano" },
+const BASE_LINKS = [
+  { label: "Início", to: "/", match: (p) => p === "/" },
+  { label: "Explorar", to: "/explorar", match: (p) => p === "/explorar" },
+  { label: "Roteiros", to: "/roteiros", match: (p) => p.startsWith("/roteiros") },
+  { label: "Locais", to: "/local", match: (p) => p.startsWith("/local") },
+  { label: "Comunidade", to: "/comunidade", match: (p) => p.startsWith("/comunidade") || p.startsWith("/blog") },
 ];
 
-// ==========================================================================
-//    COMPONENTE HEADER
-//    Não recebe props: pega o que precisa direto dos Contexts
-//    - user: dados de quem está logado (ex.: { nome: "Ana", tipo: "usuario" })
-//            ou null quando for visitante
-//    - openModal: função que abre um modal (recebe o nome do modal)
-// ==========================================================================
 export default function Header() {
-  // --------------------------------------------------------------------------
-  //    DADOS VINDOS DOS CONTEXTS
-  // --------------------------------------------------------------------------
-
-  // --------------------------------------------------------------------------
-  //    ESTADOS
-  // --------------------------------------------------------------------------
-
-  // Controla se o menu do celular está aberto ou fechado
+  const { user, logout } = useAuth();
+  const { openModal } = useModal();
+  const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
-
-  // Fica true quando o usuário já rolou a página (liga a sombra da barra)
   const [scrolled, setScrolled] = useState(false);
 
-  // Guarda qual link está ativo agora (começa no Início)
-  const [activeLink, setActiveLink] = useState("#inicio");
+  const legacyRoute = location.pathname.startsWith("/local") || location.pathname.startsWith("/roteiros");
+  const navLinks =
+    user?.role === "ADMIN"
+      ? [...BASE_LINKS, { label: "Admin", to: "/admin", match: (p) => p.startsWith("/admin") }]
+      : BASE_LINKS;
 
-  // --------------------------------------------------------------------------
-  //    SOMBRA DA BARRA AO ROLAR A PÁGINA
-  // --------------------------------------------------------------------------
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
-
     window.addEventListener("scroll", handleScroll, { passive: true });
-
-    // Limpeza: remove o fofoqueiro quando o componente sair da tela
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // --------------------------------------------------------------------------
-  //    LINK ATIVO AUTOMÁTICO
-  // --------------------------------------------------------------------------
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveLink(`#${entry.target.id}`);
-          }
-        });
-      },
-      { rootMargin: "-45% 0px -50% 0px" },
-    );
-
-    NAV_LINKS.forEach(({ href }) => {
-      const section = document.querySelector(href);
-      if (section) observer.observe(section);
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <header id="top" className={`header ${scrolled ? "header--scrolled" : ""}`}>
+    <header className={`header ${legacyRoute ? "header--legacy" : ""} ${scrolled ? "header--scrolled" : ""}`}>
       <div className="header__container">
-        {/* ==========================================================================
-            SEÇÃO 1: LOGOTIPO 
-        ========================================================================== */}
-        <a href="#inicio" className="header__logo">
-          <img
-            src={logo}
-            alt="Logo Rota Cultural"
-            className="header__logo-img"
-          />
-        </a>
+        <Link to="/" className="header__logo" onClick={() => setMenuOpen(false)}>
+          <img src={logo} alt="Logo Rota Cultural" className="header__logo-img" />
+        </Link>
 
-        {/* ==========================================================================
-            SEÇÃO 2: NAVEGAÇÃO 
-        ========================================================================== */}
-        <nav id="links" className={`header__nav ${menuOpen ? "header__nav--open" : ""}`}>
-          {NAV_LINKS.map(({ label, href }) => (
-            <a
-              key={href}
-              href={href}
-              className={`header__link ${activeLink === href ? "header__link--active" : ""}`}
+        <nav className={`header__nav ${menuOpen ? "header__nav--open" : ""}`}>
+          {navLinks.map((item) => (
+            <Link
+              key={item.to}
+              to={item.to}
+              className={`header__link ${item.match(location.pathname) ? "header__link--active" : ""}`}
               onClick={() => setMenuOpen(false)}
             >
-              {label}
-            </a>
+              {item.label}
+            </Link>
           ))}
         </nav>
 
-        {/* ==========================================================================
-            SEÇÃO 3: AÇÕES (muda conforme o usuário está logado ou não)
-        ========================================================================== */}
         <div className="header__actions">
-          <ButtonRegister />
-          <ButtonToEnter />
+          {user ? (
+            <>
+              <ButtonAccount nome={user.nome || user.name || "Conta"} onClick={() => openModal("conta")} />
+              <button
+                type="button"
+                className="header__logout"
+                onClick={logout}
+                title="Sair da conta"
+              >
+                Sair
+              </button>
+            </>
+          ) : (
+            <>
+              <ButtonRegister onClick={() => openModal("cadastrar")} />
+              <ButtonToEnter onClick={() => openModal("entrar")} />
+            </>
+          )}
         </div>
 
-        {/* ==========================================================================
-            SEÇÃO 4: BOTÃO HAMBÚRGUER 
-        ========================================================================== */}
         <button
           id="burger"
           className="header__burger"
+          type="button"
           aria-label="Abrir menu"
           aria-expanded={menuOpen}
           onClick={() => setMenuOpen((open) => !open)}

@@ -1,79 +1,141 @@
-/* ==========================================================================
-   PÁGINA: LOCATION | Detalhes de um local do RotaCultural.
-   Mantém o runtime legado isolado e os blocos visuais em componentes React.
-========================================================================== */
-import { useEffect, useRef } from "react";
-import IconSprite from "../../components/Location/IconSprite/LocationIconSprite";
-import Header from "../../components/Location/Header/LocationHeader";
-import Hero from "../../components/Location/Hero/LocationHero";
-import SectionNav from "../../components/Location/SectionNav/LocationSectionNav";
-import Information from "../../components/Location/Information/LocationInformation";
-import Gallery from "../../components/Location/Gallery/LocationGallery";
-import Hours from "../../components/Location/Hours/LocationHours";
-import Map from "../../components/Location/Map/LocationMap";
-import Reviews from "../../components/Location/Reviews/LocationReviews";
-import Feedback from "../../components/Location/Feedback/LocationFeedback";
-import Routes from "../../components/Location/Routes/LocationRoutes";
-import Destinations from "../../components/Location/Destinations/LocationDestinations";
-import StylePanel from "../../components/Location/StylePanel/LocationStylePanel";
-import BackToTop from "../../components/Location/BackToTop/LocationBackToTop";
-import Footer from "../../components/Location/Footer/LocationFooter";
-import Overlays from "../../components/Location/Overlays/LocationOverlays";
-import { initializeLocationCore } from "../../features/Location/scripts/locationCore";
-import { initializeLocationInteractions } from "../../features/Location/scripts/locationInteractions";
+import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import AdminSection from "../../features/local/components/AdminSection";
+import { ResidentTipsSection, VisitorRoutesSection } from "../../features/local/components/CommunitySections";
+import GallerySection from "../../features/local/components/GallerySection";
+import { HoursSection, LocationSection } from "../../features/local/components/HoursLocationSections";
+import InformationSection from "../../features/local/components/InformationSection";
+import LocalDialogs, { Lightbox } from "../../features/local/components/LocalDialogs";
+import LocalHero from "../../features/local/components/LocalHero";
+import LocalNavigation from "../../features/local/components/LocalNavigation";
+import OtherPlacesSection from "../../features/local/components/OtherPlacesSection";
+import ReviewsSection from "../../features/local/components/ReviewsSection";
+import useLocalPage from "../../features/local/hooks/useLocalPage";
+import LegacyIcon from "../../components/common/LegacyIcon";
+import { useModal } from "../../context/ModalContext";
+import useRevealOnScroll from "../../hooks/useRevealOnScroll";
 import "./Location.css";
-import "../../components/Location/Header/LocationHeader.css";
-import "../../components/Location/Hero/LocationHero.css";
-import "../../components/Location/SectionNav/LocationSectionNav.css";
-import "../../components/Location/Sections/LocationSections.css";
-import "../../components/Location/Information/LocationInformation.css";
-import "../../components/Location/Gallery/LocationGallery.css";
-import "../../components/Location/Hours/LocationHours.css";
-import "../../components/Location/Map/LocationMap.css";
-import "../../components/Location/Reviews/LocationReviews.css";
-import "../../components/Location/Feedback/LocationFeedback.css";
-import "../../components/Location/Routes/LocationRoutes.css";
-import "../../components/Location/Destinations/LocationDestinations.css";
-import "../../components/Location/Footer/LocationFooter.css";
-import "../../components/Location/Overlays/LocationOverlays.css";
 
 export default function Location() {
-  const pageRef = useRef(null);
+  const rootRef = useRef(null);
+  const page = useLocalPage();
+  const { openModal } = useModal();
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    const root = pageRef.current;
-    if (!root) return undefined;
+  useRevealOnScroll(rootRef, page.place?.id || "loading");
 
-    root.classList.add("location-page--enhanced", "location-js");
-    initializeLocationCore();
-    const cleanupInteractions = initializeLocationInteractions(root);
+  if (page.loading) {
+    return (
+      <div className="location-page js" style={{ padding: "120px 20px", textAlign: "center" }}>
+        <h2>Carregando local cultural...</h2>
+        <p>Buscando informações reais no servidor.</p>
+      </div>
+    );
+  }
 
-    return () => {
-      cleanupInteractions?.();
-      root.classList.remove("location-page--enhanced", "location-js");
-    };
-  }, []);
+  if (page.error || !page.place) {
+    return (
+      <div className="location-page js" style={{ padding: "120px 20px", textAlign: "center" }}>
+        <h2>{page.error ? "Não foi possível carregar este local" : "Nenhum local aprovado encontrado"}</h2>
+        <p>{page.error || "Explore outros locais disponíveis na plataforma."}</p>
+        <div style={{ display: "flex", gap: 12, justifyContent: "center", marginTop: 18 }}>
+          <button type="button" className="btn" onClick={() => navigate("/explorar")}>
+            Ir para Explorar
+          </button>
+          <button type="button" className="btn ghost" onClick={page.reload}>
+            Tentar novamente
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  const theme = page.place.themeObj;
+  const style = {
+    "--t": theme.color,
+    "--td": theme.dark,
+    "--ts": theme.soft,
+    "--tb": theme.background,
+    "--tx": theme.accent,
+    "--tc": theme.contrast,
+    "--tm": theme.text,
+  };
 
   return (
-    <div className="location-page" ref={pageRef}>
-      <IconSprite />
-      <Header />
-      <main id="app" className="location-page__app">
-        <Hero />
-        <SectionNav />
-        <Information />
-        <Gallery />
-        <Hours />
-        <Map />
-        <Reviews />
-        <Feedback />
-        <Routes />
-        <Destinations />
-        <StylePanel />
-        <BackToTop />
-      </main>
-      <Footer />
-      <Overlays />
+    <div className="location-page js" id="app" data-tema={page.place.theme} style={style} ref={rootRef}>
+      <LocalHero
+        place={page.place}
+        allPlaces={page.allPlaces}
+        isFavorite={page.isFavorite}
+        onFavorite={page.toggleFavorite}
+        onShare={page.share}
+        onChoosePlace={page.choosePlace}
+      />
+      <LocalNavigation />
+      <InformationSection place={page.place} />
+      <GallerySection place={page.place} onOpen={page.setLightbox} />
+      <HoursSection place={page.place} />
+      <LocationSection place={page.place} />
+      <ReviewsSection
+        reviews={page.reviews}
+        sort={page.reviewSort}
+        onSort={page.setReviewSort}
+        user={page.user}
+        onOpenAuth={() => openModal("entrar")}
+        onSaveReview={page.saveReview}
+        onDeleteReview={page.deleteReview}
+      />
+      <ResidentTipsSection
+        tips={page.sampleTips}
+        user={page.user}
+        place={page.place}
+        onRegister={() => page.setModal("place")}
+        onManage={() => page.setModal("manage")}
+      />
+      <VisitorRoutesSection routes={page.sampleRoutes} place={page.place} />
+      <OtherPlacesSection
+        places={page.visiblePlaces}
+        allPlaces={page.allPlaces}
+        filters={page.filters}
+        onFilters={page.setFilters}
+        onChoose={page.choosePlace}
+      />
+      {page.user?.role === "ADMIN" && (
+        <AdminSection
+          place={page.place}
+          onUpdateStatus={page.updatePlaceStatus}
+          onManage={() => page.setModal("manage")}
+          onRegister={() => page.setModal("place")}
+        />
+      )}
+      <button
+        type="button"
+        id="toTop"
+        aria-label="Voltar ao topo"
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      >
+        <LegacyIcon name="chev-r" />
+      </button>
+      {page.lightbox !== null && (
+        <Lightbox
+          place={page.place}
+          index={page.lightbox}
+          onIndex={page.setLightbox}
+          onClose={() => page.setLightbox(null)}
+        />
+      )}
+      <LocalDialogs
+        modal={page.modal}
+        place={page.place}
+        categories={page.categories}
+        onClose={() => page.setModal(null)}
+        onCreatePlace={page.createPlace}
+        onUpdatePlace={page.updatePlace}
+        onDeleteImage={page.deletePlaceImage}
+      />
+      <div className={`gtoast ${page.toast ? "show" : ""}`} role="status" aria-live="polite">
+        {page.toast}
+      </div>
     </div>
   );
 }

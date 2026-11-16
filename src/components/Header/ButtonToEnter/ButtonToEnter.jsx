@@ -1,12 +1,13 @@
-/* ==========================================================================
-   COMPONENTE: ButtonToEnter | Acesso à autenticação de usuário.
-   ========================================================================== */
-
 import "./ButtonToEnter.css";
 
-export default function ButtonToEnter() {
+export default function ButtonToEnter({ onClick }) {
   return (
-    <button className="button-to-enter" type="button" data-auth="login">
+    <button
+      className="button-to-enter"
+      type="button"
+      data-auth="login"
+      onClick={onClick}
+    >
       <span className="button-to-enter__text">Entrar</span>
     </button>
   );

@@ -1,0 +1,20 @@
+import LegacyIcon from "../../../components/common/LegacyIcon";
+import { foodPreferences, meals, stays, transports } from "../data/roteiroData";
+import { roteiroImage } from "../data/images";
+import StepHeader from "./StepHeader";
+
+function Pick({ icon, title, text, pressed, onClick }) {
+  return <button className="pk" type="button" aria-pressed={pressed} onClick={onClick}><span className="pi"><LegacyIcon name={icon} /></span><b>{title}</b><small>{text}</small></button>;
+}
+
+export function FoodStep({ form, toggle }) {
+  return <section className="lsec" id="comer"><div className="wrap"><StepHeader icon="r-fork" badge="Alimentação e rotina" lead="Marque suas preferências e as refeições do dia. A gente sugere onde ir em cada uma.">Como você gosta de <em className="hl">comer?</em></StepHeader><b className="lbl rv">Quantas refeições você faz por dia?</b><div className="cps rv">{meals.map((meal) => <button className="cp" type="button" key={meal} aria-pressed={form.meals.includes(meal)} onClick={() => toggle("meals", meal)}>{meal}</button>)}</div><b className="lbl rv">Preferências</b><div className="picks rv">{foodPreferences.map(([name, description, icon]) => <Pick key={name} title={name} text={description} icon={icon} pressed={form.food.includes(name)} onClick={() => toggle("food", name)} />)}</div><div className="opts">{form.meals.map((meal, index) => <article className="op" key={meal}><span className="hd"><LegacyIcon name="r-fork" />{meal}</span><b>{form.food[index % Math.max(form.food.length, 1)] || "Sabores da região"}</b><small>{["07:30", "12:30", "16:30", "20:00"][meals.indexOf(meal)]}</small><span className="pr">cerca de R$ {22 + index * 12} por pessoa</span></article>)}</div></div></section>;
+}
+
+export function StayStep({ form, update, onDetail }) {
+  return <section className="lsec w" id="ficar"><div className="wrap"><StepHeader icon="r-bed" badge="Hospedagem" lead="Clique em um tipo para ver como é o lugar, confirme e depois escolha a opção.">Onde você vai <em className="hl">dormir?</em></StepHeader><div className="tcards rv">{stays.map((stay) => <button className="tc" type="button" key={stay.id} aria-pressed={form.stay === stay.id} onClick={() => onDetail({ title: stay.name, description: stay.description, image: stay.image, rows: stay.benefits, action: () => update({ stay: stay.id }) })}><img src={roteiroImage(stay.image)} alt="" /><span>{stay.name}<small>Ver como é</small></span></button>)}</div>{form.stay ? <div className="opts"><button className="op" type="button" aria-pressed="true"><span className="hd"><LegacyIcon name="r-bed" />{stays.find((stay) => stay.id === form.stay)?.name}</span><b>{stays.find((stay) => stay.id === form.stay)?.name} Centro</b><small>Nota 4,6 · boa localização</small><span className="pr">R$ {stays.find((stay) => stay.id === form.stay)?.price} por diária</span><small>{form.days} diárias = R$ {(stays.find((stay) => stay.id === form.stay)?.price ?? 0) * form.days}</small></button></div> : null}</div></section>;
+}
+
+export function TransportStep({ form, toggle }) {
+  return <section className="lsec" id="desloc"><div className="wrap"><StepHeader icon="r-bus" badge="Deslocamento" lead="Escolha os meios de transporte e veja estimativas, paradas e dicas para a região.">Como você vai <em className="hl">se mover?</em></StepHeader><div className="cps rv">{transports.map((transport) => <button className="cp" type="button" key={transport} aria-pressed={form.transports.includes(transport)} onClick={() => toggle("transports", transport)}>{transport}</button>)}</div><div className="opts">{form.transports.map((transport, index) => <article className="op" key={transport}><span className="hd"><LegacyIcon name="r-bus" />{transport}</span><b>{transport === "A pé" ? "Melhor para o centro" : `Opção de ${transport.toLowerCase()}`}</b><small>{transport === "A pé" ? "Sem custo · use calçado confortável" : `${10 + index * 7} min entre atrações`}</small><span className="pr">{transport === "A pé" ? "Grátis" : `estimativa R$ ${8 + index * 5}`}</span></article>)}</div></div><div className="rib" aria-hidden="true"><div className="trk" /></div></section>;
+}
