@@ -1,8 +1,11 @@
 ﻿# MVP Progress — rc-web
 
-- Branch: `feat/mvp-integration`; origem `74c6625` confirmada no GitHub em 16/11/2026.
-- CONCLUÍDO: lockfile sincronizado (npm ci antes falhava); npm ci, build e lint aprovados. Bundle production sem atalhos/senha demo. Visual preservado.
-- CONCLUÍDO: projeto Hobby `rhu4ns-projects/rota-cultural` descoberto como ausente e criado sem duplicata; script versionado em deploy/.
-- BLOQUEADO: integração Git privada da organização é recusada pela Vercel no Hobby (409); sem contratação Pro. Publicação seguirá pela CLI usando checkout validado.
-- EM ANDAMENTO: API HTTPS, variável VITE_API_URL no build, deploy/staging e jornadas no navegador.
-- PARCIAL: feat/mvp-integration e origin/main não têm ancestral comum; PR direto não é possível sem ajuste de histórico autorizado. Nenhum merge/rewrite executado.
+- Branch feat/mvp-integration; origem 74c6625 confirmada; correções c07d783/c17c1ff enviadas sem merge na main.
+- CONCLUÍDO: lockfile corrigido, npm ci/build/lint aprovados; bundle de produção sem credenciais demo; visual preservado.
+- CONCLUÍDO: https://rota-cultural-rhu4n.vercel.app — deployment production dpl_Ho5pFQ5n4JmaTuX3kfVL1SPpCEVB READY, source c17c1ff; build com VITE_API_URL real do Azure. Domínio vinculado ao projeto Hobby rhu4ns-projects/rota-cultural.
+- CONCLUÍDO: SPA/reload HTTP 200 em /, /explorar, /local/1, /roteiros, /admin e /comunidade; API no bundle, origem exata aceita pelo CORS e origem externa rejeitada. Proteção de staging preservada, bypass transitório revogado.
+- PARCIAL: interação React no navegador; Computer Use interrompeu por não conseguir identificar URL Windows com segurança. Jornadas de cadastro/login/favorito/roteiro/NATIVO/ADMIN aprovadas diretamente na API, incluindo persistência após restart.
+- BLOQUEADO: integração Git com repo privado da organização é recusada no Hobby (409); CLI local funciona, sem contratação Pro.
+- BLOQUEADO: PR direto para main, pois os históricos não têm ancestral comum. Necessita autorização para branch de entrega baseada em main; nenhum merge/rewrite realizado.
+- Pendência manual: testar formulários, prévia de fotos pendentes, painel ADMIN, salvar/reabrir roteiro e mensagens de conexão no navegador. Aviso de chunk >500kB mantido.
+- Script reutilizável versionado em deploy/vercel-deploy.ps1; não incluir .env.local/credenciais no Git.

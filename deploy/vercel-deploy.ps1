@@ -19,6 +19,10 @@ try {
     if (!(Test-Path -LiteralPath .vercel/project.json)) {
         throw 'Vincule explicitamente o projeto com vercel link antes de executar; remova o .env.local transitório criado pela CLI.'
     }
+    $link = Get-Content -LiteralPath .vercel/project.json -Raw | ConvertFrom-Json
+    if ($link.projectName -ne $ProjectName -or $link.orgId -ne 'team_MqcdXrKXBxy00kWQV7QPy6Da') {
+        throw 'Vínculo local diverge do projeto/owner autorizado.'
+    }
     npx.cmd vercel@65.16.0 project inspect --scope $Scope --non-interactive
     if ($LASTEXITCODE -ne 0) { throw 'Vínculo não confirmado.' }
     npx.cmd vercel@65.16.0 env add VITE_API_URL --environment production --value $api --no-sensitive --force --yes --scope $Scope
