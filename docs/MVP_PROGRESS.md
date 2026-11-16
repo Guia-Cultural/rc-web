@@ -10,3 +10,4 @@
 - Pendência manual: testar formulários, prévia de fotos pendentes, painel ADMIN, salvar/reabrir roteiro e mensagens de conexão no navegador. Aviso de chunk >500kB mantido.
 - Script reutilizável versionado em deploy/vercel-deploy.ps1; não incluir .env.local/credenciais no Git.
 - Continuação: corrigidos dois CTAs da Home que apontavam para roteiros.html; agora usam /roteiros. Build/lint aprovados. Home renderizada com dados Azure; interação ainda depende de cancelar diálogo de firewall Node.js no Windows.
+- Consolidação de revisão (sem deploy): integration/mvp-consolidado baseada em main, 34 arquivos exclusivos preservados/inativos, prévias locais e teclado da galeria recuperados. npm ci/build/lint e auditoria de imports aprovados; visual parcial. Ver docs/BRANCH_CONSOLIDATION.md.
