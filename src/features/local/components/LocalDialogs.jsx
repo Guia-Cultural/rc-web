@@ -41,6 +41,7 @@ function PlaceDialog({ categories = [], onClose, onCreate }) {
     contact: "",
   });
   const [files, setFiles] = useState([]);
+  const [createdPlaceId, setCreatedPlaceId] = useState(null);
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
 
@@ -57,9 +58,13 @@ function PlaceDialog({ categories = [], onClose, onCreate }) {
           latitude: form.latitude !== "" ? Number(form.latitude) : null,
           longitude: form.longitude !== "" ? Number(form.longitude) : null,
         },
-        files
+        files,
+        createdPlaceId
       );
     } catch (err) {
+      if (err?.createdPlaceId) {
+        setCreatedPlaceId(err.createdPlaceId);
+      }
       setError(err.message || "Não foi possível cadastrar o local.");
     } finally {
       setBusy(false);
@@ -235,7 +240,7 @@ function PlaceDialog({ categories = [], onClose, onCreate }) {
             Cancelar
           </button>
           <button className="btn" type="submit" disabled={busy}>
-            {busy ? "Enviando..." : "Enviar cadastro"}
+            {busy ? "Enviando..." : createdPlaceId ? "Reenviar fotos" : "Enviar cadastro"}
           </button>
         </div>
       </form>

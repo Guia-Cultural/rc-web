@@ -84,10 +84,11 @@ VITE_API_URL=http://localhost:8081
 | `/explorar` | **Explorar** (`Explorar.jsx`) | Catálogo completo conectado à API com busca textual, filtro por categoria, cidade/estado, faixa de preço, favoritos persistidos e estados explícitos de carregamento, vazio e erro. |
 | `/local` e `/local/:id` | **Detalhes do Local** (`Location.jsx`) | Página migrada preservada e integrada ao backend: capa, galeria de fotos reais, endereço/horários, favoritar, avaliação única por usuário/local com criação e edição, envio/edição de locais e upload multipart de imagens para `NATIVO`/`ADMIN`, e moderação de status para `ADMIN`. |
 | `/roteiros` | **Planejador de Roteiros** (`Roteiros.jsx`) | Criação de viagem (`POST /trip`, validando limite de 30 dias), seleção de categorias/atrações reais, geração e persistência de roteiro diário (`POST /itineraries/generate/{tripId}`), consulta de roteiros salvos (`GET /trip/me` / `?tripId=`) e prévia determinística sem login (`POST /recommendations/preview`). |
-| `/admin` | **Painel Administrativo** (`AdminPage.jsx`) | Exclusivo para `ADMIN`: aprovação/rejeição de locais (`EM_AVALIACAO`, `APROVADO`, `REJEITADO` com motivo), CRUD de categorias e aprovação de solicitações para `NATIVO` / alteração de roles. |
+| `/admin` | **Painel Administrativo** (`AdminPage.jsx`) | Exclusivo para `ADMIN`: aprovação/rejeição de locais (`EM_AVALIACAO`, `APROVADO`, `REJEITADO` com motivo) com pré-visualização das imagens enviadas, CRUD de categorias e aprovação de solicitações para `NATIVO` / alteração de roles. |
 | `/comunidade` | **Comunidade & Blog** (`Community.jsx`) | Layout e identidade preservados com header/footer unificados e indicação explícita de que os posts/artigos são conteúdo demonstrativo fora do escopo transacional do MVP. |
 
-- **Modal de Autenticação e Conta (`AuthAccountModal.jsx`)**: login (com preenchimento rápido das contas demo), cadastro com fluxo explícito de solicitação `NATIVO` (não concede privilégio imediato) e painel de conta com abas **Meus Dados**, **Favoritos**, **Minhas Viagens** e **Meus Locais** (incluindo envio de novo local + upload de imagem para `NATIVO`/`ADMIN`).
+- **Modal de Autenticação e Conta (`AuthAccountModal.jsx`)**: login (com preenchimento rápido das contas demo), cadastro com fluxo explícito de solicitação `NATIVO` (não concede privilégio imediato) e painel de conta com abas **Meus Dados**, **Favoritos**, **Minhas Viagens** e **Meus Locais** (incluindo envio de novo local com campos opcionais e upload multipart com retentativa segura em caso de falha parcial).
+- **Roteamento SPA na Vercel (`vercel.json`)**: configurado rewrite global para `/index.html`, permitindo recarregar diretamente rotas como `/explorar`, `/local/:id`, `/roteiros` e `/admin`.
 
 ---
 
@@ -103,5 +104,6 @@ Quando o backend `rc-service` sobe com o `DataInitializer` ativo, estão dispon�
 
 ## Status do MVP
 
-- **Concluído no MVP:** Autenticação JWT real, modais de login/cadastro/conta, exploração de locais via API com filtros, detalhes/galeria/upload de imagens, favoritos persistidos, 1 avaliação editável por usuário/local, criação de viagens (até 30 dias), recomendações determinísticas, geração/salvamento/reabertura de roteiros e painel completo de administração.
+- **Concluído no MVP:** Autenticação JWT real, modais de login/cadastro/conta, exploração de locais via API com filtros, detalhes/galeria/upload de imagens (com retentativa sem duplicar local), pré-visualização de fotos pendentes no `/admin`, favoritos persistidos, 1 avaliação editável por usuário/local, criação de viagens (até 30 dias), recomendações determinísticas, geração/salvamento/reabertura de roteiros e `vercel.json` para SPA.
 - **Conteúdo demonstrativo preservado (fora do CRUD transacional):** Artigos editoriais e discussões da página `/comunidade` (`Community`) e fotos estáticas complementares da Home (`Momentos` / `Blog`), claramente sinalizados como demonstrativos.
+- **Deploy Vercel:** Preparado via `../deploy/vercel-deploy.ps1` aguardando URL final da API no Azure e autorização de publicação.

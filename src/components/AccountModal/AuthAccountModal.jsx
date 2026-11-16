@@ -126,6 +126,7 @@ function AuthAccountModalContent({
 
   // New place quick form for NATIVO/ADMIN
   const [showPlaceForm, setShowPlaceForm] = useState(false);
+  const [pendingPlaceId, setPendingPlaceId] = useState(null);
   const [newPlace, setNewPlace] = useState({
     name: "",
     description: "",
@@ -134,6 +135,8 @@ function AuthAccountModalContent({
     city: "",
     state: "",
     country: "Brasil",
+    latitude: "",
+    longitude: "",
     businessHours: "",
     price: "GRATUITO",
     estimatedCost: "",
@@ -263,17 +266,40 @@ function AuthAccountModalContent({
     setSuccess("");
     setBusy(true);
     try {
-      const payload = {
-        ...newPlace,
-        catId: Number(newPlace.catId),
-        estimatedCost: newPlace.estimatedCost !== "" ? Number(newPlace.estimatedCost) : null,
-      };
-      const created = await placesService.create(payload);
-      if (placeFiles.length > 0 && created?.id) {
-        await placesService.uploadImages(created.id, placeFiles, true);
+      let placeId = pendingPlaceId;
+      let createdStatus = "EM_AVALIACAO";
+      if (!placeId) {
+        const payload = {
+          ...newPlace,
+          catId: Number(newPlace.catId),
+          estimatedCost: newPlace.estimatedCost !== "" ? Number(newPlace.estimatedCost) : null,
+          latitude: newPlace.latitude !== "" ? Number(newPlace.latitude) : null,
+          longitude: newPlace.longitude !== "" ? Number(newPlace.longitude) : null,
+        };
+        const created = await placesService.create(payload);
+        placeId = created?.id || null;
+        createdStatus = created?.status || "EM_AVALIACAO";
+        setPendingPlaceId(placeId);
       }
+
+      if (placeFiles.length > 0 && placeId) {
+        try {
+          await placesService.uploadImages(placeId, placeFiles, true);
+        } catch (uploadErr) {
+          const updatedList = await placesService.getMyPlaces().catch(() => []);
+          if (Array.isArray(updatedList)) {
+            setMyPlaces(updatedList);
+          }
+          throw new Error(
+            `Local #${placeId} já foi salvo (${createdStatus}), mas o envio das fotos falhou: ${uploadErr.message}. Ajuste os arquivos e clique em "Reenviar fotos" sem duplicar o cadastro.`,
+            { cause: uploadErr }
+          );
+        }
+      }
+
       const updatedList = await placesService.getMyPlaces();
       setMyPlaces(Array.isArray(updatedList) ? updatedList : []);
+      setPendingPlaceId(null);
       setShowPlaceForm(false);
       setPlaceFiles([]);
       setNewPlace((prev) => ({
@@ -283,13 +309,15 @@ function AuthAccountModalContent({
         address: "",
         city: "",
         state: "",
+        latitude: "",
+        longitude: "",
         businessHours: "",
         estimatedCost: "",
         officialWebsite: "",
         contact: "",
       }));
       setSuccess(
-        created.status === "APROVADO"
+        createdStatus === "APROVADO"
           ? "Local cadastrado e aprovado."
           : "Local enviado para avaliação do administrador (EM_AVALIACAO)."
       );
@@ -697,7 +725,10 @@ function AuthAccountModalContent({
                   <button
                     type="button"
                     className="rc-modal__btn rc-modal__btn--sm"
-                    onClick={() => setShowPlaceForm((v) => !v)}
+                    onClick={() => {
+                      setPendingPlaceId(null);
+                      setShowPlaceForm((v) => !v);
+                    }}
                   >
                     {showPlaceForm ? "Voltar à lista" : "+ Cadastrar local"}
                   </button>
@@ -806,15 +837,47 @@ function AuthAccountModalContent({
                         />
                       </label>
                       <label className="rc-modal__field">
-                        Site oficial (opcional)
+                        Contato (opcional)
                         <input
-                          type="url"
-                          placeholder="https://"
-                          value={newPlace.officialWebsite}
-                          onChange={(e) => setNewPlace((p) => ({ ...p, officialWebsite: e.target.value }))}
+                          type="text"
+                          maxLength={150}
+                          placeholder="(11) 99999-9999 ou e-mail"
+                          value={newPlace.contact}
+                          onChange={(e) => setNewPlace((p) => ({ ...p, contact: e.target.value }))}
                         />
                       </label>
                     </div>
+                    <div className="rc-modal__row">
+                      <label className="rc-modal__field">
+                        Latitude (opcional)
+                        <input
+                          type="number"
+                          step="any"
+                          placeholder="-23.55052"
+                          value={newPlace.latitude}
+                          onChange={(e) => setNewPlace((p) => ({ ...p, latitude: e.target.value }))}
+                        />
+                      </label>
+                      <label className="rc-modal__field">
+                        Longitude (opcional)
+                        <input
+                          type="number"
+                          step="any"
+                          placeholder="-46.63331"
+                          value={newPlace.longitude}
+                          onChange={(e) => setNewPlace((p) => ({ ...p, longitude: e.target.value }))}
+                        />
+                      </label>
+                    </div>
+                    <label className="rc-modal__field">
+                      Site oficial (opcional)
+                      <input
+                        type="url"
+                        placeholder="https://"
+                        value={newPlace.officialWebsite}
+                        onChange={(e) => setNewPlace((p) => ({ ...p, officialWebsite: e.target.value }))}
+                      />
+                    </label>
                     <label className="rc-modal__field">
                       Imagens do local (JPG, PNG ou WEBP — máx. 5MB cada)
                       <input
@@ -826,7 +889,7 @@ function AuthAccountModalContent({
                     </label>
                     <div>
                       <button type="submit" className="rc-modal__btn" disabled={busy}>
-                        {busy ? "Enviando..." : "Submeter local"}
+                        {busy ? "Enviando..." : pendingPlaceId ? "Reenviar fotos" : "Submeter local"}
                       </button>
                     </div>
                   </form>

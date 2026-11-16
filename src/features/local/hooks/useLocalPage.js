@@ -280,20 +280,35 @@ export default function useLocalPage() {
     }
   };
 
-  const createPlace = async (payload, files) => {
-    const created = await placesService.create(payload);
-    if (files?.length && created?.id) {
-      await placesService.uploadImages(created.id, files, true);
+  const createPlace = async (payload, files, existingPlaceId = null) => {
+    let targetId = existingPlaceId;
+    let status = "EM_AVALIACAO";
+    if (!targetId) {
+      const created = await placesService.create(payload);
+      targetId = created?.id || null;
+      status = created?.status || "EM_AVALIACAO";
+    }
+    if (files?.length && targetId) {
+      try {
+        await placesService.uploadImages(targetId, files, true);
+      } catch (uploadErr) {
+        const err = new Error(
+          `Local #${targetId} salvo (${status}), mas o envio das fotos falhou: ${uploadErr.message}. Ajuste os arquivos e clique em "Reenviar fotos" sem duplicar o local.`,
+          { cause: uploadErr }
+        );
+        err.createdPlaceId = targetId;
+        throw err;
+      }
     }
     setModal(null);
     showToast(
-      created.status === "APROVADO"
+      status === "APROVADO"
         ? "Local cadastrado e aprovado."
         : "Local enviado para avaliação do administrador (EM_AVALIACAO)."
     );
     await loadCatalogAndPlace();
-    if (created?.id) {
-      navigate(`/local/${created.id}`);
+    if (targetId) {
+      navigate(`/local/${targetId}`);
     }
   };
 

@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useModal } from "../../context/ModalContext";
+import { resolveAssetUrl } from "../../services/apiClient";
 import { categoriesService } from "../../services/categoriesService";
 import { placesService } from "../../services/placesService";
 import { usersService } from "../../services/usersService";
@@ -237,6 +238,29 @@ export default function AdminPage() {
                         {pl.creatorName}
                       </p>
                       <p>{pl.description}</p>
+                      {(pl.coverImage || (Array.isArray(pl.images) && pl.images.length > 0)) && (
+                        <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 8 }}>
+                          {(Array.isArray(pl.images) && pl.images.length > 0
+                            ? pl.images.map((img) => ({ id: img.id, url: resolveAssetUrl(img.url) }))
+                            : [{ id: "cover", url: resolveAssetUrl(pl.coverImage) }]
+                          )
+                            .slice(0, 4)
+                            .map((photo) => (
+                              <img
+                                key={photo.id}
+                                src={photo.url}
+                                alt={pl.name}
+                                style={{
+                                  width: 72,
+                                  height: 54,
+                                  objectFit: "cover",
+                                  borderRadius: 6,
+                                  border: "1px solid #d1d5db",
+                                }}
+                              />
+                            ))}
+                        </div>
+                      )}
                       {pl.rejectionReason && (
                         <p style={{ color: "#b91c1c" }}>Motivo atual: {pl.rejectionReason}</p>
                       )}
