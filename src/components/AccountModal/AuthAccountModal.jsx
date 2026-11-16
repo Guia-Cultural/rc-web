@@ -381,7 +381,7 @@ function AuthAccountModalContent({
               </button>
             </form>
 
-            <div className="rc-modal__demos">
+            {import.meta.env.DEV && <div className="rc-modal__demos">
               <p className="rc-modal__demos-title">Contas de teste do ambiente local (senha: Senha@123):</p>
               <div className="rc-modal__demos-list">
                 <button
@@ -406,7 +406,7 @@ function AuthAccountModalContent({
                   Admin
                 </button>
               </div>
-            </div>
+            </div>}
 
             <div className="rc-modal__switch">
               Ainda não tem conta?{" "}
