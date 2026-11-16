@@ -1,4 +1,7 @@
-// src/components/Header/ButtonAccount/ButtonAccount.jsx
+/* ==========================================================================
+   COMPONENTE: ButtonAccount | Botão de acesso ao menu da conta.
+   ========================================================================== */
+
 import "./ButtonAccount.css";
 
 // ==========================================================================
@@ -13,12 +16,12 @@ export default function ButtonAccount({ nome, onClick }) {
 
   return (
     <button
-      className="btn-account"
+      className="button-account"
       onClick={onClick}
       aria-label={`Abrir conta de ${nome}`}
     >
-      <span className="btn-account__avatar">{inicial}</span>
-      <p className="btn-account__txt">{nome}</p>
+      <span className="button-account__avatar">{inicial}</span>
+      <p className="button-account__text">{nome}</p>
     </button>
   );
 }

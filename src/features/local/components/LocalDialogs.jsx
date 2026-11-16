@@ -1,45 +1,457 @@
+import { useState } from "react";
 import LegacyIcon from "../../../components/common/LegacyIcon";
-import { localImage } from "../data/images";
-import { themes } from "../data/localData";
 
 function DialogShell({ title, icon, children, onClose, wide = false }) {
-  return <dialog className={`ldlg ${wide ? "bigdlg" : ""}`} open onClick={(event) => event.target === event.currentTarget && onClose()}><div className="dialog-inner"><button className="dr-x dialog-close" type="button" onClick={onClose} aria-label="Fechar"><LegacyIcon name="x" /></button><h3><LegacyIcon name={icon} />{title}</h3>{children}</div></dialog>;
+  return (
+    <dialog
+      className={`ldlg ${wide ? "bigdlg" : ""}`}
+      open
+      onClick={(event) => event.target === event.currentTarget && onClose()}
+    >
+      <div className="dialog-inner">
+        <button className="dr-x dialog-close" type="button" onClick={onClose} aria-label="Fechar">
+          <LegacyIcon name="x" />
+        </button>
+        <h3>
+          <LegacyIcon name={icon} />
+          {title}
+        </h3>
+        {children}
+      </div>
+    </dialog>
+  );
 }
 
-function ReportDialog({ onClose, onSubmit }) {
-  return <DialogShell title="Reportar um problema" icon="flag" onClose={onClose}><form className="lform" onSubmit={(event) => { event.preventDefault(); const data = new FormData(event.currentTarget); onSubmit({ reason: data.get("reason"), text: data.get("text") }); }}><label>Motivo<select name="reason"><option>Informação incorreta</option><option>Local fechado ou mudou de endereço</option><option>Conteúdo inadequado</option><option>Outro</option></select></label><label>Detalhes<textarea name="text" required maxLength="400" placeholder="Explique o que encontrou" /></label><div className="row"><button className="btn ghost" type="button" onClick={onClose}>Cancelar</button><button className="btn" type="submit">Enviar denúncia</button></div></form></DialogShell>;
+function PlaceDialog({ categories = [], onClose, onCreate }) {
+  const [form, setForm] = useState({
+    name: "",
+    catId: categories[0]?.id ? String(categories[0].id) : "",
+    price: "GRATUITO",
+    estimatedCost: "",
+    description: "",
+    address: "",
+    city: "",
+    state: "",
+    country: "Brasil",
+    latitude: "",
+    longitude: "",
+    businessHours: "",
+    officialWebsite: "",
+    ticketLink: "",
+    contact: "",
+  });
+  const [files, setFiles] = useState([]);
+  const [error, setError] = useState("");
+  const [busy, setBusy] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    setBusy(true);
+    try {
+      await onCreate(
+        {
+          ...form,
+          catId: Number(form.catId),
+          estimatedCost: form.estimatedCost !== "" ? Number(form.estimatedCost) : null,
+          latitude: form.latitude !== "" ? Number(form.latitude) : null,
+          longitude: form.longitude !== "" ? Number(form.longitude) : null,
+        },
+        files
+      );
+    } catch (err) {
+      setError(err.message || "Não foi possível cadastrar o local.");
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  return (
+    <DialogShell title="Cadastrar local cultural" icon="plus" onClose={onClose} wide>
+      <p className="hint">
+        Locais cadastrados por perfis Nativo iniciam com status EM_AVALIACAO até aprovação por um administrador.
+      </p>
+      {error && <p style={{ color: "#b91c1c", fontWeight: 700 }}>{error}</p>}
+      <form className="lform" onSubmit={handleSubmit}>
+        <div className="pgrid">
+          <h4>1. Informações</h4>
+          <label className="full">
+            Nome do local
+            <input
+              required
+              maxLength={150}
+              value={form.name}
+              onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))}
+            />
+          </label>
+          <label>
+            Categoria
+            <select
+              required
+              value={form.catId}
+              onChange={(e) => setForm((p) => ({ ...p, catId: e.target.value }))}
+            >
+              <option value="">Selecione</option>
+              {categories.map((cat) => (
+                <option key={cat.id} value={cat.id}>
+                  {cat.name}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label>
+            Faixa de preço
+            <select
+              value={form.price}
+              onChange={(e) => setForm((p) => ({ ...p, price: e.target.value }))}
+            >
+              <option value="GRATUITO">Gratuito</option>
+              <option value="BARATO">Barato</option>
+              <option value="MODERADO">Moderado</option>
+              <option value="CARO">Caro</option>
+            </select>
+          </label>
+          <label>
+            Custo estimado (R$, opcional)
+            <input
+              type="number"
+              min="0"
+              step="0.01"
+              value={form.estimatedCost}
+              onChange={(e) => setForm((p) => ({ ...p, estimatedCost: e.target.value }))}
+            />
+          </label>
+          <label>
+            Horário de funcionamento
+            <input
+              required
+              maxLength={150}
+              placeholder="Terça a Domingo: 09h às 17h"
+              value={form.businessHours}
+              onChange={(e) => setForm((p) => ({ ...p, businessHours: e.target.value }))}
+            />
+          </label>
+          <label className="full">
+            Descrição
+            <textarea
+              required
+              maxLength={500}
+              value={form.description}
+              onChange={(e) => setForm((p) => ({ ...p, description: e.target.value }))}
+            />
+          </label>
+
+          <h4>2. Endereço e localização</h4>
+          <label className="full">
+            Endereço
+            <input
+              required
+              maxLength={150}
+              value={form.address}
+              onChange={(e) => setForm((p) => ({ ...p, address: e.target.value }))}
+            />
+          </label>
+          <label>
+            Cidade
+            <input
+              required
+              maxLength={100}
+              value={form.city}
+              onChange={(e) => setForm((p) => ({ ...p, city: e.target.value }))}
+            />
+          </label>
+          <label>
+            UF / Estado
+            <input
+              required
+              maxLength={150}
+              value={form.state}
+              onChange={(e) => setForm((p) => ({ ...p, state: e.target.value }))}
+            />
+          </label>
+          <label>
+            Latitude (opcional)
+            <input
+              type="number"
+              step="any"
+              placeholder="-23.55052"
+              value={form.latitude}
+              onChange={(e) => setForm((p) => ({ ...p, latitude: e.target.value }))}
+            />
+          </label>
+          <label>
+            Longitude (opcional)
+            <input
+              type="number"
+              step="any"
+              placeholder="-46.63331"
+              value={form.longitude}
+              onChange={(e) => setForm((p) => ({ ...p, longitude: e.target.value }))}
+            />
+          </label>
+
+          <h4>3. Imagens (JPG, PNG ou WEBP)</h4>
+          <label className="full">
+            Fotos do local
+            <input
+              type="file"
+              accept="image/jpeg,image/png,image/webp"
+              multiple
+              onChange={(e) => setFiles(Array.from(e.target.files || []))}
+            />
+          </label>
+
+          <h4>4. Canais oficiais (opcional)</h4>
+          <label>
+            Site oficial
+            <input
+              type="url"
+              placeholder="https://"
+              value={form.officialWebsite}
+              onChange={(e) => setForm((p) => ({ ...p, officialWebsite: e.target.value }))}
+            />
+          </label>
+          <label>
+            Link de ingressos
+            <input
+              type="url"
+              placeholder="https://"
+              value={form.ticketLink}
+              onChange={(e) => setForm((p) => ({ ...p, ticketLink: e.target.value }))}
+            />
+          </label>
+          <label className="full">
+            Contato
+            <input
+              maxLength={150}
+              value={form.contact}
+              onChange={(e) => setForm((p) => ({ ...p, contact: e.target.value }))}
+            />
+          </label>
+        </div>
+
+        <div className="row">
+          <button className="btn ghost" type="button" onClick={onClose}>
+            Cancelar
+          </button>
+          <button className="btn" type="submit" disabled={busy}>
+            {busy ? "Enviando..." : "Enviar cadastro"}
+          </button>
+        </div>
+      </form>
+    </DialogShell>
+  );
 }
 
-function TipDialog({ onClose, onSubmit }) {
-  return <DialogShell title="Escrever uma dica de morador" icon="home" onClose={onClose}><form className="lform" onSubmit={(event) => { event.preventDefault(); const data = new FormData(event.currentTarget); onSubmit({ author: data.get("author"), text: data.get("text") }); }}><label>Seu nome<input name="author" required maxLength="40" /></label><label>Sua dica<textarea name="text" required maxLength="300" placeholder="O que quem mora aqui sabe e os guias não contam?" /></label><div className="row"><button className="btn ghost" type="button" onClick={onClose}>Cancelar</button><button className="btn" type="submit">Publicar dica</button></div></form></DialogShell>;
-}
+function ManageDialog({ place, categories = [], onClose, onUpdate, onDeleteImage }) {
+  const [form, setForm] = useState({
+    name: place.name || "",
+    description: place.description || "",
+    catId: place.catId ? String(place.catId) : categories[0]?.id ? String(categories[0].id) : "",
+    address: place.address || "",
+    city: place.city || "",
+    state: place.state || "",
+    country: place.country || "Brasil",
+    latitude: place.latitude ?? "",
+    longitude: place.longitude ?? "",
+    businessHours: place.businessHours || "",
+    price: place.price || "GRATUITO",
+    estimatedCost: place.estimatedCost ?? "",
+    officialWebsite: place.officialWebsite || "",
+    ticketLink: place.ticketLink || "",
+    contact: place.contact || "",
+  });
+  const [newFiles, setNewFiles] = useState([]);
+  const [error, setError] = useState("");
+  const [busy, setBusy] = useState(false);
 
-function RouteDialog({ place, onClose, onSubmit }) {
-  return <DialogShell title="Criar meu roteiro" icon="map" onClose={onClose}><p className="hint">Inclua {place.name} no seu plano.</p><form className="lform" onSubmit={(event) => { event.preventDefault(); const data = new FormData(event.currentTarget); onSubmit({ title: data.get("title"), duration: data.get("duration"), budget: data.get("budget"), stops: String(data.get("stops")).split("\n").filter(Boolean) }); }}><label>Título<input name="title" required maxLength="70" placeholder="Ex.: Fim de semana nas cachoeiras" /></label><div className="pgrid"><label>Duração<select name="duration"><option>Meio dia</option><option>1 dia</option><option>2 dias</option><option>3 dias ou mais</option></select></label><label>Orçamento<select name="budget"><option>Econômico</option><option>Moderado</option><option>Confortável</option></select></label></div><label>Paradas<textarea name="stops" required placeholder={"9h: chegada\n11h: trilha leve\n13h: almoço"} /></label><div className="row"><button className="btn ghost" type="button" onClick={onClose}>Cancelar</button><button className="btn" type="submit">Publicar roteiro</button></div></form></DialogShell>;
-}
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    setBusy(true);
+    try {
+      await onUpdate(
+        {
+          ...form,
+          catId: Number(form.catId),
+          estimatedCost: form.estimatedCost !== "" ? Number(form.estimatedCost) : null,
+          latitude: form.latitude !== "" ? Number(form.latitude) : null,
+          longitude: form.longitude !== "" ? Number(form.longitude) : null,
+        },
+        newFiles
+      );
+    } catch (err) {
+      setError(err.message || "Erro ao atualizar local.");
+    } finally {
+      setBusy(false);
+    }
+  };
 
-function PlaceDialog({ onClose, onComplete }) {
-  const days = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"];
-  return <DialogShell title="Cadastrar local" icon="plus" onClose={onClose} wide><p className="hint">Cadastro demonstrativo: os dados ficam somente nesta tela e aguardam uma API futura para envio real.</p><form className="lform" onSubmit={(event) => { event.preventDefault(); onComplete("Cadastro validado localmente; nenhuma informação foi enviada a um servidor."); }}><div className="pgrid"><h4>1. Informações</h4><label className="full">Nome do local<input required name="name" maxLength="80" /></label><label>Estilo do local<select required><option value="">Selecione</option><option>Natureza</option><option>Histórico</option><option>Praias</option><option>Cidades</option><option>Aventura</option></select></label><label>Entrada<select><option>Gratuita</option><option>Paga</option></select></label><label className="full">Descrição<textarea required maxLength="600" /></label><h4>2. Endereço e localização</h4><label>CEP<input inputMode="numeric" maxLength="9" placeholder="00000-000" /></label><label>Endereço<input required /></label><label>Cidade<input required /></label><label>UF<input required maxLength="2" /></label><label>Latitude<input inputMode="decimal" placeholder="-23.55052" /></label><label>Longitude<input inputMode="decimal" placeholder="-46.63331" /></label><h4>3. Horários</h4><div className="days full">{days.map((day) => <div className="day" key={day}><b>{day}</b><input type="time" defaultValue="09:00" aria-label={`Abre ${day}`} /><input type="time" defaultValue="17:00" aria-label={`Fecha ${day}`} /><label><input type="checkbox" />Fechado</label></div>)}</div><h4>4. Destaques e detalhes (opcional)</h4><label>Destaque 1<input /></label><label>Destaque 2<input /></label><label>Duração sugerida<input /></label><label>Acessibilidade<input /></label><h4>5. Fotos (até 4)</h4><label className="full">Fotos<input type="file" accept="image/*" multiple /></label><h4>6. Contato (opcional)</h4><label>Telefone<input type="tel" /></label><label>E-mail<input type="email" /></label><label className="full">Site<input type="url" placeholder="https://" /></label></div><div className="row"><button className="btn ghost" type="button" onClick={onClose}>Cancelar</button><button className="btn" type="submit">Enviar cadastro</button></div></form></DialogShell>;
-}
+  return (
+    <DialogShell title="Editar local e galeria" icon="settings" onClose={onClose} wide>
+      {error && <p style={{ color: "#b91c1c", fontWeight: 700 }}>{error}</p>}
+      <form className="lform" onSubmit={handleSubmit}>
+        <div className="pgrid">
+          <label className="full">
+            Nome
+            <input
+              required
+              maxLength={150}
+              value={form.name}
+              onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))}
+            />
+          </label>
+          <label className="full">
+            Descrição
+            <textarea
+              required
+              maxLength={500}
+              value={form.description}
+              onChange={(e) => setForm((p) => ({ ...p, description: e.target.value }))}
+            />
+          </label>
+          <label>
+            Categoria
+            <select
+              required
+              value={form.catId}
+              onChange={(e) => setForm((p) => ({ ...p, catId: e.target.value }))}
+            >
+              {categories.map((cat) => (
+                <option key={cat.id} value={cat.id}>
+                  {cat.name}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label>
+            Faixa de preço
+            <select
+              value={form.price}
+              onChange={(e) => setForm((p) => ({ ...p, price: e.target.value }))}
+            >
+              <option value="GRATUITO">Gratuito</option>
+              <option value="BARATO">Barato</option>
+              <option value="MODERADO">Moderado</option>
+              <option value="CARO">Caro</option>
+            </select>
+          </label>
+          <label className="full">
+            Horário de funcionamento
+            <input
+              required
+              maxLength={150}
+              value={form.businessHours}
+              onChange={(e) => setForm((p) => ({ ...p, businessHours: e.target.value }))}
+            />
+          </label>
+          <label className="full">
+            Adicionar novas imagens (JPG, PNG, WEBP)
+            <input
+              type="file"
+              accept="image/jpeg,image/png,image/webp"
+              multiple
+              onChange={(e) => setNewFiles(Array.from(e.target.files || []))}
+            />
+          </label>
+        </div>
 
-function ManageDialog({ place, onClose, onComplete }) {
-  return <DialogShell title="Gerenciar local" icon="settings" onClose={onClose}><form className="lform" onSubmit={(event) => { event.preventDefault(); onComplete("Alterações demonstrativas validadas localmente."); }}><label>Descrição<textarea defaultValue={place.description} maxLength="500" /></label><label>Informação de ingresso<input defaultValue={place.price} maxLength="120" /></label><div className="row"><button className="btn ghost" type="button" onClick={onClose}>Cancelar</button><button className="btn" type="submit">Salvar alterações</button></div></form></DialogShell>;
+        {place.uploadedImages?.length > 0 && (
+          <div style={{ marginTop: 12 }}>
+            <h4>Imagens enviadas</h4>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginTop: 8 }}>
+              {place.uploadedImages.map((img) => (
+                <div key={img.id} style={{ display: "flex", flexDirection: "column", gap: 4, width: 110 }}>
+                  <img
+                    src={img.url}
+                    alt={img.name}
+                    style={{ width: 110, height: 75, objectFit: "cover", borderRadius: 8 }}
+                  />
+                  <button
+                    type="button"
+                    className="btn ghost xs"
+                    onClick={() => onDeleteImage(img.id)}
+                  >
+                    Remover
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <div className="row" style={{ marginTop: 14 }}>
+          <button className="btn ghost" type="button" onClick={onClose}>
+            Cancelar
+          </button>
+          <button className="btn" type="submit" disabled={busy}>
+            {busy ? "Salvando..." : "Salvar alterações"}
+          </button>
+        </div>
+      </form>
+    </DialogShell>
+  );
 }
 
 export function Lightbox({ place, index, onIndex, onClose }) {
-  const photos = themes[place.theme].gallery;
-  const previous = () => onIndex((index - 1 + photos.length) % photos.length);
-  const next = () => onIndex((index + 1) % photos.length);
-  return <dialog className="ldlg" open onClick={(event) => event.target === event.currentTarget && onClose()}><img className="lightbox-image" src={localImage(photos[index])} alt={`${place.name}, foto ${index + 1}`} /><div className="bar2"><button type="button" onClick={previous} aria-label="Foto anterior"><LegacyIcon name="chev-l" /></button><span>{index + 1} / {photos.length}</span><button type="button" onClick={next} aria-label="Próxima foto"><LegacyIcon name="chev-r" /></button><button type="button" onClick={onClose} aria-label="Fechar"><LegacyIcon name="x" /></button></div></dialog>;
+  const photos = place.gallery || [];
+  if (!photos.length) return null;
+  const safeIndex = ((index % photos.length) + photos.length) % photos.length;
+  const previous = () => onIndex((safeIndex - 1 + photos.length) % photos.length);
+  const next = () => onIndex((safeIndex + 1) % photos.length);
+
+  return (
+    <dialog
+      className="ldlg"
+      open
+      onClick={(event) => event.target === event.currentTarget && onClose()}
+    >
+      <img
+        className="lightbox-image"
+        src={photos[safeIndex].url}
+        alt={photos[safeIndex].name || `${place.name}, foto ${safeIndex + 1}`}
+      />
+      <div className="bar2">
+        <button type="button" onClick={previous} aria-label="Foto anterior">
+          <LegacyIcon name="chev-l" />
+        </button>
+        <span>
+          {safeIndex + 1} / {photos.length}
+        </span>
+        <button type="button" onClick={next} aria-label="Próxima foto">
+          <LegacyIcon name="chev-r" />
+        </button>
+        <button type="button" onClick={onClose} aria-label="Fechar">
+          <LegacyIcon name="x" />
+        </button>
+      </div>
+    </dialog>
+  );
 }
 
-export default function LocalDialogs({ modal, place, onClose, onReport, onTip, onRoute, onComplete }) {
+export default function LocalDialogs({
+  modal,
+  place,
+  categories,
+  onClose,
+  onCreatePlace,
+  onUpdatePlace,
+  onDeleteImage,
+}) {
   if (!modal) return null;
-  if (modal === "report") return <ReportDialog onClose={onClose} onSubmit={onReport} />;
-  if (modal === "tip") return <TipDialog onClose={onClose} onSubmit={onTip} />;
-  if (modal === "route") return <RouteDialog place={place} onClose={onClose} onSubmit={onRoute} />;
-  if (modal === "place") return <PlaceDialog onClose={onClose} onComplete={onComplete} />;
-  if (modal === "manage") return <ManageDialog place={place} onClose={onClose} onComplete={onComplete} />;
+  if (modal === "place") {
+    return <PlaceDialog categories={categories} onClose={onClose} onCreate={onCreatePlace} />;
+  }
+  if (modal === "manage" && place) {
+    return (
+      <ManageDialog
+        place={place}
+        categories={categories}
+        onClose={onClose}
+        onUpdate={onUpdatePlace}
+        onDeleteImage={onDeleteImage}
+      />
+    );
+  }
   return null;
 }

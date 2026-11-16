@@ -1,38 +1,44 @@
 /* ==========================================================================
    Variaveis
 ========================================================================== */
+
+/* ==========================================================================
+   VARIÁVEIS E TOKENS DO COMPONENTE
+========================================================================== */
+
 :root {
-    /* Colors */
   --footer-bg: #ffffff;
-  --footer-color-top: #ffcc00;         
-  --footer-txt-cta: #111a3a;           
-  --footer-txt-title: #000000;        
+  --footer-color-top: #ffcc00;
+  --footer-txt-cta: #111a3a;
+  --footer-txt-title: #000000;
   --footer-txt-link: #4a4a4a;
   --footer-txt-link-hover: #000000;
-  --footer-line-dashed: #f5dc84;        
+  --footer-line-dashed: #f5dc84;
   --footer-line-vertical: #ffcc00;
-  --footer-social-bg: #101b3a;          
+  --footer-social-bg: #101b3a;
   --footer-txt-copyright: #7a8499;
   --footer-shadow: 0 -12px 30px rgba(14, 26, 61, 0.08);
-
-  /* Fonts */
-    --footer-font-nunito: 'Nunito';
-    --footer-font-inter: 'Inter';
-    /* sizes */
-    --footer-font-size-institucional-suporte: 19px;
-    --footer-font-size-link: 15px;
-    --footer-font-size-copyright: 0.84rem;
-    --footer-font-size: 15px;
-    --footer-font-size-top:clamp(1.5rem, 3vw, 2.2rem); /* Cresce e diminui conforme a tela */
-    /* weights */
-    --footer-font-weight-black: 900;
-    --footer-font-weight-extra-bold: 800;
-    --footer-font-weight-semi-bold: 600;
-    --footer-font-weight-medium: 500;
-    --footer-font-weight-regular: 400;
-
+  --footer-font-nunito: var(--body);
+  --footer-font-inter: var(--inter);
+  --footer-font-size-institucional-suporte: 19px;
+  --footer-font-size-link: 15px;
+  --footer-font-size-copyright: 0.84rem;
+  --footer-font-size: 15px;
+  --footer-font-size-top: clamp(1.5rem, 3vw, 2.2rem);
+  --footer-font-weight-black: 900;
+  --footer-font-weight-extra-bold: 800;
+  --footer-font-weight-semi-bold: 600;
+  --footer-font-weight-medium: 500;
+  --footer-font-weight-regular: 400;
 }
 
+/* ==========================================================================
+   ESTILIZAÇÃO EM EFEITO CASCATA
+========================================================================== */
+
+/* ==========================================================================
+   SEÇÃO 1: ESTRUTURA E ELEMENTOS DO COMPONENTE
+========================================================================== */
 
 /* ==========================================================================
    SEÇÃO 1: O BLOCO PRINCIPAL 
@@ -41,7 +47,7 @@
 .footer {
   background-color: var(--footer-bg);
   border-top: 9px solid var(--footer-color-top);
-  border-radius: 90px 90px 0 0;     
+  border-radius: 90px 90px 0 0;
   box-shadow: var(--footer-shadow);
   margin-top: -2.4rem;
   position: relative;
@@ -49,13 +55,13 @@
 }
 
 /* Centraliza o conteúdo e limita a largura em telas grandes */
+
 .footer__container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 24px;
   box-sizing: border-box;
 }
-
 
 /* ==========================================================================
    SEÇÃO 2: BLOCO DE CIMA 
@@ -65,10 +71,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;                
+  flex-wrap: wrap;
   gap: 1.4rem;
   padding: 3rem 0 1.6rem;
-  border-bottom: 2px dashed var(--footer-line-dashed); 
+  border-bottom: 2px dashed var(--footer-line-dashed);
 }
 
 .footer__txt {
@@ -80,7 +86,6 @@
   line-height: 1.15;
   letter-spacing: -0.5px;
 }
-
 
 /* ==========================================================================
    SEÇÃO 3: BLOCO DO MEIO (LOGO, COLUNAS E CONTATO)
@@ -97,6 +102,7 @@
   display: flex;
   align-items: center;
 }
+
 .footer__logo-img {
   height: 92px;
   width: auto;
@@ -111,6 +117,7 @@
 }
 
 /* As duas colunas de links usam o mesmo estilo */
+
 .footer__institucional,
 .footer__suporte {
   min-width: 150px;
@@ -135,7 +142,6 @@
   transition: color 0.2s ease, transform 0.2s ease;
 }
 
-
 .footer__link:hover {
   color: var(--footer-txt-link-hover);
   transform: translateX(3px);
@@ -145,7 +151,6 @@
   margin-left: auto;
   text-align: center;
 }
-
 
 /* ==========================================================================
    SEÇÃO 4: REDES SOCIAIS
@@ -161,18 +166,32 @@
 .footer__rede-social {
   transition: transform 0.2s ease;
 }
+
 .footer__rede-social:hover {
   transform: scale(1.12);
 }
+
 .footer__rede-social-icon {
   width: 48px;
   height: auto;
 }
 
-
 /* ==========================================================================
    SEÇÃO 5: BLOCO DE BAIXO (DIREITOS AUTORAIS)
    ========================================================================== */
+
+.footer__line-dashed {
+  width: 100%;
+  border-top: 2px dashed var(--footer-line-dashed);
+  margin: .5rem 0 1.2rem;
+}
+
+.footer__link {
+  cursor: pointer;
+  border: 0;
+  background: transparent;
+  text-align: left;
+}
 
 .footer__container-bottom {
   padding-bottom: 1.6rem;
@@ -187,31 +206,31 @@
   text-align: center;
 }
 
-
 /* ==========================================================================
    SEÇÃO 6: RESPONSIVO
    ========================================================================== */
+
+/* ==========================================================================
+   RESPONSIVIDADE
+========================================================================== */
 
 @media (max-width: 1000px) {
   .footer {
     border-radius: 48px 48px 0 0;
   }
-
   .footer__container-middle {
     flex-wrap: wrap;
     gap: 28px 40px;
   }
-
   .footer__line-vertical {
     display: none;
   }
-
   .footer__contato {
     margin-left: 0;
     text-align: left;
   }
-
   .footer__redes-sociais {
     justify-content: flex-start;
   }
+
 }

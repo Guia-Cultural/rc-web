@@ -1,67 +1,90 @@
 /* ==========================================================================
    Variaveis
 ========================================================================== */
+
+/* ==========================================================================
+   VARIÁVEIS E TOKENS DO COMPONENTE
+========================================================================== */
+
 :root {
-    --btn-account-color: #ffffff;
-    --btn-account-avatar-bg: #1f9d55;     /* Verde da bolinha, igual ao modal da conta */
-    --btn-account-avatar-ring: #7dd58c;   /* Anel verde claro em volta da bolinha */
+  --button-account-color: #ffffff;
+  --button-account-avatar-bg: #1f9d55;
+  --button-account-avatar-ring: #7dd58c;
 }
+
+/* ==========================================================================
+   ESTILIZAÇÃO EM EFEITO CASCATA
+========================================================================== */
+
+/* ==========================================================================
+   SEÇÃO 1: ESTRUTURA E ELEMENTOS DO COMPONENTE
+========================================================================== */
 
 /* ==========================================================================
    Botão de conta
 ========================================================================== */
 
-.btn-account {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: transparent;
-    border: 1px solid var(--btn-account-color);
-    border-radius: 40px;
-    padding: 5px 16px 5px 5px; /* menos espaço na esquerda, onde fica a bolinha */
-    cursor: pointer;
-    transition: all 0.2s ease;
+.button-account {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 1px solid var(--button-account-color);
+  border-radius: 40px;
+  padding: 5px 16px 5px 5px;
+  /* menos espaço na esquerda, onde fica a bolinha */
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
-.btn-account:hover {
-    opacity: 0.9;
-    transform: translateY(-1px);
+
+.button-account:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
 }
 
 /* Bolinha com a inicial do nome */
-.btn-account__avatar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background-color: var(--btn-account-avatar-bg);
-    border: 2px solid var(--btn-account-avatar-ring);
-    color: var(--btn-account-color);
-    font-family: system-ui, -apple-system;
-    font-size: 14px;
-    font-weight: 700;
+
+.button-account__avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: var(--button-account-avatar-bg);
+  border: 2px solid var(--button-account-avatar-ring);
+  color: var(--button-account-color);
+  font-family: var(--body);
+  font-size: 14px;
+  font-weight: 700;
 }
 
 /* Nome: se for muito grande, corta com "..." para não estourar a barra */
-.btn-account__txt {
-    margin: 0;
-    max-width: 140px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    color: var(--btn-account-color);
-    font-family: system-ui, -apple-system;
-    font-size: 16px;
-    font-weight: 700;
+
+.button-account__text {
+  margin: 0;
+  max-width: 140px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--button-account-color);
+  font-family: var(--body);
+  font-size: 16px;
+  font-weight: 700;
 }
 
 /* Celular pequeno: some o nome e fica só a bolinha, para caber na barra */
+
+/* ==========================================================================
+   RESPONSIVIDADE
+========================================================================== */
+
 @media (max-width: 640px) {
-    .btn-account {
-        padding: 5px;
-    }
-    .btn-account__txt {
-        display: none;
-    }
+  .button-account {
+    padding: 5px;
+  }
+  .button-account__text {
+    display: none;
+  }
+
 }

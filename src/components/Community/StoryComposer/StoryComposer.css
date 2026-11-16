@@ -1,0 +1,36 @@
+/* ==========================================================================
+   COMMUNITY | STORYCOMPOSER
+   Folha do componente — BEM, variáveis próprias e comentários por responsabilidade.
+========================================================================== */
+
+/* ==========================================================================
+   VARIÁVEIS E TOKENS DO COMPONENTE
+========================================================================== */
+
+:root {
+  --community-composer-accent-orange: #FF7A00;
+  --community-composer-border: 3px solid #000;
+  --community-composer-radius: 38px;
+}
+
+/* ==========================================================================
+   ESTILIZAÇÃO EM EFEITO CASCATA
+========================================================================== */
+
+.community-page .community-composer__steps{display:flex;gap:.6rem;margin-bottom:1.6rem;flex-wrap:wrap}
+.community-page .community-composer__step{flex:1;min-width:120px;display:flex;gap:.5rem;align-items:center;border:2px solid #000;background:#fff;border-radius:999px;padding:.35rem .9rem .35rem .35rem;font-weight:900;font-size:.85rem;transition:background .25s,color .25s}
+.community-page .community-composer__step b{width:28px;height:28px;border-radius:50%;background:#EFE6BE;color:#000;display:grid;place-items:center;font-size:.8rem;flex:none}
+.community-page .community-composer__step.is-on{background:#000;color:#fff}
+.community-page .community-composer__step.is-on b{background:var(--community-yellow)}
+.community-page .community-composer__step.is-ok b{background:var(--community-green);color:#fff}
+.community-page .community-composer__panel{display:none}
+.community-page .community-composer__panel.is-on{display:block;animation:community-etapa-in .45s var(--community-ease)}
+.community-page .community-composer__panel h3{font:400 clamp(1.9rem,3vw,2.4rem)/1.05 var(--community-brush);letter-spacing:0;margin:0 0 .2rem}
+
+/* ==========================================================================
+   VARIÁVEIS DO FORMULÁRIO DE PUBLICAÇÃO
+========================================================================== */
+
+.community-page .community-highlight--orange { --community-rc: var(--community-composer-accent-orange); }
+.community-page .community-form__field--spaced { margin-top: .8rem; }
+.community-page .community-form__optional { color: var(--community-muted); font-weight: 700; }

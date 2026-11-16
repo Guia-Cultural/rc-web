@@ -1,0 +1,30 @@
+/* ==========================================================================
+   COMMUNITY | MARQUEE
+   Folha do componente — BEM, variáveis próprias e comentários por responsabilidade.
+========================================================================== */
+
+/* ==========================================================================
+   VARIÁVEIS E TOKENS DO COMPONENTE
+========================================================================== */
+
+:root {
+  --community-marquee-speed: 32s;
+  --community-marquee-padding: .7rem;
+}
+
+/* ==========================================================================
+   ESTILIZAÇÃO EM EFEITO CASCATA
+========================================================================== */
+
+.community-page .community-marquee{margin:0 -3%;rotate:-1.6deg;background:var(--community-yellow);color:var(--community-navy);overflow:hidden;white-space:nowrap;padding:.7rem 0;border-block:3px solid var(--community-navy);position:relative;z-index:3}
+.community-page .community-marquee.community-marquee--reverse{rotate:1.4deg}
+.community-page .community-marquee.community-marquee--blue{background:var(--community-blue);color:#fff;border-color:var(--community-navy)}
+.community-page .community-marquee.community-marquee--orange{background:var(--community-orange);color:#fff}
+.community-page .community-marquee .community-marquee__track{display:inline-flex;width:max-content;animation:community-mq var(--community-marquee-speed) linear infinite}
+.community-page .community-marquee:hover .community-marquee__track{animation-play-state:paused}
+.community-page .community-marquee span{font:400 clamp(1.5rem,2.8vw,2.1rem) var(--community-brush);padding-left:1.4rem;display:inline-flex;align-items:center;gap:1.4rem}
+.community-page .community-marquee span::after{content:"✦";font-size:1.1rem}
+.community-page .community-marquee .community-marquee__track{animation-duration:120s}
+.community-page .community-marquee.community-marquee--magenta{background:var(--community-mag);color:#fff}
+.community-page .community-marquee{margin-top:-1.2rem;margin-bottom:-1.2rem}
+.community-page .community-marquee.community-marquee--reverse{rotate:1.4deg}

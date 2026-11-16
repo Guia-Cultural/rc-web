@@ -1,3 +1,8 @@
+/* ==========================================================================
+   COMPONENTE: Footer | Rodapé institucional e links de navegação.
+   ========================================================================== */
+
+import { Link, useNavigate } from "react-router-dom";
 import "./Footer.css";
 import ButtonFooter from "./ButtonFooter/ButtonFooter";
 import ButtonContact from "./ButtonContact/ButtonContact";
@@ -5,12 +10,8 @@ import logoFooter from "../../assets/icons/logoFooter.svg";
 import Instagram from "../../assets/icons/instaIcon.svg";
 import WhatsApp from "../../assets/icons/zapIcon.svg";
 import Facebook from "../../assets/icons/faceIcon.svg";
-import { useNavigate } from "react-router-dom";
 import { useModal } from "../../context/ModalContext";
 
-/* ==========================================================================
-   Redes sociais
-========================================================================== */
 const SOCIAL_LINKS = [
   { label: "Instagram", href: "https://www.instagram.com/", icon: Instagram },
   { label: "WhatsApp", href: "https://wa.me/", icon: WhatsApp },
@@ -20,12 +21,10 @@ const SOCIAL_LINKS = [
 export default function Footer() {
   const navigate = useNavigate();
   const { openModal } = useModal();
+
   return (
     <footer className="footer">
       <div className="footer__container">
-        {/*==================================================
-        Conteúdo do topo
-        ================================================= */}
         <div className="footer__container-top">
           <p className="footer__txt">
             Sua próxima viagem
@@ -35,55 +34,39 @@ export default function Footer() {
           <ButtonFooter onClick={() => navigate("/roteiros")} />
         </div>
 
-        {/*==================================================
-        Conteúdo do meio
-        ================================================= */}
         <div className="footer__container-middle">
-          
-          <a
-            href="/#inicio"
-            className="footer__logo"
-            aria-label="Rota Cultural - Sua viagem começa aqui"
-          >
-            <img
-              src={logoFooter}
-              alt="Logo Rota Cultural do footer"
-              className="footer__logo-img"
-            />
-          </a>
+          <Link to="/" className="footer__logo" aria-label="Rota Cultural - Sua viagem começa aqui">
+            <img src={logoFooter} alt="Logo Rota Cultural do footer" className="footer__logo-img" />
+          </Link>
 
-          {/* Linha amarela que separa a logo das colunas */}
           <div className="footer__line-vertical"></div>
 
-          {/* Coluna Institucional */}
           <div className="footer__institucional">
             <h5 className="footer__txt-institucional">Institucional</h5>
-            <a href="#sobre" className="footer__link">
+            <Link to="/#sobre" className="footer__link">
               Sobre nós
-            </a>
-            <a href="#como-funciona" className="footer__link">
+            </Link>
+            <Link to="/#como-funciona" className="footer__link">
               Como funciona
-            </a>
-            <a href="#contato" className="footer__link">
+            </Link>
+            <button type="button" className="footer__link" onClick={() => openModal("contato")}>
               Contato
-            </a>
+            </button>
           </div>
 
-          {/* Coluna Suporte */}
           <div className="footer__suporte">
             <h5 className="footer__txt-suporte">Suporte</h5>
-            <a href="#perguntas-frequentes" className="footer__link">
+            <button type="button" className="footer__link" onClick={() => openModal("faq")}>
               Perguntas frequentes
-            </a>
-            <a href="#central-de-ajuda" className="footer__link">
+            </button>
+            <button type="button" className="footer__link" onClick={() => openModal("ajuda")}>
               Central de ajuda
-            </a>
-            <a href="#termos-de-uso" className="footer__link">
+            </button>
+            <button type="button" className="footer__link" onClick={() => openModal("termos")}>
               Termos de uso
-            </a>
+            </button>
           </div>
 
-          {/* Contato: botão Fale Conosco + redes sociais */}
           <div className="footer__contato">
             <ButtonContact onClick={() => openModal("contato")} />
 
@@ -104,9 +87,6 @@ export default function Footer() {
           </div>
         </div>
 
-        {/*==================================================
-        Conteúdo do rodapé (copyright)
-        ================================================= */}
         <div className="footer__line-dashed"></div>
         <div className="footer__container-bottom">
           <p className="footer__txt-copyright">

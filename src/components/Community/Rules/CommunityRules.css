@@ -1,0 +1,54 @@
+/* ==========================================================================
+   COMMUNITY | RULES
+   Folha do componente — BEM, variáveis próprias e comentários por responsabilidade.
+========================================================================== */
+
+/* ==========================================================================
+   VARIÁVEIS E TOKENS DO COMPONENTE
+========================================================================== */
+
+:root {
+  --community-rules-highlight-green: #27D118;
+  --community-rule-yellow: #FFC107;
+  --community-rule-green: #27D118;
+  --community-rule-orange: #FF6B00;
+  --community-rule-pink: #E91E8C;
+  --community-rules-gap: 1.6rem;
+  --community-rules-radius: 30px;
+}
+
+/* ==========================================================================
+   ESTILIZAÇÃO EM EFEITO CASCATA
+========================================================================== */
+
+.community-page .community-rules{background:#fff;overflow:hidden}
+.community-page .community-rule-card{background:var(--community-c);color:var(--community-ct,#000);border:3px solid #000;border-radius:30px;padding:1.6rem 1.4rem 1.8rem;box-shadow:8px 8px 0 #000;position:relative;
+ opacity:0;translate:var(--community-dx,0) 50px;scale:.9;transition:opacity .6s var(--community-ease) var(--community-d,0s),translate .7s var(--community-ease) var(--community-d,0s),scale .7s var(--community-ease) var(--community-d,0s)}
+.community-page .community-rule-card.is-visible{opacity:1;translate:0 0;scale:1}
+.community-page .community-rule-card:hover{translate:0 -6px}
+.community-page .community-rule-card h3{font:400 1.9rem/1 var(--community-brush);letter-spacing:0;color:inherit;margin:0 0 .5rem}
+.community-page .community-rule-card p{margin:0;font-weight:700;font-size:.98rem;line-height:1.45}
+
+
+/* ==========================================================================
+   VARIÁVEIS E MODIFICADORES DAS REGRAS
+========================================================================== */
+
+.community-page .community-highlight--green { --community-rc: var(--community-rules-highlight-green); color: #000; }
+.community-page .community-rule-card--yellow { --community-c: var(--community-rule-yellow); }
+.community-page .community-rule-card--green { --community-c: var(--community-rule-green); }
+.community-page .community-rule-card--orange { --community-c: var(--community-rule-orange); }
+.community-page .community-rule-card--pink { --community-c: var(--community-rule-pink); }
+.community-page .community-rule-card--light-text { --community-ct: #fff; }
+.community-page .community-rule-card--delay-0 { --community-dx: -60px; --community-d: 0s; }
+.community-page .community-rule-card--delay-120 { --community-dx: -20px; --community-d: .12s; }
+.community-page .community-rule-card--delay-240 { --community-dx: 20px; --community-d: .24s; }
+.community-page .community-rule-card--delay-360 { --community-dx: 60px; --community-d: .36s; }
+
+/* ==========================================================================
+   RESPONSIVIDADE
+========================================================================== */
+
+@media (prefers-reduced-motion:reduce) {
+.community-page .community-rule-card{opacity:1;translate:none;scale:1}
+}

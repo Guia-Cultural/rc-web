@@ -1,11 +1,16 @@
 import "./ButtonRegister.css";
-import registerIcon from "../../../assets/icons/userIcon.svg"; // Certifique-se de que o caminho está correto
+import registerIcon from "../../../assets/icons/userIcon.svg";
 
 export default function ButtonRegister({ onClick }) {
   return (
-    <button className="btn-register" onClick={onClick}>
-      <img src={registerIcon} alt="Icone de cadastro" className="btn-register-icon" />
-      <p className="btn-register-text">Cadastrar</p>
+    <button
+      className="button-register"
+      type="button"
+      data-auth="register"
+      onClick={onClick}
+    >
+      <img src={registerIcon} alt="" className="button-register__icon" />
+      <span className="button-register__text">Cadastrar</span>
     </button>
   );
 }

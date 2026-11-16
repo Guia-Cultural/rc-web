@@ -1,0 +1,448 @@
+/* ==========================================================================
+   VARIÁVEIS E TOKENS DO COMPONENTE
+========================================================================== */
+
+/* ==========================================================================
+   VARIÁVEIS E TOKENS DO COMPONENTE
+========================================================================== */
+
+:root {
+  --rc-dialog-radius: 28px;
+  --rc-dialog-shadow: 0 30px 80px rgba(16,27,59,.45);
+  --destinos-detail-radius: 30px;
+  --momentos-tour-modal-ratio: 16 / 10;
+}
+
+/* ==========================================================================
+   ESTILIZAÇÃO EM EFEITO CASCATA
+========================================================================== */
+
+/* ==========================================================================
+   SEÇÃO 1: ESTRUTURA E ELEMENTOS DO COMPONENTE
+========================================================================== */
+
+/* ==========================================================================
+   OVERLAYS — modais, detalhes e notificações em BEM
+========================================================================== */
+
+.rc-dialog {
+  border: 0;
+  border-radius: var(--rc-dialog-radius);
+  padding: 0;
+  width: min(470px,92vw);
+  max-height: 90vh;
+  overflow: auto;
+  box-shadow: var(--rc-dialog-shadow);
+  color: var(--navy);
+  background: #fff;
+  animation: pop .4s var(--ease);
+}
+
+.rc-dialog::backdrop {
+  background: rgba(16,27,59,.6);
+  backdrop-filter: blur(4px);
+}
+
+.rc-dialog__body {
+  padding: 2rem 2rem 1.8rem;
+}
+
+.rc-dialog__close {
+  position: absolute;
+  right: 14px;
+  top: 14px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 0;
+  background: var(--soft);
+  font-weight: 900;
+  z-index: 2;
+}
+
+.rc-dialog__close:hover {
+  background: var(--yellow);
+}
+
+.rc-dialog__tabs {
+  display: flex;
+  gap: .3rem;
+  background: var(--soft);
+  padding: .3rem;
+  border-radius: 999px;
+  margin: 0 2.4rem 1.2rem 0;
+}
+
+.rc-dialog__tabs button {
+  flex: 1;
+  border: 0;
+  background: none;
+  border-radius: 999px;
+  padding: .5rem;
+  font-weight: 900;
+}
+
+.rc-dialog__tabs [aria-selected=true] {
+  background: var(--yellow);
+}
+
+.rc-dialog h2 {
+  font: 900 1.7rem/1.1 var(--body);
+  letter-spacing: -.5px;
+}
+
+.rc-dialog__subtitle {
+  color: var(--muted);
+  font-weight: 600;
+  margin: .4rem 0 1.1rem;
+}
+
+.rc-dialog__subtitle--small {
+  font-size: .85rem;
+  margin: .9rem 0 0;
+}
+
+.rc-dialog label {
+  display: block;
+  font-weight: 800;
+  font-size: .9rem;
+  margin-bottom: .7rem;
+}
+
+.rc-dialog input,
+.rc-dialog textarea {
+  width: 100%;
+  margin-top: .3rem;
+  padding: .75rem 1rem;
+  border: 2px solid #E7E2D2;
+  border-radius: 14px;
+  font: 600 1rem var(--body);
+  background: #fff;
+  color: var(--navy);
+}
+
+.rc-dialog input:focus,
+.rc-dialog textarea:focus {
+  outline: 0;
+  border-color: var(--yellow);
+  box-shadow: 0 0 0 4px rgba(255,193,7,.3);
+}
+
+.rc-dialog .rc-dialog__error {
+  display: block;
+  color: var(--red);
+  font-size: .8rem;
+  min-height: 1em;
+  font-weight: 700;
+}
+
+.rc-dialog__password-field {
+  position: relative;
+  display: block;
+}
+
+.rc-dialog__password-field button {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  translate: 0 -50%;
+  border: 0;
+  background: none;
+  padding: .4rem;
+}
+
+.rc-dialog__link {
+  border: 0;
+  background: none;
+  font-weight: 800;
+  text-decoration: underline;
+  padding: 0;
+  color: inherit;
+}
+
+.rc-dialog details {
+  border: 2px solid var(--line);
+  border-radius: 16px;
+  padding: .7rem 1rem;
+  margin-bottom: .6rem;
+}
+
+.rc-dialog summary {
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.rc-dialog details p {
+  margin-top: .4rem;
+  font-weight: 600;
+  color: #3b4660;
+}
+
+.rc-dialog .rc-dialog__success {
+  text-align: center;
+  padding: 1.2rem 0;
+}
+
+.rc-dialog .rc-dialog__success .icon {
+  width: 3rem;
+  height: 3rem;
+  color: var(--green);
+}
+
+.account-menu {
+  position: relative;
+}
+
+.account-menu .account-menu__button {
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+  border: 2px solid #fff;
+  border-radius: 999px;
+  padding: .2rem .9rem .2rem .25rem;
+  background: transparent;
+  color: #fff;
+  font-weight: 800;
+}
+
+.account-menu__avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--yellow);
+  color: var(--navy);
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+}
+
+.account-menu__menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 10px);
+  background: #fff;
+  color: var(--navy);
+  border-radius: 18px;
+  box-shadow: var(--shadow-lg);
+  padding: .5rem;
+  min-width: 230px;
+  display: none;
+  z-index: 40;
+}
+
+.account-menu.account-menu--open .account-menu__menu {
+  display: block;
+}
+
+.account-menu__menu a,
+.account-menu__menu button {
+  display: flex;
+  gap: .6rem;
+  align-items: center;
+  width: 100%;
+  padding: .65rem .8rem;
+  border: 0;
+  background: none;
+  border-radius: 12px;
+  font-weight: 800;
+  text-decoration: none;
+  text-align: left;
+}
+
+.account-menu__menu a:hover,
+.account-menu__menu button:hover {
+  background: var(--soft);
+}
+
+
+
+
+
+.rc-dialog.rc-dialog--wide {
+  width: min(800px,94vw);
+}
+
+.rc-dialog__body.rc-dialog__body--wide {
+  padding: 0;
+}
+
+.rc-dialog.rc-dialog--wide .rc-dialog__close {
+  z-index: 5;
+  background: #fff;
+}
+
+.destinos__detail-modal {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.destinos__detail-image {
+  position: relative;
+  min-height: 340px;
+}
+
+.destinos__detail-image img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.destinos__detail-body {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: .7rem;
+}
+
+.destinos__detail-title {
+  font: 900 1.8rem/1.1 var(--body);
+}
+
+.destinos__detail-body p {
+  margin: 0;
+  font-weight: 600;
+  color: #3b4660;
+}
+
+.destinos__detail-list {
+  list-style: none;
+  padding: 0;
+  margin: .4rem 0;
+  display: grid;
+  gap: .5rem;
+}
+
+.destinos__detail-list li {
+  background: var(--cream);
+  border-radius: 14px;
+  padding: .55rem .9rem;
+  font-weight: 600;
+  font-size: .92rem;
+}
+
+.destinos__detail-list b {
+  display: block;
+  font-size: .75rem;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  color: var(--orange);
+}
+
+.destinos__detail-actions {
+  display: flex;
+  gap: .6rem;
+  flex-wrap: wrap;
+  margin-top: auto;
+}
+
+.momentos__tour-modal {
+  position: relative;
+  background: #000;
+  aspect-ratio: var(--momentos-tour-modal-ratio);
+  overflow: hidden;
+}
+
+.momentos__tour-modal img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: kb 3.6s linear both;
+}
+
+.momentos__tour-progress {
+  position: absolute;
+  left: 14px;
+  right: 60px;
+  top: 14px;
+  display: flex;
+  gap: 6px;
+  z-index: 3;
+}
+
+.momentos__tour-progress-item {
+  flex: 1;
+  height: 4px;
+  border-radius: 9px;
+  background: rgba(255,255,255,.4);
+  overflow: hidden;
+}
+
+.momentos__tour-progress-item i {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--yellow);
+}
+
+.momentos__tour-progress-item--complete i {
+  width: 100%;
+}
+
+.momentos__tour-progress-item--active i {
+  animation: tbp 3.4s linear forwards;
+}
+
+.momentos__tour-caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 3rem 1.4rem 1.2rem;
+  background: linear-gradient(transparent,rgba(0,0,0,.75));
+  color: #fff;
+  z-index: 2;
+}
+
+.momentos__tour-caption b {
+  display: block;
+  font: 400 2rem/1 var(--brush);
+}
+
+.momentos__tour-caption span {
+  font-weight: 700;
+}
+
+.momentos__tour-navigation {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  translate: 0 -50%;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 0;
+  background: rgba(255,255,255,.9);
+  font-size: 1.6rem;
+  z-index: 3;
+}
+
+.momentos__tour-navigation--next {
+  left: auto;
+  right: 10px;
+}
+
+/* ==========================================================================
+   RESPONSIVIDADE
+========================================================================== */
+
+@media (max-width:640px) {
+  .account-menu__name {
+    display: none;
+  }
+  .rc-dialog__body {
+    padding: 1.6rem 1.3rem;
+  }
+
+}@media (max-width:700px) {
+  .destinos__detail-modal {
+    grid-template-columns: 1fr;
+  }
+  .destinos__detail-image {
+    min-height: 220px;
+  }
+
+}

@@ -1,0 +1,241 @@
+/* ===========================================================================
+   MOMENTOS — estilos do componente (BEM)
+========================================================================== */
+
+/* ==========================================================================
+   VARIÁVEIS E TOKENS DO COMPONENTE
+========================================================================== */
+
+:root {
+  --momentos-gallery-radius: 22px;
+  --momentos-video-radius: 40px;
+  --momentos-gallery-shape: #FFEBA8;
+}
+
+/* ==========================================================================
+   ESTILIZAÇÃO EM EFEITO CASCATA
+========================================================================== */
+
+/* ==========================================================================
+   SEÇÃO 1: ESTRUTURA E ELEMENTOS DO COMPONENTE
+========================================================================== */
+
+.momentos {
+  background: #fff;
+  overflow: hidden;
+  padding-bottom: 5rem;
+}
+
+.momentos__grid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.momentos__gallery {
+  position: relative;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.momentos__gallery::before {
+  content: "";
+  position: absolute;
+  inset: -10% 8% -6% 22%;
+  background: var(--soft);
+  border-radius: 60% 40% 55% 45%/50% 55% 45% 50%;
+  z-index: 0;
+  animation: morph 14s ease-in-out infinite;
+}
+
+.momentos__gallery img {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  min-width: 0;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 24px;
+  border: 5px solid #fff;
+  box-shadow: var(--shadow);
+  rotate: var(--momentos-rotation);
+  animation: float 6s ease-in-out infinite;
+  animation-delay: var(--momentos-delay);
+}
+
+.momentos__gallery img:nth-child(2) {
+  height: 340px;
+}
+
+.momentos__video {
+  position: relative;
+  display: block;
+  width: 100%;
+  border: 0;
+  padding: 0;
+  margin-top: 3.4rem;
+  border-radius: 40px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  aspect-ratio: 21/6;
+}
+
+.momentos__video img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: scale 1.2s var(--ease);
+}
+
+.momentos__video:hover img {
+  scale: 1.06;
+}
+
+.momentos__video .momentos__play-button {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  background: var(--yellow);
+  display: grid;
+  place-items: center;
+  animation: ring 1.8s ease-out infinite;
+  transition: scale .3s;
+}
+
+.momentos__video:hover .momentos__play-button {
+  scale: 1.15;
+}
+
+.momentos__video .momentos__play-button .icon {
+  width: 36px;
+  height: 36px;
+  fill: var(--navy);
+  margin-left: 5px;
+}
+
+
+
+
+
+
+
+
+
+.momentos .section-title .text-highlight {
+  background: none;
+  color: var(--blue2);
+}
+
+.momentos__gallery {
+  display: block;
+  aspect-ratio: 600/470;
+  max-width: 600px;
+  width: 100%;
+  margin-inline: auto;
+  position: relative;
+}
+
+.momentos__gallery::before {
+  display: none;
+}
+
+.momentos__gallery .momentos__background-shape {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.momentos__gallery img {
+  position: absolute;
+  z-index: 1;
+  flex: none;
+  min-width: 0;
+  border: 0;
+  border-radius: 22px;
+  object-fit: cover;
+  box-shadow: var(--shadow);
+  height: auto !important;
+}
+
+.momentos__gallery img.momentos__image--one {
+  left: 1%;
+  top: 21%;
+  width: 24.5%;
+  aspect-ratio: 150/172;
+}
+
+.momentos__gallery img.momentos__image--two {
+  left: 27.5%;
+  top: 6%;
+  width: 26%;
+  aspect-ratio: 155/215;
+}
+
+.momentos__gallery img.momentos__image--three {
+  left: 56%;
+  top: 17%;
+  width: 22%;
+  aspect-ratio: 127/178;
+}
+
+.momentos__gallery img.momentos__image--four {
+  left: 79.5%;
+  top: 25%;
+  width: 20.5%;
+  aspect-ratio: 147/172;
+}
+
+.momentos__gallery img.momentos__image--one {
+  top: 37%;
+}
+
+.momentos__gallery img.momentos__image--two {
+  top: 22%;
+}
+
+.momentos__gallery img.momentos__image--three {
+  top: 33%;
+}
+
+.momentos__gallery img.momentos__image--four {
+  top: 42%;
+}
+
+/* ==========================================================================
+   VARIÁVEIS E POSICIONAMENTO DAS IMAGENS DA GALERIA
+========================================================================== */
+
+.momentos__background-path { fill: var(--momentos-gallery-shape); }
+.momentos__image--one { object-position: 50% 55%; }
+.momentos__image--two { object-position: 50% 60%; }
+.momentos__image--three { object-position: 50% 55%; }
+.momentos__image--four { --momentos-rotation: 8deg; --momentos-delay: -4.5s; }
+
+/* ==========================================================================
+   RESPONSIVIDADE
+========================================================================== */
+
+@media (max-width:1000px) {
+  .momentos__grid {
+    grid-template-columns: 1fr;
+  }
+
+}@media (max-width:640px) {
+  .momentos__gallery img {
+    height: 190px !important;
+  }
+  .momentos__video {
+    aspect-ratio: 16/9;
+    border-radius: 26px;
+  }
+
+}

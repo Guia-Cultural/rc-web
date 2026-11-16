@@ -1,0 +1,62 @@
+/* ==========================================================================
+   COMMUNITY | HIGHLIGHTS
+   Folha do componente — BEM, variáveis próprias e comentários por responsabilidade.
+========================================================================== */
+
+/* ==========================================================================
+   VARIÁVEIS E TOKENS DO COMPONENTE
+========================================================================== */
+
+:root {
+  --community-highlights-background: #FFF6D6;
+  --community-highlights-gap: 1.4rem;
+}
+
+/* ==========================================================================
+   ESTILIZAÇÃO EM EFEITO CASCATA
+========================================================================== */
+
+.community-page .community-highlights{background:var(--community-highlights-background);overflow:hidden}
+.community-page .community-highlights::before{content:"";position:absolute;left:-8%;bottom:-26%;width:36%;aspect-ratio:1;border-radius:50%;background:#FFEBA8}
+.community-page .community-highlight-feature{display:grid;grid-template-columns:minmax(0,430px) 1fr;gap:2.4rem;align-items:center;background:#fff;border:3px solid #000;border-radius:34px;padding:1.5rem 1.8rem 1.5rem 1.5rem;box-shadow:8px 8px 0 var(--community-c);cursor:pointer;animation:community-up .6s var(--community-ease) both;position:relative}
+.community-page .community-highlight-feature .community-password img{aspect-ratio:4/3}
+.community-page .community-highlight-feature:hover .community-password img, .community-page .community-hs:hover .community-password img{translate:-3px -3px}
+.community-page .community-highlight-feature:hover .community-password::before, .community-page .community-hs:hover .community-password::before{inset:5px -3px -3px 5px}
+.community-page .community-highlight-feature .community-tx{display:flex;flex-direction:column;gap:.9rem;align-items:flex-start}
+.community-page .community-highlight-feature h3{font-size:clamp(1.6rem,2.6vw,2.2rem);letter-spacing:-1px;margin:0}
+.community-page .community-highlight-feature p{margin:0;color:var(--community-muted);font-weight:700;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.community-page .community-hist{background:#fff;border:3px solid #000;border-radius:30px;padding:.7rem;box-shadow:7px 7px 0 var(--community-c);display:flex;flex-direction:column;animation:community-up .55s var(--community-ease) both;animation-delay:var(--community-d,0s);transition:translate .25s var(--community-ease),box-shadow .25s}
+.community-page .community-hist:hover{translate:-3px -6px;box-shadow:11px 13px 0 var(--community-c)}
+.community-page .community-hist__capa{position:relative;aspect-ratio:4/3;border-radius:22px;overflow:hidden;cursor:pointer}
+.community-page .community-hist__capa img{width:100%;height:100%;object-fit:cover;transition:scale .8s var(--community-ease)}
+.community-page .community-hist:hover .community-hist__capa img{scale:1.1}
+.community-page .community-hist__cat{position:absolute;left:10px;top:10px;z-index:1;display:inline-flex;gap:6px;align-items:center;background:var(--community-c);border:2px solid #000;border-radius:999px;padding:4px 12px;font-weight:900;font-size:.78rem;color:#000}
+.community-page .community-hist__rota{position:absolute;left:10px;bottom:10px;z-index:1;display:inline-flex;gap:6px;align-items:center;background:#000;color:#fff;border-radius:999px;padding:4px 12px;font-weight:900;font-size:.75rem}
+.community-page .community-hist__salvar{position:absolute;right:10px;top:10px;z-index:2;width:42px;height:42px;border-radius:50%;border:2px solid #000;background:#fff;display:grid;place-items:center;transition:scale .2s,background .2s}
+.community-page .community-hist__salvar:hover{scale:1.12}
+.community-page .community-hist__salvar[aria-pressed=true]{background:var(--community-yellow)}
+.community-page .community-hist__salvar[aria-pressed=true] .community-icon{fill:#000}
+.community-page .community-hist__corpo{padding:1rem .6rem .5rem;display:flex;flex-direction:column;gap:.5rem;flex:1}
+.community-page .community-hist__local{display:flex;gap:6px;align-items:center;color:var(--community-orange);font-weight:900;font-size:.82rem}
+.community-page .community-hist__titulo{margin:0;font-size:1.2rem;font-weight:900;line-height:1.22;letter-spacing:-.4px;cursor:pointer}
+.community-page .community-hist__titulo:hover{text-decoration:underline}
+.community-page .community-hist__resumo{margin:0;color:var(--community-muted);font-weight:700;font-size:.92rem;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.community-page .community-hist__rodape{display:flex;align-items:center;justify-content:space-between;gap:.6rem;padding:.8rem .5rem .3rem;margin-top:auto;border-top:2px dashed #EBD27A}
+.community-page .community-hist__autor{display:flex;gap:.55rem;align-items:center;min-width:0}
+.community-page .community-hist__autor b{display:block;font-size:.88rem;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.community-page .community-hist__autor small{font-size:.74rem;color:var(--community-muted);font-weight:800}
+.community-page .community-hist__acoes{display:flex;gap:.4rem;flex:none}
+
+
+/* ==========================================================================
+   VARIAÇÕES DE TÍTULO E LEAD DOS DESTAQUES
+========================================================================== */
+.community-page .community-section__lead--flush { margin: 0; }
+
+/* ==========================================================================
+   RESPONSIVIDADE
+========================================================================== */
+
+@media (max-width:680px) {
+.community-page .community-hist__rodape{flex-wrap:wrap}
+}

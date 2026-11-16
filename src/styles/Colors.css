@@ -1,3 +1,61 @@
-:root{
-    
+/* ==========================================================================
+   TOKENS GLOBAIS DE CORES — RotaCultural
+========================================================================== */
+
+/* ==========================================================================
+   VARIÁVEIS E TOKENS DO COMPONENTE
+========================================================================== */
+
+:root {
+  --rc-navy: #0E1A3D;
+  --rc-navy-soft: #1E2847;
+  --rc-yellow: #FFC107;
+  --rc-cream: #FFF6D6;
+  --rc-soft: #FFF0B8;
+  --rc-line: #F5DC84;
+  --rc-muted: #55627F;
+  --rc-orange: #FF6B00;
+  --rc-green: #12B76A;
+  --rc-blue: #0B5BFF;
+  --rc-blue-strong: #1455F1;
+  --rc-sky: #00B8D9;
+  --rc-magenta: #E91E8C;
+  --rc-purple: #5B21B6;
+  --rc-red: #E8222B;
+  --rc-shadow: 0 14px 34px -18px rgba(14,26,61,.45);
+  --rc-shadow-lg: 0 26px 56px -22px rgba(14,26,61,.5);
+  --rc-ease: cubic-bezier(.2,.8,.2,1);
+  --rc-radius: 28px;
+  --navy: var(--rc-navy);
+  --nv2: var(--rc-navy-soft);
+  --yellow: var(--rc-yellow);
+  --cream: var(--rc-cream);
+  --soft: var(--rc-soft);
+  --line: var(--rc-line);
+  --muted: var(--rc-muted);
+  --orange: var(--rc-orange);
+  --green: var(--rc-green);
+  --blue: var(--rc-blue);
+  --blue2: #0066CC;
+  --blue3: var(--rc-blue-strong);
+  --sky: var(--rc-sky);
+  --mag: var(--rc-magenta);
+  --pur: var(--rc-purple);
+  --red: var(--rc-red);
+  --shadow: var(--rc-shadow);
+  --shadow-lg: var(--rc-shadow-lg);
+  --ease: var(--rc-ease);
+  --r: var(--rc-radius);
+  --body: "Nunito", sans-serif;
+  --inter: "Inter", sans-serif;
+  --brush: "Caveat Brush", cursive;
+  color-scheme: light;
 }
+
+/* ==========================================================================
+   ESTILIZAÇÃO EM EFEITO CASCATA
+========================================================================== */
+
+/* ==========================================================================
+   SEÇÃO 1: ESTRUTURA E ELEMENTOS DO COMPONENTE
+========================================================================== */

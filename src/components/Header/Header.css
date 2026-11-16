@@ -127,7 +127,26 @@
 
 .header__actions {
   display: flex;
-  gap: 1rem; /* Espaço entre o botão de cadastrar e o de entrar */
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.header__logout {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 40px;
+  padding: 7px 14px;
+  color: #ffffff;
+  font-family: var(--body, 'Nunito', sans-serif);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.header__logout:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: #ffcc00;
 }
 
 
@@ -184,7 +203,8 @@
     padding: 0.8rem 1rem;
   }
 
-  .header__actions .btn-register {
+  .header__actions .btn-register,
+  .header__actions .button-register {
     display: none;
   }
 }

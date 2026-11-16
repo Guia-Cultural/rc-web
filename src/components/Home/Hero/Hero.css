@@ -1,0 +1,471 @@
+/* ===========================================================================
+   HERO — estilos do componente (BEM)
+========================================================================== */
+
+/* ==========================================================================
+   VARIÁVEIS E TOKENS DO COMPONENTE
+========================================================================== */
+
+:root {
+  --hero-theme-default: #00B8D9;
+  --hero-caption-shadow: 6px 6px 0 #00B8D9;
+}
+
+/* ==========================================================================
+   ESTILIZAÇÃO EM EFEITO CASCATA
+========================================================================== */
+
+/* ==========================================================================
+   SEÇÃO 1: ESTRUTURA E ELEMENTOS DO COMPONENTE
+========================================================================== */
+
+.hero {
+  --hero-theme-color: var(--rc-sky);
+  --hero-theme-color: #00B8D9;
+  background: color-mix(in srgb,var(--hero-theme-color) 16%,#fff);
+  overflow: hidden;
+  padding: 3.4rem 0 4.5rem;
+  transition: background .8s;
+}
+
+.hero__grid {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.hero__title {
+  font-weight: 900;
+  font-size: clamp(2.3rem,5vw,4.1rem);
+  line-height: 1.02;
+  letter-spacing: -2px;
+  margin: 1rem 0;
+}
+
+.hero__title .text-highlight {
+  background: linear-gradient(transparent 58%,var(--hero-theme-color) 58%);
+  transition: background .8s;
+  color: var(--navy);
+}
+
+.hero__description {
+  min-height: 3.4em;
+  transition: opacity .4s;
+}
+
+.hero__themes {
+  display: flex;
+  gap: .6rem;
+  flex-wrap: wrap;
+  margin: 1.4rem 0;
+}
+
+.hero__themes b {
+  width: 100%;
+  font-size: .85rem;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  color: var(--muted);
+}
+
+.hero__theme {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: .6rem 1.1rem;
+  border-radius: 999px;
+  border: 2px solid var(--navy);
+  background: #fff;
+  font-weight: 900;
+  font-size: .92rem;
+  transition: background .25s,color .25s,translate .2s;
+}
+
+.hero__theme:hover {
+  translate: 0 -3px;
+}
+
+.hero__theme[aria-pressed=true] {
+  background: var(--navy);
+  color: #fff;
+}
+
+.hero__search {
+  display: flex;
+  gap: .5rem;
+  background: #fff;
+  border: 2px solid var(--navy);
+  border-radius: 999px;
+  padding: .4rem;
+  max-width: 560px;
+  box-shadow: 0 14px 30px -18px rgba(14,26,61,.6);
+}
+
+.hero__search input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: none;
+  padding: .5rem 1rem;
+  font: 700 1rem var(--body);
+  color: var(--navy);
+}
+
+.hero__search input:focus {
+  outline: 0;
+}
+
+.hero__search .button {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: #fff;
+}
+
+.hero__actions {
+  display: flex;
+  gap: .8rem;
+  flex-wrap: wrap;
+  margin-top: 1.2rem;
+}
+
+.hero__stage {
+  position: relative;
+  aspect-ratio: 1/1.02;
+  max-width: 560px;
+  width: 100%;
+  margin-inline: auto;
+}
+
+.hero__stage .hero__shape {
+  position: absolute;
+  inset: 4% 0 0 8%;
+  background: var(--hero-theme-color);
+  border-radius: 46% 54% 42% 58%/52% 44% 56% 48%;
+  transition: background .8s;
+  animation: morph 12s ease-in-out infinite;
+}
+
+.hero__stage figure {
+  position: absolute;
+  margin: 0;
+  inset: 7% 14% 12% 3%;
+  rotate: -3deg;
+  animation: float 7s ease-in-out infinite;
+}
+
+.hero__stage .hero__media {
+  position: absolute;
+  inset: 0;
+  border-radius: 30px;
+  border: 6px solid #fff;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.hero__stage .hero__media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity .8s,scale 6s linear;
+}
+
+.hero__stage .hero__media img.hero__image--inactive {
+  opacity: 0;
+}
+
+.hero__stage .hero__media img.hero__image--active {
+  scale: 1.08;
+}
+
+.hero__stage figcaption {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  right: 14px;
+  z-index: 2;
+  background: rgba(14,26,61,.82);
+  color: #fff;
+  border-radius: 18px;
+  padding: .7rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+}
+
+.hero__stage figcaption b {
+  display: block;
+  line-height: 1.2;
+}
+
+.hero__stage figcaption small {
+  opacity: .8;
+  font-weight: 700;
+}
+
+.hero__stage .hero__ring {
+  position: absolute;
+  right: 0;
+  bottom: 6%;
+  width: 124px;
+  z-index: 4;
+  animation: spin 22s linear infinite;
+  filter: drop-shadow(0 8px 12px rgba(0,0,0,.25));
+}
+
+
+
+
+
+
+
+
+
+.hero::before {
+  content: "";
+  position: absolute;
+  left: -8%;
+  top: -34%;
+  width: 34%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--hero-theme-color);
+  opacity: .2;
+  transition: background .8s;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  right: 34%;
+  bottom: -16%;
+  width: 13%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--yellow);
+  opacity: .95;
+}
+
+.hero .hero__grid {
+  z-index: 1;
+}
+
+.hero__title {
+  margin-top: 0;
+}
+
+.hero__stage figcaption {
+  left: -9%;
+  bottom: 9%;
+  right: auto;
+  width: min(310px,80%);
+  display: block;
+  background: #fff;
+  color: var(--navy);
+  border: 3px solid var(--navy);
+  border-radius: 22px;
+  padding: .8rem 1.05rem 1rem;
+  box-shadow: 6px 6px 0 var(--hero-theme-color);
+  rotate: -3deg;
+  backdrop-filter: none;
+  transition: rotate .3s var(--ease),translate .3s var(--ease),box-shadow .3s,background .8s;
+}
+
+.hero__stage figcaption:hover,
+.hero__stage figcaption:focus-visible {
+  rotate: 0deg;
+  translate: 0 -5px;
+  box-shadow: 9px 9px 0 var(--hero-theme-color);
+}
+
+.hero__stage figcaption .hero__caption-meta {
+  display: flex;
+  gap: .4rem;
+  align-items: center;
+  margin-bottom: .45rem;
+}
+
+.hero__stage figcaption .hero__caption-tag {
+  color: #fff;
+  font-weight: 900;
+  font-size: .72rem;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  padding: 3px 11px;
+  border-radius: 999px;
+  background: var(--hero-theme-color);
+  transition: background .6s;
+}
+
+.hero__stage figcaption b {
+  display: block;
+  font-weight: 900;
+  font-size: 1.3rem;
+  line-height: 1.15;
+  letter-spacing: -.3px;
+}
+
+.hero__stage figcaption .hero__caption-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: .45rem;
+}
+
+.hero__stage figcaption .hero__location {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  color: var(--orange);
+  font-weight: 800;
+  font-size: .9rem;
+}
+
+.hero__stage figcaption .hero__caption-action {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--yellow);
+  border: 2px solid var(--navy);
+  display: grid;
+  place-items: center;
+  transition: rotate .3s var(--ease);
+}
+
+.hero__stage figcaption:hover .hero__caption-action {
+  rotate: -45deg;
+}
+
+.hero__segments {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  top: 14px;
+  z-index: 3;
+  display: flex;
+  gap: 6px;
+}
+
+.hero__segments i {
+  flex: 1;
+  height: 5px;
+  border-radius: 9px;
+  background: rgba(255,255,255,.5);
+  overflow: hidden;
+  position: relative;
+}
+
+.hero__segments i::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  scale: 0 1;
+  transform-origin: left;
+}
+
+.hero__segments i.hero__segment--complete::after {
+  scale: 1 1;
+}
+
+.hero__segments i.hero__segment--active::after {
+  animation: seg 6.5s linear forwards;
+}
+
+.hero__segments.hero__segments--manual i.hero__segment--active::after {
+  animation: none;
+  scale: 1 1;
+}
+
+.hero__stage .hero__ring {
+  bottom: 2%;
+  right: -2%;
+}
+
+
+
+
+
+
+
+
+
+.hero__stage figure {
+  inset: 13% 14% 10% 3%;
+}
+
+.hero__title {
+  color: #000;
+}
+
+.hero__title .text-highlight {
+  background: none;
+  color: var(--hero-theme-text,#0891B2);
+  transition: color .8s;
+}
+
+.hero__themes .hero__theme[aria-pressed=true] {
+  background: var(--hero-theme-accent,var(--hero-theme-color));
+  border-color: var(--hero-theme-accent,var(--hero-theme-color));
+  color: #fff;
+}
+
+.hero__themes .hero__theme[aria-pressed=true] .icon {
+  color: #fff;
+}
+
+.hero__stage .hero__ring {
+  animation: none !important;
+}
+
+.hero__ring-text {
+  transform-box: view-box;
+  transform-origin: 100px 100px;
+  animation: spin 22s linear infinite;
+}
+
+/* ==========================================================================
+   SEÇÃO: ELEMENTOS DO SELO CIRCULAR DO HERO
+========================================================================== */
+.hero__ring-disc { fill: currentColor; color: var(--rc-navy); }
+.hero__ring-label { fill: currentColor; color: var(--rc-yellow); }
+.hero__ring-plane { color: var(--rc-yellow); fill: currentColor; stroke: currentColor; }
+
+/* ==========================================================================
+   RESPONSIVIDADE
+========================================================================== */
+
+@media (max-width:1000px) {
+  .hero__grid {
+    grid-template-columns: 1fr;
+  }
+  .hero__stage {
+    max-width: 440px;
+  }
+
+}@media (max-width:640px) {
+  .hero__search {
+    flex-wrap: wrap;
+    border-radius: 26px;
+  }
+  .hero__search .button {
+    width: 100%;
+    justify-content: center;
+  }
+
+}@media (max-width:1000px) {
+  .hero__stage figcaption {
+    left: -2%;
+  }
+
+}@media (max-width:640px) {
+  .hero__stage figcaption {
+    width: 84%;
+  }
+
+}

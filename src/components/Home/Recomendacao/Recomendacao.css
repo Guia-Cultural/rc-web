@@ -1,0 +1,468 @@
+/* ==========================================================================
+   VARIÁVEIS E TOKENS DO COMPONENTE
+========================================================================== */
+
+/* ==========================================================================
+   VARIÁVEIS E TOKENS DO COMPONENTE
+========================================================================== */
+
+:root {
+  --recomendacao-step-yellow: var(--rc-yellow);
+  --recomendacao-step-sky: var(--rc-sky);
+  --recomendacao-step-magenta: var(--rc-magenta);
+  --recomendacao-card-radius: 30px;
+  --recomendacao-field-radius: 14px;
+}
+
+/* ==========================================================================
+   ESTILIZAÇÃO EM EFEITO CASCATA
+========================================================================== */
+
+/* ===========================================================================
+   RECOMENDACAO — estilos do componente (BEM)
+========================================================================== */
+
+
+
+
+
+/* ==========================================================================
+   SEÇÃO 1: ESTRUTURA E ELEMENTOS DO COMPONENTE
+========================================================================== */
+
+.recomendacao {
+  background: #FDE98B;
+  overflow: hidden;
+  padding-bottom: 8rem;
+}
+
+.recomendacao::before {
+  content: "";
+  position: absolute;
+  left: -10%;
+  bottom: -30%;
+  width: 50%;
+  aspect-ratio: 1;
+  background: #fff;
+  border-radius: 50%;
+}
+
+.recomendacao::after {
+  content: "";
+  position: absolute;
+  right: -6%;
+  top: -14%;
+  width: 24%;
+  aspect-ratio: 1;
+  background: var(--orange);
+  border-radius: 50%;
+  opacity: .9;
+}
+
+.recomendacao__grid {
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  gap: 3.4rem;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.recomendacao__title {
+  font-weight: 900;
+  font-size: clamp(2.2rem,5vw,3.8rem);
+  line-height: 1.04;
+  letter-spacing: -1.5px;
+  margin: 1rem 0;
+}
+
+.recomendacao__title .text-highlight {
+  background: linear-gradient(transparent 62%,var(--orange) 62%);
+}
+
+.recomendacao__card {
+  background: #fff;
+  border-radius: 30px;
+  padding: 2rem;
+  box-shadow: var(--shadow-lg);
+  border: 3px solid var(--navy);
+}
+
+.recomendacao__card label {
+  display: block;
+  font-weight: 900;
+  font-size: .92rem;
+  margin: .9rem 0 .35rem;
+}
+
+.recomendacao__card .form-field {
+  border-radius: 14px;
+}
+
+.recomendacao__interests {
+  display: flex;
+  gap: .5rem;
+  flex-wrap: wrap;
+}
+
+.recomendacao__interests button {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  border: 2px solid var(--navy);
+  background: #fff;
+  border-radius: 999px;
+  padding: .45rem .95rem;
+  font-weight: 800;
+  font-size: .88rem;
+  transition: background .2s,translate .2s;
+}
+
+.recomendacao__interests button:hover {
+  translate: 0 -2px;
+}
+
+.recomendacao__interests [aria-pressed=true] {
+  background: var(--recomendacao-accent,var(--yellow));
+}
+
+.recomendacao__form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .8rem;
+}
+
+.recomendacao__error {
+  color: var(--red);
+  font-weight: 800;
+  font-size: .82rem;
+  min-height: 1.1em;
+}
+
+.recomendacao__result {
+  display: none;
+}
+
+.recomendacao__card.recomendacao__card--completed .recomendacao__form {
+  display: none;
+}
+
+.recomendacao__card.recomendacao__card--completed .recomendacao__result {
+  display: block;
+  animation: pop .5s var(--ease);
+}
+
+.recomendacao__result-title {
+  font-weight: 900;
+  font-size: 1.6rem;
+  margin: .2rem 0;
+}
+
+.recomendacao__result .recomendacao__success-icon {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: var(--green);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-size: 1.6rem;
+  animation: ring 1.6s 2;
+}
+
+.recomendacao__result-card {
+  display: grid;
+  grid-template-columns: 78px 1fr auto;
+  gap: .9rem;
+  align-items: center;
+  background: var(--cream);
+  border-radius: 18px;
+  padding: .6rem;
+  margin: .6rem 0;
+  animation: up .5s var(--ease) both;
+  animation-delay: var(--recomendacao-delay);
+}
+
+.recomendacao__result-card img {
+  width: 78px;
+  height: 62px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.recomendacao__result-card b {
+  display: block;
+  line-height: 1.2;
+}
+
+.recomendacao__result-card small {
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.recomendacao__result-card .recomendacao__score {
+  font-weight: 900;
+  color: var(--green);
+  font-size: .9rem;
+}
+
+@keyframes recomendacao-confetti {
+  to {
+    transform: translate(var(--recomendacao-x),var(--recomendacao-y)) rotate(var(--recomendacao-rotation));
+    opacity: 0;
+  }
+
+}
+
+.recomendacao__confetti-piece {
+  position: fixed;
+  pointer-events: none;
+  z-index: 300;
+  width: 10px;
+  height: 14px;
+  animation: recomendacao-confetti 1.4s var(--ease) forwards;
+}
+
+
+
+
+
+
+
+
+
+.recomendacao__title {
+  color: #000;
+}
+
+.recomendacao__title .text-highlight {
+  background: none;
+  color: var(--blue2);
+}
+
+.recomendacao__card {
+  border-color: #1455F1;
+}
+
+.recomendacao .handwritten-note {
+  color: #000;
+}
+
+.recomendacao.recomendacao--v2 {
+  position: relative;
+  background: linear-gradient(155deg,#0E1A3D 0%,#1E2847 52%,#3B1F7A 100%);
+  color: #fff;
+  padding-bottom: 7rem;
+}
+
+.recomendacao.recomendacao--v2::before {
+  left: auto;
+  right: -8%;
+  bottom: -22%;
+  width: 46%;
+  background: var(--mag);
+  opacity: .38;
+}
+
+.recomendacao.recomendacao--v2::after {
+  left: -7%;
+  right: auto;
+  top: -14%;
+  width: 28%;
+  background: var(--yellow);
+  opacity: .95;
+}
+
+.recomendacao.recomendacao--v2 .recomendacao__grid {
+  align-items: start;
+}
+
+.recomendacao.recomendacao--v2 .recomendacao__title {
+  color: #fff;
+}
+
+.recomendacao.recomendacao--v2 .recomendacao__title .text-highlight {
+  background: none;
+  color: var(--yellow);
+}
+
+.recomendacao.recomendacao--v2 .section-description {
+  color: #fff;
+  opacity: .92;
+}
+
+.recomendacao.recomendacao--v2 .handwritten-note {
+  color: var(--yellow);
+}
+
+.recomendacao.recomendacao--v2 .badge {
+  background: var(--yellow);
+}
+
+.recomendacao__steps {
+  list-style: none;
+  padding: 0;
+  margin: 1.6rem 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.recomendacao__steps li {
+  display: flex;
+  gap: .9rem;
+  align-items: center;
+  font-weight: 800;
+}
+
+.recomendacao__steps .recomendacao__step-number {
+  flex: none;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font: 400 1.7rem var(--brush);
+  color: var(--navy);
+  background: var(--recomendacao-accent);
+  border: 3px solid #fff;
+  transition: rotate .4s var(--ease);
+}
+
+.recomendacao__steps li:hover .recomendacao__step-number {
+  rotate: -12deg;
+}
+
+.recomendacao__steps small {
+  display: block;
+  font-weight: 600;
+  opacity: .8;
+}
+
+.recomendacao__card.recomendacao__card--v2 {
+  border-color: var(--yellow);
+  box-shadow: 10px 10px 0 var(--yellow);
+}
+
+.recomendacao__fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0 0 1.1rem;
+}
+
+.recomendacao__fieldset legend {
+  display: flex;
+  gap: .6rem;
+  align-items: center;
+  font: 900 1.15rem var(--body);
+  padding: 0;
+  margin-bottom: .3rem;
+}
+
+.recomendacao__fieldset legend span {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--navy);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-size: .9rem;
+}
+
+.recomendacao__fieldset+.recomendacao__fieldset {
+  border-top: 2px dashed var(--line);
+  padding-top: 1.1rem;
+}
+
+.recomendacao.recomendacao--v2 {
+  background: #1240B5;
+}
+
+.recomendacao.recomendacao--v2 h2 .recomendacao__highlight {
+  display: inline-block;
+  background: var(--yellow);
+  color: var(--navy);
+  padding: .02em .3em .08em;
+  border-radius: 18px;
+  rotate: -2deg;
+  box-shadow: 6px 6px 0 var(--navy);
+  margin-top: .15em;
+  animation: bob2 4s ease-in-out infinite;
+}
+
+.recomendacao__card.recomendacao__card--v2 {
+  color: var(--navy);
+}
+
+.recomendacao__card.recomendacao__card--v2 label,
+.recomendacao__card.recomendacao__card--v2 legend,
+.recomendacao__card.recomendacao__card--v2 .recomendacao__interests button {
+  color: var(--navy);
+  background: #fff;
+}
+
+.recomendacao__card.recomendacao__card--v2 .recomendacao__interests [aria-pressed=true] {
+  background: var(--recomendacao-accent,var(--yellow));
+}
+
+.recomendacao__card.recomendacao__card--v2 .form-field {
+  color: var(--navy);
+  background-color: #fff;
+}
+
+.recomendacao__fieldset legend span {
+  background: var(--blue);
+  color: #fff;
+}
+
+.recomendacao.recomendacao--v2 .recomendacao__steps li,
+.recomendacao.recomendacao--v2 .recomendacao__steps small {
+  color: #fff;
+}
+
+.recomendacao.recomendacao--v2::before {
+  background: #FF5CA8;
+  opacity: 1;
+  width: 30%;
+  right: -6%;
+  bottom: -16%;
+}
+
+.recomendacao.recomendacao--v2 {
+  background: #0A7D4F;
+}
+
+.recomendacao.recomendacao--v2::before {
+  background: var(--mag);
+  opacity: .92;
+}
+
+.recomendacao__card.recomendacao__card--v2 {
+  border-color: var(--navy);
+}
+
+/* ==========================================================================
+   MODIFICADORES DE ETAPA E FORMULÁRIO
+========================================================================== */
+.recomendacao__step--yellow { --recomendacao-accent: var(--recomendacao-step-yellow); }
+.recomendacao__step--sky { --recomendacao-accent: var(--recomendacao-step-sky); }
+.recomendacao__step--magenta { --recomendacao-accent: var(--recomendacao-step-magenta); }
+.recomendacao__card--delayed { --rc-animation-delay: .15s; }
+.recomendacao__optional { color: var(--rc-muted); font-weight: 700; }
+.recomendacao__field--full { width: 100%; }
+
+/* ==========================================================================
+   RESPONSIVIDADE
+========================================================================== */
+
+@media (max-width:1000px) {
+  .recomendacao__grid {
+    grid-template-columns: 1fr;
+  }
+
+}@media (max-width:640px) {
+  .recomendacao__form-grid {
+    grid-template-columns: 1fr;
+  }
+
+}

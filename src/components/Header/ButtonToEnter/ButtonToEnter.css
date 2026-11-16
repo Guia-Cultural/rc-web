@@ -2,32 +2,46 @@
    Variaveis
 ========================================================================== */
 
+/* ==========================================================================
+   VARIÁVEIS E TOKENS DO COMPONENTE
+========================================================================== */
+
 :root {
-    --btn-to-enter-bg: #ffcc00;
-    --btn-to-enter-color: #111a3a;
+  --button-to-enter-background: #ffcc00;
+  --button-to-enter-color: #111a3a;
 }
+
+/* ==========================================================================
+   ESTILIZAÇÃO EM EFEITO CASCATA
+========================================================================== */
+
+/* ==========================================================================
+   SEÇÃO 1: ESTRUTURA E ELEMENTOS DO COMPONENTE
+========================================================================== */
 
 /* ==========================================================================
    Botão de entrar
 ========================================================================== */
 
-.btn-to-enter {
-    background-color: var(--btn-to-enter-bg);
-    border: none;
-    border-radius: 40px;
-    padding: 9px 18px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    text-align: center;
-    width: 100px;
+.button-to-enter {
+  background-color: var(--button-to-enter-background);
+  border: none;
+  border-radius: 40px;
+  padding: 9px 18px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+  width: 100px;
 }
-.btn-to-enter-text{
-    color: var(--btn-to-enter-color);
-    font-family: system-ui, -apple-system;
-    font-size: 16px;
-    font-weight: 700;
+
+.button-to-enter__text {
+  color: var(--button-to-enter-color);
+  font-family: var(--body);
+  font-size: 16px;
+  font-weight: 700;
 }
-.btn-to-enter:hover{
-    opacity: 0.9;
-    transform: translateY(-1px);
+
+.button-to-enter:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
 }

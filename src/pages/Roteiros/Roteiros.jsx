@@ -8,6 +8,7 @@ import { AttractionsStep, ProfileStep } from "../../features/roteiros/components
 import RoteirosHero from "../../features/roteiros/components/RoteirosHero";
 import { roteiroThemes } from "../../features/roteiros/data/roteiroData";
 import useItineraryBuilder from "../../features/roteiros/hooks/useItineraryBuilder";
+import { useAuth } from "../../context/AuthContext";
 import useRevealOnScroll from "../../hooks/useRevealOnScroll";
 import "./Roteiros.css";
 
@@ -15,32 +16,147 @@ export default function Roteiros() {
   const [themeKey, setThemeKey] = useState("neutro");
   const [detail, setDetail] = useState(null);
   const rootRef = useRef(null);
+  const { isAuthenticated } = useAuth();
   const builder = useItineraryBuilder();
   const theme = roteiroThemes[themeKey];
-  useRevealOnScroll(rootRef, `${themeKey}-${builder.generated}`);
+
+  useRevealOnScroll(
+    rootRef,
+    `${themeKey}-${builder.generated}-${builder.filteredAttractions.length}-${builder.activeDay}`
+  );
 
   const style = {
-    "--t": theme.color, "--td": theme.dark, "--ts": theme.soft, "--tb": theme.background,
-    "--tx": theme.accent, "--tc": theme.contrast, "--tm": theme.text,
-    "--hi": theme.color, "--hit": theme.text, "--hg": `linear-gradient(135deg, ${theme.dark}, ${theme.accent})`,
+    "--t": theme.color,
+    "--td": theme.dark,
+    "--ts": theme.soft,
+    "--tb": theme.background,
+    "--tx": theme.accent,
+    "--tc": theme.contrast,
+    "--tm": theme.text,
+    "--hi": theme.color,
+    "--hit": theme.text,
+    "--hg": `linear-gradient(135deg, ${theme.dark}, ${theme.accent})`,
   };
 
-  return <div className="roteiros-page js" id="app" data-tema={themeKey} style={style} ref={rootRef}>
-    <i className="pbar" />
-    <div id="wiz">
-      <RoteirosHero themeKey={themeKey} onTheme={setThemeKey} />
-      <DestinationStep form={builder.form} update={builder.update} themeKey={themeKey} />
-      <ProfileStep form={builder.form} update={builder.update} />
-      <AttractionsStep form={builder.form} update={builder.update} toggle={builder.toggle} onDetail={setDetail} />
-      <FoodStep form={builder.form} toggle={builder.toggle} />
-      <StayStep form={builder.form} update={builder.update} onDetail={setDetail} />
-      <TransportStep form={builder.form} toggle={builder.toggle} />
-      <BudgetStep form={builder.form} update={builder.update} totals={builder.totals} groupCount={builder.groupCount} />
-      <GenerateStep form={builder.form} error={builder.error} onGenerate={builder.generate} onReset={builder.reset} />
+  return (
+    <div className="roteiros-page js" id="app" data-tema={themeKey} style={style} ref={rootRef}>
+      <i className="pbar" />
+      <div id="wiz">
+        <RoteirosHero themeKey={themeKey} onTheme={setThemeKey} />
+
+        {isAuthenticated && builder.savedTrips.length > 0 && (
+          <section className="lsec" id="meus-roteiros-salvos">
+            <div className="wrap">
+              <div className="lcard" style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", gap: 10 }}>
+                  <div>
+                    <span className="badge">Salvos no banco</span>
+                    <h2 style={{ margin: "6px 0 0", fontSize: "1.35rem" }}>Meus roteiros anteriores</h2>
+                  </div>
+                </div>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
+                  {builder.savedTrips.map((trip) => (
+                    <button
+                      key={trip.id}
+                      type="button"
+                      className="cp"
+                      aria-pressed={builder.activeTrip?.id === trip.id}
+                      onClick={() => builder.loadSavedTrip(trip.id)}
+                    >
+                      {trip.destination} ({trip.startDate} · {trip.itineraryCount || 0} paradas)
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        <DestinationStep
+          form={builder.form}
+          update={builder.update}
+          themeKey={themeKey}
+          availableCities={builder.availableCities}
+        />
+        <ProfileStep form={builder.form} update={builder.update} />
+        <AttractionsStep
+          form={builder.form}
+          categories={builder.categories}
+          places={builder.filteredAttractions}
+          loading={builder.loadingCatalog}
+          update={builder.update}
+          toggle={builder.toggle}
+          onDetail={setDetail}
+        />
+        <FoodStep form={builder.form} toggle={builder.toggle} />
+        <StayStep form={builder.form} update={builder.update} onDetail={setDetail} />
+        <TransportStep form={builder.form} toggle={builder.toggle} />
+        <BudgetStep
+          form={builder.form}
+          update={builder.update}
+          totals={builder.totals}
+          groupCount={builder.groupCount}
+        />
+        <GenerateStep
+          form={builder.form}
+          error={builder.error}
+          submitting={builder.submitting}
+          isAuthenticated={isAuthenticated}
+          onGenerate={builder.generate}
+          onReset={builder.reset}
+        />
+      </div>
+
+      {builder.generated ? (
+        <ItineraryResults
+          form={builder.form}
+          theme={theme}
+          totals={builder.totals}
+          itinerary={builder.itinerary}
+          activeDay={builder.activeDay}
+          onDay={builder.setActiveDay}
+          onEdit={() => document.querySelector("#destino")?.scrollIntoView({ behavior: "smooth" })}
+          onCopy={builder.copySummary}
+          isPreviewMode={builder.isPreviewMode}
+          recommendationInfo={builder.recommendationInfo}
+          onPromptLogin={builder.promptLoginToSave}
+        />
+      ) : null}
+
+      <DetailModal detail={detail} onClose={() => setDetail(null)} />
+
+      <div className="rdock" aria-live="polite">
+        <span className="dk">
+          <b>{builder.form.destination || "Seu roteiro"}</b>
+          <small>
+            {builder.form.destination
+              ? `${builder.form.days} dias · ${builder.form.group || "defina o perfil"}`
+              : "Comece escolhendo o destino"}
+          </small>
+        </span>
+        <span className="dkp">
+          <i
+            style={{
+              width: `${
+                [
+                  builder.form.destination,
+                  builder.form.group,
+                  builder.form.pace,
+                  builder.form.categoryIds.length || builder.form.attractions.length,
+                  builder.form.startDate && builder.form.endDate,
+                ].filter(Boolean).length * 20
+              }%`,
+            }}
+          />
+        </span>
+        <a className="btn sm" href="#gerar">
+          Gerar
+        </a>
+      </div>
+
+      <div className={`rtoast ${builder.toast ? "show" : ""}`} role="status">
+        {builder.toast}
+      </div>
     </div>
-    {builder.generated ? <ItineraryResults form={builder.form} theme={theme} totals={builder.totals} itinerary={builder.itinerary} activeDay={builder.activeDay} onDay={builder.setActiveDay} onEdit={() => document.querySelector("#destino")?.scrollIntoView({ behavior: "smooth" })} onCopy={builder.copySummary} /> : null}
-    <DetailModal detail={detail} onClose={() => setDetail(null)} />
-    <div className="rdock" aria-live="polite"><span className="dk"><b>{builder.form.destination || "Seu roteiro"}</b><small>{builder.form.destination ? `${builder.form.days} dias · ${builder.form.group || "defina o perfil"}` : "Comece escolhendo o destino"}</small></span><span className="dkp"><i style={{ width: `${[builder.form.destination, builder.form.group, builder.form.pace, builder.form.attractions.length, builder.form.stay].filter(Boolean).length * 20}%` }} /></span><a className="btn sm" href="#gerar">Gerar</a></div>
-    <div className={`rtoast ${builder.toast ? "show" : ""}`} role="status">{builder.toast}</div>
-  </div>;
+  );
 }
